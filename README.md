@@ -1,5 +1,11 @@
 @[TOC](Android SDK 接入文档)
 
+
+# 文件说明
+1. sdk aar文件目录        /Assets/Plugins/Android/
+2. 示例default.json文件   /Assets/Plugins/Android/default.json
+3. Uniyt平台接口文件       /Assets/Plugins/IvySdk/
+
 # SDK引入
 ```js
 aar 文件说明:

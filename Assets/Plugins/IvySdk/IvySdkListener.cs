@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+namespace com.ivy.sdk { 
 public class IvySdkListener : MonoBehaviour
 {
 
@@ -431,7 +432,7 @@ public class IvySdkListener : MonoBehaviour
             string[] args = data.Split("|");
             if (args != null && args.Length == 3)
             {
-                string channel = args[0];   
+                string channel = args[0];
                 int status = int.Parse(args[1]);
                 OnFirebaseUnlinkEvent.Invoke(channel, status == 1);
             }
@@ -497,7 +498,7 @@ public class IvySdkListener : MonoBehaviour
     {
         if (!string.IsNullOrEmpty(data))
         {
-           OnCloudDataMergeEvent.Invoke(data, true);
+            OnCloudDataMergeEvent.Invoke(data, true);
         }
     }
 
@@ -608,5 +609,7 @@ public class IvySdkListener : MonoBehaviour
     }
 
     #endregion
+
+}
 
 }

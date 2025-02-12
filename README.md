@@ -7,6 +7,28 @@
 3. Uniyt平台接口文件       /Assets/Plugins/IvySdk/
 <br>
 
+# 原生配置
+```js
+请在原生项目 build.gradle文件内增加以下配置:
+android {
+//...
+    defaultConfig {
+       //...
+        manifestPlaceholders = [
+                "ivy_debug"            : true,
+                "ivy_app_id"           : "2732",
+                "facebook_app_id"      : "443246477338698",
+                "facebook_client_token": "e27c126af9b1fc8b66b42111eabab047",
+                "admob_application_id" : "ca-app-pub-3940256099942544~3347511713",
+                "gms_play_services_id" : "16951538787", 
+                "applovin_sdk_key"      : "E8pVhU9mykQd3y0TD0Ksoq4vpf_Muat6ifcP9m96UakTWk5klQaWEeQ2IPOA-GHgxu54eEA8pvgKcn2MBdtQGH",
+                "ivy_notch"             : true, //是否适配刘海屏
+                "aps_id"                : "" //amazion app id
+        ]
+    }
+}
+```
+
 # SDK引入
 ```js
 aar 文件说明:

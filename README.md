@@ -16,7 +16,7 @@ android {
        //...
         manifestPlaceholders = [
                 "ivy_debug"            : true,
-                "ivy_app_id"           : "2732",
+                "ivy_app_id"           : "2732",//请联系运营人员获取 app id
                 "facebook_app_id"      : "443246477338698",
                 "facebook_client_token": "e27c126af9b1fc8b66b42111eabab047",
                 "admob_application_id" : "ca-app-pub-3940256099942544~3347511713",

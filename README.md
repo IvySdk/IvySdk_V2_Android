@@ -6,6 +6,7 @@
 2. 示例default.json文件   /Assets/Plugins/Android/default.json
 3. Uniyt平台接口文件       /Assets/Plugins/IvySdk/
 <br>
+
 # SDK引入
 ```js
 aar 文件说明:
@@ -29,7 +30,6 @@ com_rise_Firestore_10.0.0.28.aar
 //客服模块，根据需要引入
 com_rise_AIHelp_10.0..0.28.aar
 ```
-<br>
 
 # 混淆
 ```js
@@ -41,7 +41,6 @@ com_rise_AIHelp_10.0..0.28.aar
 #unity 2021及之后版本混淆需要添加
 -keep class com.google.androidgamesdk.**{*;}
 ```
-<br>
 
 # 初始化
 ```js
@@ -182,7 +181,7 @@ private void IvySdkListener_OnPaymentWithPayloadEvent(IvySdk.PaymentResult resul
 ```
 <br>
 
-# 事件统计
+# 事件统计 <br>
 ++*所有事件接口中data参数结构为 逗号分隔的字符串，
 如:key,value,key,value,...*++
 <br>
@@ -253,48 +252,38 @@ private void IvySdkListener_OnPlayGamesLoginEvent(bool status)
 // status 登陆状态
 }
 ```
-<br>
+
 - 登陆状态<br>
   ```bool isLogin = IvySDK.Instance.IsPlayGamesLoggedIn();```
   <br>
 
-- 登陆(++如果项目配置了PlayGames，sdk会在游戏开启时主动登录PlayGames，客户端可以在登录回调中选择调用此接口++)<br>
+- 登陆 <br> (++如果项目配置了PlayGames，sdk会在游戏开启时主动登录PlayGames，客户端可以在登录回调中选择调用此接口++) <br>
   ```IvySDK.Instance.LoginPlayGames();```
   <br>
-
 - 登出<br>
   ```IvySDK.Instance.LogoutPlayGames();```
-<br>
-
+  <br>
 - 获取用户信息<br>
   ```string data = IvySDK.Instance.GetPlayGamesUserInfo();```
-<br>
-
+  <br>
 - 解锁成就<br>
   ```IvySDK.Instance.UnlockAchievement(string achievementId);```
-<br>
-
+  <br>
 - 提升成就<br>
   ```IvySDK.Instance.IncreaseAchievement(string achievementId, int step);```
-<br>
-
+  <br>
 - 展示成就页面<br>
   ```IvySDK.Instance.ShowAchievement();```
-
   <br>
-
 - 展示排行榜<br>
   ```IvySDK.Instance.ShowLeaderboards();```
-<br>
-
+  <br>
 - 展示指定排行榜<br>
   ```IvySDK.Instance.ShowLeaderboard(string leaderboardId);```
-<br>
-
+  <br>
 - 更新排行榜<br>
   ```IvySDK.Instance.UpdateLeaderboard(string leaderboardId, long score);```
-
-<br>
+  <br>
 
 > Facebook
 - 事件监听
@@ -306,28 +295,22 @@ private void IvySdkListener_OnFacebookLoginEvent(bool status)
 // status 登陆状态
 }
 ```
-<br>
 
 - 登陆<br>
   ```IvySDK.Instance.LogInFacebook();```
-<br>
-
+  <br>
 - 登出<br>
   ```IvySDK.Instance.LogoutFacebook();```
-<br>
-
+  <br>
 - 登陆状态<br>
   ```bool isLogin = IvySDK.Instance.IsFacebookLoggedIn();```
-<br>
-
+  <br>
 - 获取用户信息<br>
   ```string data = IvySDK.Instance.GetFacebookUserInfo();```
-<br>
-
+  <br>
 - 获取朋友列表<br>
   ```string data = IvySDK.Instance.GetFacebookFriends();```
-
-<br>
+  <br>
 
 > Firebase
 
@@ -341,51 +324,40 @@ private void IvySdkListener_OnFirebaseLoginEvent(string platform, bool status)
 // status 登陆状态
 }
 ```
-<br>
 
 - 匿名登陆<br>
   ```IvySDK.Instance.LoginFBWithAnonymous()```
-<br>
-
+  <br>
 - PlayGames渠道登陆<br>
   ```IvySDK.Instance.LoginFBWithPlayGames()```
-<br>
-
+  <br>
 - Facebook渠道登陆<br>
   ```IvySDK.Instance.LoginFBWithFacebook()```
-<br>
-
+  <br>
 - Email渠道登陆<br>
   ```IvySDK.Instance.LoginFBWithEmailAndPwd(string email, string password)```
-<br>
-
+  <br>
 - 重载Firebase的登陆状态<br>
   ```IvySDK.Instance.ReloadFirebaseLogStatus()```
-<br>
-
+  <br>
 - 是否可登出指定渠道(++channel 参考FirebaseLinkChannel++)<br>
   ```bool status = IvySDK.Instance.CanFirebaseUnlinkWithChannel(string channel)```
-<br>
-
+  <br>
 - 登出指定渠道<br>
   ```IvySDK.Instance.UnlinkFirebaseWithChannel(string channel)```
-<br>
-
+  <br>
 - 是否已登陆指定渠道<br>
   ```bool status = IvySDK.Instance.IsFirebaseLinkedWithChannel(string channel)```
-<br>
-
+  <br>
 - 是否为匿名登陆<br>
   ```bool status = IvySDK.Instance.IsFirebaseAnonymousLoggedIn()```
-<br>
-
+  <br>
 - 获取指定渠道用户信息<br>
   ```string data = IvySDK.Instance.GetFirebaseUserInfo(string channel)```
-<br>
-
+  <br>
 - 登出<br>
   ```IvySDK.Instance.LogoutFirebase()```
-<br>
+  <br>
 
 # Firestore云存档
 
@@ -397,7 +369,6 @@ private void IvySdkListener_OnFirebaseLoginEvent(string platform, bool status)
  */
 IvySDK.Instance.SaveCloudData(string collection, string jsonData);
 ```
-<br>
 
 - 存储结果监听
 ```js
@@ -416,7 +387,6 @@ private void IvySdkListener_OnCloudDataSaveEvent(string collection, bool status)
  */
 IvySDK.Instance.ReadCloudData(string collection);
 ```
-<br>
 
 - 读取指定数据集合内文档
 ```js
@@ -426,7 +396,6 @@ IvySDK.Instance.ReadCloudData(string collection);
  */
 IvySDK.Instance.ReadCloudData(string collection, string documentId);
 ```
-<br>
 
 - 读取结果监听
 ```js
@@ -446,7 +415,6 @@ private void IvySdkListener_OnCloudDataReadEvent(string collection, string doucu
  */
 IvySDK.Instance.MergeCloudData(string collection, string jsonData);
 ```
-<br>
 
 - 合并结果监听
 ```js
@@ -465,7 +433,6 @@ private void IvySdkListener_OnCloudDataMergeEvent(string collection, bool status
  */
 IvySDK.Instance.QueryCloudData(string collection);
 ```
-<br>
 
 - 查询结果监听
 ```js
@@ -484,7 +451,6 @@ private void IvySdkListener_OnCloudDataQueryEvent(string collection, string data
  */
 IvySDK.Instance.DeleteCloudData(string collection);
 ```
-<br>
 
 - 删除结果监听
 ```js
@@ -505,7 +471,6 @@ private void IvySdkListener_OnCloudDataDeleteEvent(string collection, bool statu
  */
 IvySDK.Instance.UpdateCloudData(string collection, string transactionId, string jsonData);
 ```
-<br>
 
 - 更新结果监听
 ```js
@@ -524,7 +489,6 @@ private void IvySdkListener_OnCloudDataDeleteEvent(string collection, string tra
  */
 IvySDK.Instance.SnapshotCloudData(string collection);
 ```
-<br>
 
 - 备份数据
 ```js
@@ -549,12 +513,10 @@ private void IvySdkListener_OnCloudDataSnapshotEvent(string collection, string d
 # 客服
 - 客服准备状态<br>
   ```bool isReady = IvySDK.Instance.IsHelperInitialized();```
-<br>
-
+  <br>
 - 是否有新的客服消息<br>
   ```bool isReady = IvySDK.Instance.HasNewHelperMessage();```
-<br>
-
+  <br>
 - 跳转客服
 ```js
 /**
@@ -565,7 +527,6 @@ private void IvySdkListener_OnCloudDataSnapshotEvent(string collection, string d
  */
 IvySDK.Instance.ShowHelper(string entranceId, string meta, string tags, string welcomeMessage);
 ```
-<br>
 
 - 跳转指定客服单页
 ```js
@@ -575,18 +536,13 @@ IvySDK.Instance.ShowHelper(string entranceId, string meta, string tags, string w
  */
 IvySDK.Instance.ShowHelperSingleFAQ(string faqId, int moment = 3);
 ```
-<br>
 
 - 监听未读消息<br>
   ```IvySDK.Instance.ListenHelperUnreadMsgCount(bool onlyOnce);```
-
   <br>
-
 - 停止监听未读消息<br>
   ```IvySDK.Instance.StopListenHelperUnreadMsgCount();```
-
   <br>
-
 - 未读消息监听
 ```js
 IvySdkListener.HelperUnreadMsgCountEvent += IvySdkListener_HelperUnreadMsgCountEvent;
@@ -595,7 +551,6 @@ private void IvySdkListener_HelperUnreadMsgCountEvent(int count)
 {
 }
 ```
-<br>
 
 - 更新用户属性
 ```js
@@ -609,7 +564,6 @@ IvySDK.Instance.UpdateHelperUserInfo(string data, string tags);
 - 重置用户属性<br>
   ```IvySDK.Instance.ResetHelperUserInfo();```
   <br>
-
 - 关闭客服<br>
   ```IvySDK.Instance.CloseHelper();```
   <br>
@@ -628,7 +582,6 @@ int state = IvySDK.Instance.LoadNotificationPermissionState();
 - 请求权限<br>
   ```IvySDK.Instance.RequestNotificationPermission();```
   <br>
-
 - 跳转权限设置页<br>
   ```IvySDK.Instance.OpenNotificationSettings();```
   <br>
@@ -664,14 +617,12 @@ private void IvySdkListener_OnReceivedNotificationEvent(string action)
     
 }
 ```
-<br>
 
 - 关闭本地通知任务<br>
   ```IvySDK.Instance.CancelNotification(string tag);```
   <br>
 
 # Appsflyer 用户互邀
-<br>
 
 - 发送邀请<br>
   ```IvySDK.Instance.AppsflyerInviteUser(string inviterId, string inviterAppId);```
@@ -740,7 +691,6 @@ IvySDK.Instance.OpenAppStore(String url);
 # 配置文件
 
 ## 配置说明
-<br>
 
 > 广告
 ```js
@@ -837,7 +787,6 @@ e	: 可触发的事件列表， 多事件名，满足其一即可
 p	: 可触发的事件属性，如e存在有效值，则必须满足e条件，多属性，满足其一即可
 count	: 触发次数，累计
 ```
-
 <br>
 
 > 计费
@@ -855,7 +804,6 @@ count	: 触发次数，累计
   }
 ```
 verify-url	: 在线校验地址,使用在线校验、发货时必须配置
-
 <br>
 
 > 三方服务

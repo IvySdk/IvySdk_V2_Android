@@ -1,7 +1,7 @@
 @[TOC](Android SDK 接入文档)
 
 
-# 文件说明
+# 文件位置说明
 1. sdk aar文件目录        /Assets/Plugins/Android/
 2. 示例default.json文件   /Assets/Plugins/Android/default.json
 3. Uniyt平台接口文件       /Assets/Plugins/IvySdk/
@@ -181,7 +181,6 @@ private void IvySdkListener_OnPaymentWithPayloadEvent(IvySdk.PaymentResult resul
 ++*所有事件接口中data参数结构为 逗号分隔的字符串，
 如:key,value,key,value,...*++
 - 事件流向所有平台
-  ```IvySdk.Instance.TrackEvent(string eventName, string data);```
   ```IvySdk.Instance.TrackEventToConversion(string eventName, string data);```
 
 - 事件流向Firebase
@@ -685,14 +684,14 @@ inviter_template_id	： appsflyer用户邀请模板
 
 > 事件
 
-eventChannel: 事件流向控制，此设置优先级最高
-配置方式：
-0000：共4位，分别对应四个打点平台； 0： 关闭，1：开启
-第1位： appsflyer
-第2位： firebase
-第3位： facebook
-第4位： thing data
-示例：如事件只 流向firebase，配置位 ”0100“
+eventChannel: 事件流向控制，此设置优先级最高<br>
+配置方式：<br>
+0000：共4位，分别对应四个打点平台； 0： 关闭，1：开启<br>
+第1位： appsflyer<br>
+第2位： firebase<br>
+第3位： facebook<br>
+第4位： thing data<br>
+示例：如事件只 流向firebase，配置位 ”0100“<br>
 ```js
      "event_channel": {
        "banner_displayed": "0000"

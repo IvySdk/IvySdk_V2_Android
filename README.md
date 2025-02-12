@@ -5,7 +5,7 @@
 1. sdk aar文件目录        /Assets/Plugins/Android/
 2. 示例default.json文件   /Assets/Plugins/Android/default.json
 3. Uniyt平台接口文件       /Assets/Plugins/IvySdk/
-
+<br>
 # SDK引入
 ```js
 aar 文件说明:
@@ -29,7 +29,7 @@ com_rise_Firestore_10.0.0.28.aar
 //客服模块，根据需要引入
 com_rise_AIHelp_10.0..0.28.aar
 ```
-<br><br>
+<br>
 
 # 混淆
 ```js
@@ -41,7 +41,7 @@ com_rise_AIHelp_10.0..0.28.aar
 #unity 2021及之后版本混淆需要添加
 -keep class com.google.androidgamesdk.**{*;}
 ```
-<br><br>
+<br>
 
 # 初始化
 ```js
@@ -50,7 +50,7 @@ void Awake()
     IvySdk.Instance.Init();
 }
 ```
-<br><br>
+<br>
 
 # 广告
 > Banner
@@ -62,11 +62,9 @@ private void IvySdkListener_OnBannerAdEvent(IvySdk.AdEvents adEvent, int placeme
 {
 }
 ```
-<br><br>
 - 加载状态<br>
   ```bool isReady = IvySdk.Instance.HasBannerAd();```
-  <br><br>
-
+  <br>
 - 展示banner
 ```js
 /**
@@ -78,11 +76,9 @@ private void IvySdkListener_OnBannerAdEvent(IvySdk.AdEvents adEvent, int placeme
 IvySdk.Instance.ShowBannerAd(string tag, BannerAdPosition position, int placement);
 IvySdk.Instance.ShowBannerAd(string tag, BannerAdPosition position, int placement, string clientInfo);
 ```
-<br><br>
 - 关闭Banner<br>
   ```IvySdk.Instance.CloseBannerAd(int placement);```
-
-<br><br>
+  <br>
 
 > 插屏
 
@@ -95,12 +91,9 @@ private void IvySdkListener_OnInterstitialAdEvent(IvySdk.AdEvents adEvent, int p
     
 }
 ```
-<br>
 - 加载状态<br>
   ```bool isReady = IvySdk.Instance.HasInterstitialAd();```
-
-<br>
-
+  <br>
 - 展示插屏
 ```js
 /**
@@ -111,7 +104,7 @@ private void IvySdkListener_OnInterstitialAdEvent(IvySdk.AdEvents adEvent, int p
  */
 IvySdk.Instance.ShowInterstitialAd(string tag, int placement, string clientInfo);
 ```
-<br><br>
+<br>
 
 > 激励视频
 - 广告事件监听
@@ -122,12 +115,9 @@ private void IvySdkListener_OnRewardedAdEvent(IvySdk.AdEvents adEvent, int place
 {
 }
 ```
-<br>
-
 - 加载状态<br>
   ```bool isReady = IvySdk.Instance.HasRewardedAd();```
-<br><br>
-
+  <br>
 - 展示视频广告
 ```js
 /**
@@ -137,7 +127,7 @@ private void IvySdkListener_OnRewardedAdEvent(IvySdk.AdEvents adEvent, int place
  */
 IvySdk.Instance.ShowRewardedAd(string tag, int placement, string clientInfo));
 ```
-<br><br>
+<br>
 
 # 计费
 - 支付
@@ -151,15 +141,12 @@ IvySdk.Instance.Pay(int payId);
 IvySdk.Instance.Pay(int payId, string payload);
 IvySdk.Instance.Pay(int payId, string payload, string clientInfo);
 ```
-<br>
-
 - 发货<br>
   ++*在使用在线支付校验流程时，必须调用此接口，否则会存在重复发货情况*++
 ```js
 //merchantTransactionId  预下单Id
 IvySdk.Instance.ShippingGoods(string merchantTransactionId);
 ```
-
 - 计费系统是否可用<br>
   ```bool isReady = IvySdk.Instance.IsPaymentValid();```
   <br>
@@ -193,7 +180,7 @@ private void IvySdkListener_OnPaymentWithPayloadEvent(IvySdk.PaymentResult resul
 }
 
 ```
-<br><br>
+<br>
 
 # 事件统计
 ++*所有事件接口中data参数结构为 逗号分隔的字符串，
@@ -210,31 +197,31 @@ private void IvySdkListener_OnPaymentWithPayloadEvent(IvySdk.PaymentResult resul
 
 - 事件流向Facebook<br>
   ```IvySdk.Instance.TrackEventToFacebook(string eventName, string data);```
-<br>
+  <br>
 
 - 事件流向AppsFlyer<br>
   ```IvySdk.Instance.TrackEventToAppsflyer(string eventName, string data);```
-<br>
+  <br>
 
 - 事件流向自有平台<br>
   ```IvySdk.Instance.TrackEventToIvy(string eventName, string data);```
-<br>
+  <br>
 
 - 设置用户属性至所有平台<br>
   ```IvySdk.Instance.SetUserProperty(string key, string 		value);```
-<br>
+  <br>
 
 - 设置用户属性至Firebase<br>
   ```IvySdk.Instance.SetUserPropertyToFirebase(string key, string value);```
-<br>
+  <br>
 
 - 设置用户属性至自有平台<br>
   ```IvySdk.Instance.SetUserPropertyToIvy(string key, string value);```
-<br>
+  <br>
 
 - 设置自定义用户 id<br>
   ```IvySdk.Instance.SetCustomUserId(string value);```
-  <br><br>
+  <br>
 
 # RemoteConfig
 - 获取 Firebase Remote Config 配置值
@@ -267,7 +254,6 @@ private void IvySdkListener_OnPlayGamesLoginEvent(bool status)
 }
 ```
 <br>
-
 - 登陆状态<br>
   ```bool isLogin = IvySDK.Instance.IsPlayGamesLoggedIn();```
   <br>
@@ -294,6 +280,7 @@ private void IvySdkListener_OnPlayGamesLoginEvent(bool status)
 
 - 展示成就页面<br>
   ```IvySDK.Instance.ShowAchievement();```
+
   <br>
 
 - 展示排行榜<br>
@@ -307,7 +294,7 @@ private void IvySdkListener_OnPlayGamesLoginEvent(bool status)
 - 更新排行榜<br>
   ```IvySDK.Instance.UpdateLeaderboard(string leaderboardId, long score);```
 
-<br><br><br>
+<br>
 
 > Facebook
 - 事件监听
@@ -340,7 +327,7 @@ private void IvySdkListener_OnFacebookLoginEvent(bool status)
 - 获取朋友列表<br>
   ```string data = IvySDK.Instance.GetFacebookFriends();```
 
-<br><br><br>
+<br>
 
 > Firebase
 
@@ -399,11 +386,8 @@ private void IvySdkListener_OnFirebaseLoginEvent(string platform, bool status)
 - 登出<br>
   ```IvySDK.Instance.LogoutFirebase()```
 <br>
-<br>
-<br>
 
 # Firestore云存档
-<br>
 
 - 存储数据到指定数据集合
 ```js
@@ -595,10 +579,12 @@ IvySDK.Instance.ShowHelperSingleFAQ(string faqId, int moment = 3);
 
 - 监听未读消息<br>
   ```IvySDK.Instance.ListenHelperUnreadMsgCount(bool onlyOnce);```
+
   <br>
 
 - 停止监听未读消息<br>
   ```IvySDK.Instance.StopListenHelperUnreadMsgCount();```
+
   <br>
 
 - 未读消息监听
@@ -619,7 +605,6 @@ private void IvySdkListener_HelperUnreadMsgCountEvent(int count)
  */
 IvySDK.Instance.UpdateHelperUserInfo(string data, string tags);
 ```
-<br>
 
 - 重置用户属性<br>
   ```IvySDK.Instance.ResetHelperUserInfo();```
@@ -639,7 +624,6 @@ IvySDK.Instance.UpdateHelperUserInfo(string data, string tags);
  */
 int state = IvySDK.Instance.LoadNotificationPermissionState();
 ```
-<br>
 
 - 请求权限<br>
   ```IvySDK.Instance.RequestNotificationPermission();```
@@ -699,40 +683,32 @@ private void IvySdkListener_OnReceivedNotificationEvent(string action)
  */
 string inviterId = IvySDK.Instance.GetAppsflyerInviterId();
 ```
-<br><br>
+<br>
 
 # 其它
-<br>
-
 - 发送邮件<br>
   ```IvySDK.Instance.SendEmail(string email, string extra);```
+  <br>
   ```IvySDK.Instance.SendEmail(string email, string title, string extra);```
   <br>
-
 - 网络状态<br>
   ```bool isConnected = IvySDK.Instance.IsNetworkConnected();```
-<br>
-
+  <br>
 - 评价<br>
   ```IvySDK.Instance.Rate();```
   <br>
-
 - 分享文本<br>
   ```IvySDK.Instance.SystemShareText(String txt);```
   <br>
-
 - 分享图片<br>
   ```IvySDK.Instance.SystemShareImage(String title, String imagePath);```
   <br>
-
 - 是否刘海屏<br>
   ```bool hasNotch = IvySDK.Instance.HasNotch();```
-<br>
-
+  <br>
 - 刘海高度<br>
   ```int height = IvySDK.Instance.GetNotchHeight();```
-<br>
-
+  <br>
 - 跳转应用商店
 ```js
 /**
@@ -740,31 +716,26 @@ string inviterId = IvySDK.Instance.GetAppsflyerInviterId();
  */
 IvySDK.Instance.OpenAppStore(String url);
 ```
-<br>
-
 - toast<br>
   ```IvySDK.Instance.toast(String message);```
-<br>
-
+  <br>
 - 复制文本<br>
   ```IvySDK.Instance.copyTxt(String txt);```
-<br>
-
+  <br>
 - 设备总内存，单位MB<br>
   ```int size = IvySDK.Instance.GetTotalMemory();```
-<br>
-
+  <br>
 - 设备可用内存，单位MB<br>
   ```int size = IvySDK.Instance.GetFreeMemory();```
-<br>
+  <br>
 
 - 设备总磁盘存储，单位MB<br>
   ```int size = IvySDK.Instance.GetDiskSize();```
-<br>
+  <br>
 
 - 设备可用磁盘存储，单位MB<br>
   ```int size = IvySDK.Instance.GetFreeDiskSize();```
-<br>
+  <br>
 
 # 配置文件
 

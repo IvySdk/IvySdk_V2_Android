@@ -1,0 +1,10 @@
+*.meta
+*/*.meta
+.vs/**
+Library/**
+obj/**
+Logs/**
+Packages/**
+UserSettings/**
+Temp/**
+

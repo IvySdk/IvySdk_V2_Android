@@ -61,7 +61,7 @@ public class IvySdkListener : MonoBehaviour
     {
         if (!string.IsNullOrEmpty(data))
         {
-            string[] args = data.Split("|");
+            string[] args = data.Split('|');
             if (args != null && args.Length == 2)
             {
                 int payId = int.Parse(args[0]);
@@ -75,7 +75,7 @@ public class IvySdkListener : MonoBehaviour
     {
         if (!string.IsNullOrEmpty(data))
         {
-            string[] args = data.Split("|");
+            string[] args = data.Split('|');
             if (args != null && args.Length == 3)
             {
                 int payId = int.Parse(args[0]);
@@ -90,7 +90,7 @@ public class IvySdkListener : MonoBehaviour
     {
         if (!string.IsNullOrEmpty(data))
         {
-            string[] args = data.Split("|");
+            string[] args = data.Split('|');
             if (args != null && args.Length == 2)
             {
                 int payId = int.Parse(args[0]);
@@ -104,7 +104,7 @@ public class IvySdkListener : MonoBehaviour
     {
         if (!string.IsNullOrEmpty(data))
         {
-            string[] args = data.Split("|");
+            string[] args = data.Split('|');
             if (args != null && args.Length == 2)
             {
                 int status = int.Parse(args[1]);
@@ -391,7 +391,7 @@ public class IvySdkListener : MonoBehaviour
     {
         if (!string.IsNullOrEmpty(data))
         {
-            string[] args = data.Split("|");
+            string[] args = data.Split('|');
             if (args != null && args.Length == 2)
             {
                 string channel = args[1];
@@ -416,7 +416,7 @@ public class IvySdkListener : MonoBehaviour
     {
         if (!string.IsNullOrEmpty(data))
         {
-            string[] args = data.Split("|");
+            string[] args = data.Split('|');
             if (args != null && args.Length == 2)
             {
                 int status = int.Parse(args[1]);
@@ -429,7 +429,7 @@ public class IvySdkListener : MonoBehaviour
     {
         if (!string.IsNullOrEmpty(data))
         {
-            string[] args = data.Split("|");
+            string[] args = data.Split('|');
             if (args != null && args.Length == 3)
             {
                 string channel = args[0];
@@ -466,7 +466,7 @@ public class IvySdkListener : MonoBehaviour
     {
         if (!string.IsNullOrEmpty(data))
         {
-            string[] args = data.Split("|");
+            string[] args = data.Split('|');
             if (args != null && args.Length == 3)
             {
                 string collection = args[0];
@@ -481,7 +481,7 @@ public class IvySdkListener : MonoBehaviour
     {
         if (!string.IsNullOrEmpty(data))
         {
-            string[] args = data.Split("|");
+            string[] args = data.Split('|');
             if (args != null && args.Length == 2)
             {
                 string collection = args[0];

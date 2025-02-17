@@ -31,26 +31,27 @@ android {
 
 # SDK引入
 ```js
-aar 文件说明:
+模块引入说明:
+sdk_version = 10.0.0-test34
 // 核心模块，必须引入
-com_rise_Core_10.0.0.28.aar 
+  implementation("io.github.ivysdk:Core:sdk_version")
 //google 支付模块，可以根据需要引入
-com_rise_GooglePay_10.0.0.28.aar
+  implementation("io.github.ivysdk:GooglePay:sdk_version")
 //广告聚合平台，根据需要选择引入
-com_rise_Admob_10.0.0.28.aar
-com_rise_Yandex_10.0.0.28.aar
-com_rise_Max_10.0.0.28.aar
+  implementation("io.github.ivysdk:Admob:sdk_version")
+  implementation("io.github.ivysdk:Max:sdk_version")
+  implementation("io.github.ivysdk:Yandex:sdk_version")
 //游戏排行榜、成就等，根据需要选择引入
-com_rise_PlayGames_10.0.0.28.aar
+  implementation("io.github.ivysdk:PlayGames:sdk_version")
 //事件统计平台，根据需要引入
-com_rise_Appsflyer_10.0.0.28.aar
-com_rise_Facebook_10.0.0.28.aar
-com_rise_Firebase_10.0.0.28.aar
-com_rise_thinkingsdk_10.0.0.28.aar
+  implementation("io.github.ivysdk:Appsflyer:sdk_version")
+  implementation("io.github.ivysdk:Facebook:sdk_version")
+  implementation("io.github.ivysdk:Firebase:sdk_version")
+  implementation("io.github.ivysdk:thinkingsdk:sdk_version")
 //云存档模块，根据需要引入
-com_rise_Firestore_10.0.0.28.aar
+  implementation("io.github.ivysdk:Firestore:sdk_version")
 //客服模块，根据需要引入
-com_rise_AIHelp_10.0..0.28.aar
+  implementation("io.github.ivysdk:AIHelp:sdk_version")
 ```
 
 # 混淆
@@ -62,6 +63,28 @@ com_rise_AIHelp_10.0..0.28.aar
 
 #unity 2021及之后版本混淆需要添加
 -keep class com.google.androidgamesdk.**{*;}
+```
+
+# 原生配置
+```js
+请在原生项目 build.gradle文件内增加以下配置:
+android {
+//...
+    defaultConfig {
+       //...
+        manifestPlaceholders = [
+                "ivy_debug"            : true,
+                "ivy_app_id"           : "2732",//请联系运营人员获取 app id
+                "facebook_app_id"      : "443246477338698",
+                "facebook_client_token": "e27c126af9b1fc8b66b42111eabab047",
+                "admob_application_id" : "ca-app-pub-3940256099942544~3347511713",
+                "gms_play_services_id" : "16951538787", 
+                "applovin_sdk_key"      : "E8pVhU9mykQd3y0TD0Ksoq4vpf_Muat6ifcP9m96UakTWk5klQaWEeQ2IPOA-GHgxu54eEA8pvgKcn2MBdtQGH",
+                "ivy_notch"             : true, //是否适配刘海屏
+                "aps_id"                : "" //amazion app id
+        ]
+    }
+}
 ```
 
 # 初始化
@@ -286,8 +309,18 @@ private void IvySdkListener_OnPlayGamesLoginEvent(bool status)
   ```IvySDK.Instance.LogoutPlayGames();```
   <br>
 - 获取用户信息<br>
-  ```string data = IvySDK.Instance.GetPlayGamesUserInfo();```
-  <br>
+  ```js
+    /**
+     *  @returns data   结构示例  
+     * {
+     *     "id":"",
+     *     "name":"",
+     *     "photo":"",
+     *   }
+     */
+    string data = IvySDK.Instance.GetPlayGamesUserInfo();
+  ```
+
 - 解锁成就<br>
   ```IvySDK.Instance.UnlockAchievement(string achievementId);```
   <br>
@@ -328,8 +361,18 @@ private void IvySdkListener_OnFacebookLoginEvent(bool status)
   ```bool isLogin = IvySDK.Instance.IsFacebookLoggedIn();```
   <br>
 - 获取用户信息<br>
-  ```string data = IvySDK.Instance.GetFacebookUserInfo();```
-  <br>
+  ```js
+    /**
+     *  @returns data   结构示例  
+     * {
+     *     "id":"",
+     *     "name":"",
+     *     "photo":"",
+     *   }
+     */
+    string data = IvySDK.Instance.GetFacebookUserInfo();
+  ```
+
 - 获取朋友列表<br>
   ```string data = IvySDK.Instance.GetFacebookFriends();```
   <br>
@@ -375,8 +418,19 @@ private void IvySdkListener_OnFirebaseLoginEvent(string platform, bool status)
   ```bool status = IvySDK.Instance.IsFirebaseAnonymousLoggedIn()```
   <br>
 - 获取指定渠道用户信息<br>
-  ```string data = IvySDK.Instance.GetFirebaseUserInfo(string channel)```
-  <br>
+  ```js
+    /**
+     *  @returns data   结构示例  
+     * {
+     *     "id":"",
+     *     "name":"",
+     *     "photo":"",
+     *     "email":""
+     *   }
+     */
+    string data = IvySDK.Instance.GetFirebaseUserInfo(string channel);
+  ```
+
 - 登出<br>
   ```IvySDK.Instance.LogoutFirebase()```
   <br>

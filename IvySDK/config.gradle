@@ -1,0 +1,435 @@
+ext {
+    maven = [
+            group_id       : "com.rise",
+            publish_version: '10.0.0-test34'
+    ]
+    android = [
+            minSdk    : 23,
+            compileSdk: 34,
+    ]
+    buildConfig = [
+            debug_debuggable       : true,
+//            debug_jniDebuggable    : true,
+            debug_minifyEnabled    : false,
+
+            release_minifyEnabled  : false,
+            release_shrinkResources: false
+    ]
+    firebase = [
+            firebase_bom: "32.7.2"
+    ]
+    facebook = [
+            facebook_version: "17.0.1"
+    ]
+    okhttp = [
+            okHttp: "4.12.0"
+    ]
+    dependencies = [
+            "androidx_appcompat"            : "androidx.appcompat:appcompat:1.6.1",
+            "androidx_core_ktx"             : "androidx.core:core-ktx:1.10.1",
+            "material"                      : "com.google.android.material:material:1.10.0",
+//local cache
+            "mmkv"                          : "com.tencent:mmkv:1.3.12",
+//appsflyer
+            "af_android_sdk"                : "com.appsflyer:af-android-sdk:6.15.0",
+            "installreferrer"               : "com.android.installreferrer:installreferrer:2.2",
+            "homereferrer"                  : "com.miui.referrer:homereferrer:1.0.0.6",
+//live
+            "kotlinx_coroutines_android"    : "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.9",
+            "lifecycle_livedata"            : "androidx.lifecycle:lifecycle-livedata:2.6.1",
+            "lifecycle_livedata_core"       : "androidx.lifecycle:lifecycle-livedata-core:2.6.1",
+            "lifecycle_viewmodel"           : "androidx.lifecycle:lifecycle-viewmodel:2.6.1",
+            "lifecycle_livedata_ktx"        : "androidx.lifecycle:lifecycle-livedata-ktx:2.6.1",
+            "lifecycle_livedata_core_ktx"   : "androidx.lifecycle:lifecycle-livedata-core-ktx:2.6.1",
+            "lifecycle_viewmodel_ktx"       : "androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1",
+            "lifecycle_process"             : "androidx.lifecycle:lifecycle-process:2.6.1",
+            "lifecycle_extensions"          : "androidx.lifecycle:lifecycle-extensions:2.2.0",
+//work manager
+            "androidx_work_runtime"         : "androidx.work:work-runtime:2.8.1",
+            "androidx_work_runtime_ktx"     : "androidx.work:work-runtime-ktx:2.8.1",
+//admob
+            "admob"                         : "com.google.android.gms:play-services-ads:23.3.0",
+            "user_messaging_platform"       : "com.google.android.ump:user-messaging-platform:3.1.0",
+            "ads_identifier"                : "com.google.android.gms:play-services-ads-identifier:18.0.1",
+// google billing   7.0版本在低版本google play上无法拉起付费页面
+//            "google_billing"                : "com.android.billingclient:billing-ktx:7.0.0",
+            "google_billing"                : "com.android.billingclient:billing-ktx:6.0.1",
+// google play games
+            "play_services_games"           : "com.google.android.gms:play-services-games-v2:20.1.2",
+// 应用内评价
+            "inapp_review"                  : "com.google.android.play:review-ktx:2.0.2",
+// credentials google 身份认证
+            "google_credentials"            : "androidx.credentials:credentials:1.2.2",
+            // optional - needed for credentials support from play services, for devices running
+            // Android 13 and below.
+            "credentials_play_services_auth": "androidx.credentials:credentials-play-services-auth:1.2.2",
+            "credentials_google_id"         : "com.google.android.libraries.identity.googleid:googleid:1.1.1",
+
+//AIHelp
+            "AIHelp"                        : "net.aihelp:android-aihelp-aar:5.3.+",
+//max
+            "max"                           : "com.applovin:applovin-sdk:13.0.1",
+            "max_admob"                     : "com.applovin.mediation:google-adapter:23.3.0.1",
+            "max_aps_adapter"               : "com.applovin.mediation:amazon-tam-adapter:10.0.0.1",
+            "max_aps"                       : "com.amazon.android:aps-sdk:10.0.0",
+
+// advertising id
+            "androidx_ads_identifier"       : "androidx.ads:ads-identifier:1.0.0-alpha01",
+            "guava_android"                 : "com.google.guava:guava:28.0-android",
+            //Yandex
+            "yandex"                        : "com.yandex.android:mobileads:7.9.0"
+
+    ]
+}
+
+
+task uploadRepoIvyYandex(dependsOn: ':Yandex:publish') {
+    group('upload')
+    description('module Yandex' + rootProject.ext.maven.publish_version)
+}
+
+task uploadRepoIvyRemoteConfig(dependsOn: ':IvyRemoteConfig:publish') {
+    group('upload')
+    description('module IvyRemoteConfig' + rootProject.ext.maven.publish_version)
+}
+
+task uploadRepoIvyMax(dependsOn: ':Max:publish') {
+    group('upload')
+    description('module Max' + rootProject.ext.maven.publish_version)
+}
+
+task uploadRepoIvyPlayGames(dependsOn: ':PlayGames:publish') {
+    group('upload')
+    description('module PlayGames' + rootProject.ext.maven.publish_version)
+}
+
+task uploadRepoIvyAIHelp(dependsOn: ':AIHelp:publish') {
+    group('upload')
+    description('module AIHelp' + rootProject.ext.maven.publish_version)
+}
+
+task uploadRepoIvyBase(dependsOn: ':IvyBase:publish') {
+    group('upload')
+    description('module Ivy Base' + rootProject.ext.maven.publish_version)
+}
+
+task uploadRepoIvyAdmob(dependsOn: ':Admob:publish') {
+    group('upload')
+    description('module Ivy admob' + rootProject.ext.maven.publish_version)
+}
+
+task uploadRepoIvyAppsflyer(dependsOn: ':Appsflyer:publish') {
+    group('upload')
+    description('module Ivy Appsflyer' + rootProject.ext.maven.publish_version)
+}
+
+task uploadRepoIvyFirebase(dependsOn: ':Firebase:publish') {
+    group('upload')
+    description('module Ivy Firebase' + rootProject.ext.maven.publish_version)
+}
+
+task uploadRepoIvyThinkingsdk(dependsOn: ':thinkingsdk:publish') {
+    group('upload')
+    description('module Ivy thinkingsdk' + rootProject.ext.maven.publish_version)
+}
+
+task uploadRepoIvyFacebook(dependsOn: ':Facebook:publish') {
+    group('upload')
+    description('module Ivy Facebook' + rootProject.ext.maven.publish_version)
+}
+
+task uploadRepoIvyCore(dependsOn: ':Core:publish') {
+    group('upload')
+    description('module Ivy Core' + rootProject.ext.maven.publish_version)
+}
+
+task uploadRepoIvyAds(dependsOn: ':IvyAds:publish') {
+    group('upload')
+    description('module IvyAds' + rootProject.ext.maven.publish_version)
+}
+
+task uploadRepoIvyGooglePay(dependsOn: ':GooglePay:publish') {
+    group('upload')
+    description('module Ivy GooglePay' + rootProject.ext.maven.publish_version)
+}
+
+task uploadRepoIvyGames(dependsOn: ':IvyGames:publish') {
+    group('upload')
+    description('module IvyGames' + rootProject.ext.maven.publish_version)
+}
+
+task uploadRepoIvyFirestore(dependsOn: ':Firestore:publish') {
+    group('upload')
+    description('module Ivy Firestore' + rootProject.ext.maven.publish_version)
+}
+
+task cleanAll() {
+    group('upload')
+    dependsOn(':Yandex:clean', ':IvyRemoteConfig:clean', ':Max:clean', ':IvyBase:clean', 'PlayGames:clean', 'AIHelp:clean', 'Appsflyer:clean', ':Firebase:clean', ':thinkingsdk:clean', ':Facebook:clean', ':Core:clean', ':Admob:clean', ':IvyAds:clean', ':GooglePay:clean', ':IvyGames:clean', ':Firestore:clean')
+}
+
+task rebuildAll() {
+    group('upload')
+    dependsOn(cleanAll, ':IvyBase:build', ':Yandex:build', ':IvyRemoteConfig:build', ':Max:build', 'PlayGames:build', 'AIHelp:build', 'Appsflyer:build', ':Firebase:build', ':thinkingsdk:build', ':Facebook:build', ':Core:build', ':Admob:build', ':IvyAds:clean', ':GooglePay:clean', ':IvyGames:clean', ':Firestore:clean')
+}
+
+task uploadAllRepo() {
+    group('upload')
+    rootProject.ext.maven.group_id = "com.rise"
+    description('upload all repo')
+    task('Core', dependsOn: ":Core:publish") {
+        doLast {
+            println("Core upload:${maven.publish_version}")
+        }
+    }
+
+    task('IvyAds', dependsOn: ":IvyAds:publish") {
+        finalizedBy('Core')
+        doLast {
+            println("IvyAds upload:${maven.publish_version}")
+        }
+    }
+
+    task('IvyGames', dependsOn: ":IvyGames:publish") {
+        finalizedBy('IvyAds')
+        doLast {
+            println("IvyGames upload:${maven.publish_version}")
+        }
+    }
+
+    task('AIHelp', dependsOn: ':AIHelp:publish') {
+        finalizedBy('IvyGames')
+        doLast {
+            println("AIHelp upload:${maven.publish_version}")
+        }
+    }
+
+    task('IvyRemoteConfig', dependsOn: ':IvyRemoteConfig:publish') {
+        finalizedBy('AIHelp')
+        doLast {
+            println("IvyRemoteConfig upload:${maven.publish_version}")
+        }
+    }
+
+    task('Admob', dependsOn: ":Admob:publish") {
+        finalizedBy('IvyRemoteConfig')
+        doLast {
+            println("Admob upload:${maven.publish_version}")
+        }
+    }
+
+    task('Max', dependsOn: ":Max:publish") {
+        finalizedBy('Admob')
+        doLast {
+            println("Max upload:${maven.publish_version}")
+        }
+    }
+
+    task('Yandex', dependsOn: ":Yandex:publish") {
+        finalizedBy('Max')
+        doLast {
+            println("Yandex upload:${maven.publish_version}")
+        }
+    }
+
+    task('Firestore', dependsOn: ":Firestore:publish") {
+        finalizedBy('Yandex')
+        doLast {
+            println("Firestore upload:${maven.publish_version}")
+        }
+    }
+    task('GooglePay', dependsOn: ":GooglePay:publish") {
+        finalizedBy('Firestore')
+        doLast {
+            println("GooglePay upload:${maven.publish_version}")
+        }
+    }
+
+    task('Facebook', dependsOn: ':Facebook:publish') {
+        finalizedBy('GooglePay')
+        doLast {
+            println("Facebook upload:${maven.publish_version}")
+        }
+    }
+
+    task('thinkingsdk', dependsOn: ':thinkingsdk:publish') {
+        finalizedBy('Facebook')
+        doLast {
+            println("thinkingsdk upload:${maven.publish_version}")
+        }
+    }
+
+    task('Firebase', dependsOn: ':Firebase:publish') {
+        finalizedBy('thinkingsdk')
+        doLast {
+            println("Firebase upload:${maven.publish_version}")
+        }
+    }
+
+    task('Appsflyer', dependsOn: ':Appsflyer:publish') {
+        finalizedBy('Firebase')
+        doLast {
+            println("Appsflyer upload:${maven.publish_version}")
+        }
+    }
+
+    task('PlayGames', dependsOn: ':PlayGames:publish') {
+        finalizedBy('Appsflyer')
+        doLast {
+            println("PlayGames upload:${maven.publish_version}")
+        }
+    }
+
+    task('IvyBase', dependsOn: ':IvyBase:publish') {
+        finalizedBy('PlayGames')
+        doLast {
+            println("IvyBase upload:${maven.publish_version}")
+        }
+    }
+
+    task('cleanTask') {
+        dependsOn(cleanAll)
+        finalizedBy('IvyBase')
+        doLast {
+            println('all clean')
+        }
+    }
+
+    dependsOn('cleanTask')
+    doFirst {
+        rootProject.ext.maven.group_id = "com.rise"
+    }
+}
+
+rebuildAll.mustRunAfter(cleanAll)
+
+
+task taskUploadToSonatype(){
+    group('upload')
+    rootProject.ext.maven.group_id = "io.github.ivysdk"
+
+    description('upload all repo')
+    task('CoreToSobatype', dependsOn: ":Core:uploadToSonatype") {
+        doLast {
+            println("Core upload:${maven.publish_version}")
+        }
+    }
+
+    task('IvyAdsToSobatype', dependsOn: ":IvyAds:uploadToSonatype") {
+        finalizedBy('CoreToSobatype')
+        doLast {
+            println("IvyAds upload:${maven.publish_version}")
+        }
+    }
+
+    task('IvyGamesToSobatype', dependsOn: ":IvyGames:uploadToSonatype") {
+        finalizedBy('IvyAdsToSobatype')
+        doLast {
+            println("IvyGames upload:${maven.publish_version}")
+        }
+    }
+
+    task('AIHelpToSobatype', dependsOn: ':AIHelp:uploadToSonatype') {
+        finalizedBy('IvyGamesToSobatype')
+        doLast {
+            println("AIHelp upload:${maven.publish_version}")
+        }
+    }
+
+    task('IvyRemoteConfigToSobatype', dependsOn: ':IvyRemoteConfig:uploadToSonatype') {
+        finalizedBy('AIHelpToSobatype')
+        doLast {
+            println("IvyRemoteConfig upload:${maven.publish_version}")
+        }
+    }
+
+    task('AdmobToSobatype', dependsOn: ":Admob:uploadToSonatype") {
+        finalizedBy('IvyRemoteConfigToSobatype')
+        doLast {
+            println("Admob upload:${maven.publish_version}")
+        }
+    }
+
+    task('MaxToSobatype', dependsOn: ":Max:uploadToSonatype") {
+        finalizedBy('AdmobToSobatype')
+        doLast {
+            println("Max upload:${maven.publish_version}")
+        }
+    }
+
+    task('YandexToSobatype', dependsOn: ":Yandex:uploadToSonatype") {
+        finalizedBy('MaxToSobatype')
+        doLast {
+            println("Yandex upload:${maven.publish_version}")
+        }
+    }
+
+    task('FirestoreToSobatype', dependsOn: ":Firestore:uploadToSonatype") {
+        finalizedBy('YandexToSobatype')
+        doLast {
+            println("Firestore upload:${maven.publish_version}")
+        }
+    }
+    task('GooglePayToSobatype', dependsOn: ":GooglePay:uploadToSonatype") {
+        finalizedBy('FirestoreToSobatype')
+        doLast {
+            println("GooglePay upload:${maven.publish_version}")
+        }
+    }
+
+    task('FacebookToSobatype', dependsOn: ':Facebook:uploadToSonatype') {
+        finalizedBy('GooglePayToSobatype')
+        doLast {
+            println("Facebook upload:${maven.publish_version}")
+        }
+    }
+
+    task('thinkingsdkToSobatype', dependsOn: ':thinkingsdk:uploadToSonatype') {
+        finalizedBy('FacebookToSobatype')
+        doLast {
+            println("thinkingsdk upload:${maven.publish_version}")
+        }
+    }
+
+    task('FirebaseToSobatype', dependsOn: ':Firebase:uploadToSonatype') {
+        finalizedBy('thinkingsdkToSobatype')
+        doLast {
+            println("Firebase upload:${maven.publish_version}")
+        }
+    }
+
+    task('AppsflyerToSobatype', dependsOn: ':Appsflyer:uploadToSonatype') {
+        finalizedBy('FirebaseToSobatype')
+        doLast {
+            println("Appsflyer upload:${maven.publish_version}")
+        }
+    }
+
+    task('PlayGamesToSobatype', dependsOn: ':PlayGames:uploadToSonatype') {
+        finalizedBy('AppsflyerToSobatype')
+        doLast {
+            println("PlayGames upload:${maven.publish_version}")
+        }
+    }
+
+    task('IvyBaseToSobatype', dependsOn: ':IvyBase:uploadToSonatype') {
+        finalizedBy('PlayGamesToSobatype')
+        doLast {
+            println("IvyBase upload:${maven.publish_version}")
+        }
+    }
+
+    task('cleanTaskForSobatype') {
+        dependsOn(cleanAll)
+        finalizedBy('IvyBaseToSobatype')
+        doLast {
+            println('all clean')
+        }
+    }
+
+    dependsOn('cleanTaskForSobatype')
+    doFirst {
+        rootProject.ext.maven.group_id = "io.github.ivysdk"
+    }
+
+}

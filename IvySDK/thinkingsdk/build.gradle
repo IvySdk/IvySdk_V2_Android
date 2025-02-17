@@ -1,0 +1,112 @@
+plugins {
+    id 'com.android.library'
+    id 'org.jetbrains.kotlin.android'
+    id("tech.medivh.plugin.publisher") version "1.2.1"
+}
+
+android {
+
+    lintOptions {
+        abortOnError false
+    }
+    namespace "ivy.data.analytics"
+    compileSdk rootProject.ext.android.compileSdk
+
+    defaultConfig {
+        minSdk rootProject.ext.android.minSdk
+        versionCode 1
+        versionName "1.0.0"
+        consumerProguardFile 'proguard-rules.pro'
+        multiDexEnabled = true
+//        addManifestPlaceholders([TAAuthID:"1b1c1fef65e3482bad5c9d0e6a823356"])
+    }
+
+    buildTypes {
+        debug {
+            debuggable rootProject.ext.buildConfig.debug_debuggable
+//            jniDebuggable rootProject.ext.buildConfig.debug_jniDebuggable
+            minifyEnabled rootProject.ext.buildConfig.debug_minifyEnabled
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+
+        release {
+            minifyEnabled rootProject.ext.buildConfig.release_minifyEnabled
+            // shrinkResources rootProject.ext.buildConfig.release_shrinkResources
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+    kotlinOptions {
+        jvmTarget = '17'
+    }
+}
+
+dependencies {
+
+//    implementation fileTree(dir: 'libs', include: ['*.jar', '*.aar'])
+//    compileOnly project(path: ':core')
+    implementation 'cn.thinkingdata.android:TDCore:1.0.3'
+//    implementation 'cn.thinkingdata.android:TDCore:1.1.0'
+
+    implementation rootProject.ext.dependencies.androidx_appcompat
+    implementation rootProject.ext.dependencies.androidx_core_ktx
+    implementation rootProject.ext.dependencies.lifecycle_viewmodel_ktx
+    debugApi project(':IvyBase')
+    releaseApi("$rootProject.ext.maven.group_id:IvyBase:$rootProject.ext.maven.publish_version")
+
+//    compileOnly project(path: ':ta_apt')
+//    annotationProcessor project(path: ':ta_apt')
+
+}
+
+//apply plugin: 'maven-publish'
+//publishing {
+//    publications {
+//        release(MavenPublication) {
+//            groupId = 'com.thinkingData'
+//            artifactId = "thinkingData"
+//            version = "1.0.1"
+//            afterEvaluate {
+//                from components.release
+//            }
+//        }
+//    }
+//    repositories {
+//        maven {
+//            url nexusUrl
+//            allowInsecureProtocol true
+//            credentials {
+//                it.username = nexusUserName
+//                it.password = nexusPassword
+//            }
+//        }
+//    }
+//}
+
+apply plugin: 'maven-publish'
+publishing {
+    publications {
+        release(MavenPublication) {
+            groupId = rootProject.ext.maven.group_id
+            artifactId = project.name
+            version = rootProject.ext.maven.publish_version
+            afterEvaluate {
+                println("Components: " + components*.name)
+                from components.release
+            }
+        }
+    }
+    repositories {
+        maven {
+            allowInsecureProtocol true
+            url 'http://10.80.1.9:8081/repository/maven-android-release/'
+            credentials {
+                it.username = "android"
+                it.password = "abc,123"
+            }
+        }
+    }
+}

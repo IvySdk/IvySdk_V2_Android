@@ -1,0 +1,377 @@
+{
+    "ads": {
+      "banner": [
+        {
+          "provider": "yandex",
+          "p": {
+            "placement": "R-M-2003866-37",
+            "adaptive": false,
+            "collapsible": "",
+            "priority": 2
+          }
+        },
+        {
+          "provider": "admob",
+          "p": {
+            "placement": "ca-app-pub-3940256099942544/6300978111",
+            "adaptive": false,
+            "collapsible": "",
+            "priority": 1
+          }
+        }
+      ],
+      "full": [
+        {
+          "provider": "yandex",
+          "p": {
+            "placement": "R-M-2003866-22",
+            "priority": 1
+          }
+        }
+      ],
+      "video": [
+        {
+          "provider": "yandex",
+          "p": {
+            "placement": "R-M-2003866-29",
+            "priority": 1
+          }
+        }
+      ],
+      "adConfig": {
+        "adLoadTimeOut": 60,
+        "delayOnLoadFail": 10,
+        "timesDelayOnLoadFail": 5,
+        "bannerAdRefreshDuration": 20,
+        "bannerRefreshByPlatform": false
+      },
+      "pam": {
+        "rewarded": [
+          {
+            "range": [
+              0,
+              1e-11
+            ],
+            "value": "rewardedGroupDefault"
+          },
+          {
+            "range": [
+              1e-11,
+              0.013
+            ],
+            "value": "rewardedGroup2"
+          },
+          {
+            "range": [
+              0.013,
+              0.037
+            ],
+            "value": "rewardedGroup3"
+          },
+          {
+            "range": [
+              0.037,
+              0.098
+            ],
+            "value": "rewardedGroup4"
+          },
+          {
+            "range": [
+              0.098,
+              0.278
+            ],
+            "value": "rewardedGroup5"
+          },
+          {
+            "range": [
+              0.278,
+              100000
+            ],
+            "value": "rewardedGroup6"
+          }
+        ],
+        "interstitial": [
+          {
+            "range": [
+              0,
+              1e-11
+            ],
+            "value": "interstitialGroupDefault"
+          },
+          {
+            "range": [
+              1e-11,
+              0.008
+            ],
+            "value": "interstitialGroup2"
+          },
+          {
+            "range": [
+              0.008,
+              0.022
+            ],
+            "value": "interstitialGroup3"
+          },
+          {
+            "range": [
+              0.022,
+              0.059
+            ],
+            "value": "interstitialGroup4"
+          },
+          {
+            "range": [
+              0.059,
+              0.207
+            ],
+            "value": "interstitialGroup5"
+          },
+          {
+            "range": [
+              0.207,
+              100000
+            ],
+            "value": "interstitialGroup6"
+          }
+        ],
+        "banner": [
+          {
+            "range": [
+              0,
+              1e-11
+            ],
+            "value": "bannerGroupDefault"
+          },
+          {
+            "range": [
+              1e-11,
+              0.0007
+            ],
+            "value": "bannerGroup2"
+          },
+          {
+            "range": [
+              0.0007,
+              0.0011
+            ],
+            "value": "bannerGroup3"
+          },
+          {
+            "range": [
+              0.0011,
+              0.0017
+            ],
+            "value": "bannerGroup4"
+          },
+          {
+            "range": [
+              0.0017,
+              0.0031
+            ],
+            "value": "bannerGroup5"
+          },
+          {
+            "range": [
+              0.0031,
+              100000
+            ],
+            "value": "bannerGroup6"
+          }
+        ]
+      }
+    },
+    "gts": 1737538304000,
+    "push": [],
+    "appid": "2732",
+    "token": "5dbced9099e90ad5be87e4625f95448f",
+    "track": {
+      "platform": {
+        "facebook": {
+          "enableAdPing": true,
+          "enablePurchasePing": true
+        },
+        "firebase": {
+          "enableAdPing": true,
+          "enablePurchasePing": true
+        },
+        "appsflyer": {
+          "app_key": "J6ejjnUP9fMkv29PqBuYzR",
+          "enableAdPing": true,
+          "enablePurchasePing": true,
+          "inviter_template_id": ""
+        },
+        "thinkingData": {
+          "app_key": "2732",
+          "server_url": "https://1331017298-90kgoi3kgz.na-siliconvalley.tencentscf.com",
+          "enableAdPing": true,
+          "enablePurchasePing": true
+        }
+      },
+      "eventChannel": {
+        "sdk_ad_closed": "0001",
+        "sdk_ad_request": "0001"
+      },
+      "combinedEvents": {
+        "video_shown_2_in3day": {
+          "d": 3,
+          "e": [
+            "sdk_ad_request"
+          ],
+          "p": {
+            "ad_format": "interstitial"
+          },
+          "r": false,
+          "v": 2,
+          "op": ">="
+        }
+      },
+      "accumulateEvent": {
+        "vs": {
+          "e": [
+            "sdk_ad_request"
+          ],
+          "p": [],
+          "count": [
+            2,
+            3,
+            5,
+            10,
+            20,
+            50,
+            100
+          ]
+        }
+      }
+    },
+    "v_api": "16",
+    "domain": "",
+    "helper": [],
+    "uacApi": "https://hda2k62cp0.execute-api.us-west-1.amazonaws.com/top_user_advalue",
+    "payment": {
+      "verify-url": "https://verify.ivymobile.com/api/external/v1/purchase",
+      "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAxqXkK5zMvvelr5uUpshbTQz8Sh54o9h7J3eY/Z4BVvvedQgsgq+bNx+rH9Guhy+VLvhYsuJAi7/LnOB1wXcTIEPEiKUYZlZBCXob5e2lepwlgz/nWptfJrse1Gzm6StJ1fUDIJn+eszuGL8lYksPGcvE/Z+qEInr5kfmzPApRta+sA0Etip0Rm0ye/LgxKdEpIjvzDSXzLS4pLL/n5XcWHHey8wUJS601E0ZbiQvEG9gWHoFPTmeuKSiaBywTE7ds6bQBCaYGNnSWRpwCkcVXeOQV/icMcq2bFWrKsR1KcuwLAoTgFxCa/A7TMOKAwq4cF2wzgaELCFNizc/OzgSTwIDAQAB",
+      "checkout": {
+        "1": {
+          "usd": 1.99,
+          "repeat": 1,
+          "feename": "20coins"
+        },
+        "2": {
+          "usd": 4.99,
+          "repeat": 1,
+          "feename": "50coins"
+        },
+        "3": {
+          "usd": 9.99,
+          "repeat": 1,
+          "feename": "100coins"
+        },
+        "4": {
+          "usd": 19.99,
+          "repeat": 1,
+          "feename": "240coins"
+        },
+        "5": {
+          "usd": 39.99,
+          "repeat": 1,
+          "feename": "500coins"
+        },
+        "6": {
+          "usd": 79.99,
+          "repeat": 1,
+          "feename": "1100coins"
+        },
+        "7": {
+          "usd": 5.99,
+          "repeat": 1,
+          "feename": "valuebundle"
+        },
+        "8": {
+          "usd": 11.99,
+          "repeat": 1,
+          "feename": "superbundle"
+        },
+        "9": {
+          "usd": 24.99,
+          "repeat": 1,
+          "feename": "specialbundle"
+        },
+        "10": {
+          "usd": 49.99,
+          "repeat": 1,
+          "feename": "generousbundle"
+        },
+        "11": {
+          "usd": 99.99,
+          "repeat": 1,
+          "feename": "legendbundle"
+        },
+        "12": {
+          "usd": 5.99,
+          "repeat": 1,
+          "feename": "adsbundle"
+        },
+        "13": {
+          "usd": 5.99,
+          "repeat": 1,
+          "feename": "removeads"
+        },
+        "16": {
+          "usd": 9.99,
+          "repeat": 1,
+          "feename": "battlepass"
+        },
+        "1000": {
+          "usd": 9.99,
+          "repeat": 1,
+          "feename": "event1000"
+        },
+        "1001": {
+          "usd": 1.99,
+          "repeat": 1,
+          "feename": "event1001"
+        },
+        "1002": {
+          "usd": 4.99,
+          "repeat": 1,
+          "feename": "event1002"
+        },
+        "1003": {
+          "usd": 6.99,
+          "repeat": 1,
+          "feename": "event1003"
+        },
+        "1004": {
+          "usd": 12.99,
+          "repeat": 1,
+          "feename": "event1004"
+        },
+        "1005": {
+          "usd": 19.99,
+          "repeat": 1,
+          "feename": "event1005"
+        }
+      }
+    },
+    "gameServices": {
+      "google+": {
+        "web_client_id": "976142984853-u08f01in8d1pdhq1d9r6mli2gh83nck0.apps.googleusercontent.com"
+      },
+      "facebook": {
+        "permissions": [
+          "public_profile",
+          "email",
+          "user_friends"
+        ]
+      },
+      "firestore": [],
+      "playGames": {
+        "web_client_id": "976142984853-u08f01in8d1pdhq1d9r6mli2gh83nck0.apps.googleusercontent.com"
+      }
+    },
+    "remoteConfig": {
+      "test_key": true
+  
+    },
+    "adPingThreshold": 0.01
+  }

@@ -1,0 +1,64 @@
+apply plugin: 'com.android.library'
+
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+
+//    implementation("io.github.ivysdk:IvyBase:1.0.0")
+
+//    implementation("io.github.ivysdk:Admob:10.0.0-test29")
+
+//    implementation(name: 'com_rise_GooglePay_10.0.0.28', ext:'aar')
+//    implementation(name: 'com_rise_Admob_10.0.0.28', ext:'aar')
+//    implementation "com.google.android.gms:play-services-ads:23.3.0"
+//
+//    implementation(name: 'com_rise_AIHelp_10.0..0.28', ext:'aar')
+//    implementation(name: 'com_rise_Facebook_10.0.0.28', ext:'aar')
+//    implementation(name: 'com_rise_Firestore_10.0.0.28', ext:'aar')
+//    implementation(name: 'com_rise_Firebase_10.0.0.28', ext:'aar')
+//    implementation(name: 'com_rise_PlayGames_10.0.0.28', ext:'aar')
+//    implementation(name: 'com_rise_Yandex_10.0.0.28', ext:'aar')
+//    implementation(name: 'com_rise_thinkingsdk_10.0.0.28', ext:'aar')
+//    implementation(name: 'com_rise_Appsflyer_10.0.0.28', ext:'aar')
+//    implementation(name: 'com_rise_Max_10.0.0.28', ext:'aar')
+//    implementation(name: 'com_rise_Core_10.0.0.28', ext:'aar')
+
+}
+
+android {
+    compileSdkVersion 34
+    buildToolsVersion '30.0.3'
+namespace "com.unity3d.player"
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    defaultConfig {
+        minSdkVersion 23
+        targetSdkVersion 34
+        ndk {
+            abiFilters 'armeabi-v7a'
+        }
+        versionCode 1
+        versionName '0.1'
+        consumerProguardFiles 'proguard-unity.txt'
+    }
+
+    lintOptions {
+        abortOnError false
+    }
+
+    aaptOptions {
+        noCompress = ['.unity3d', '.ress', '.resource', '.obb', '.bundle', '.unityexp'] + unityStreamingAssets.tokenize(', ')
+        ignoreAssetsPattern = "!.svn:!.git:!.ds_store:!*.scc:.*:!CVS:!thumbs.db:!picasa.ini:!*~"
+    }
+
+    packagingOptions {
+        doNotStrip '*/armeabi-v7a/*.so'
+    }
+}
+
+
+

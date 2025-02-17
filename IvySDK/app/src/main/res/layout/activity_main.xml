@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="42dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:onClick="onClick"
+            android:id="@+id/log_event"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="log event"
+            android:textAllCaps="false"
+            android:textColor="@color/black" />
+
+        <Button
+            android:onClick="onClick"
+            android:id="@+id/has_banner"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="has banner"
+            android:textAllCaps="false"
+            android:textColor="@color/black" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="42dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:onClick="onClick"
+            android:id="@+id/show_banner"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="show banner"
+            android:textAllCaps="false"
+            android:textColor="@color/black" />
+
+        <Button
+            android:onClick="onClick"
+            android:id="@+id/close_banner"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="close banner"
+            android:textAllCaps="false"
+            android:textColor="@color/black" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="42dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:onClick="onClick"
+            android:id="@+id/has_full"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="has full"
+            android:textAllCaps="false"
+            android:textColor="@color/black" />
+
+        <Button
+            android:onClick="onClick"
+            android:id="@+id/show_full"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="show full"
+            android:textAllCaps="false"
+            android:textColor="@color/black" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="42dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:onClick="onClick"
+            android:id="@+id/has_video"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="has video"
+            android:textAllCaps="false"
+            android:textColor="@color/black" />
+
+        <Button
+            android:onClick="onClick"
+            android:id="@+id/show_video"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="show video"
+            android:textAllCaps="false"
+            android:textColor="@color/black" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="42dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:onClick="onClick"
+            android:id="@+id/sign_play_games"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="sign play-games"
+            android:textAllCaps="false"
+            android:textColor="@color/black" />
+
+        <Button
+            android:onClick="onClick"
+            android:id="@+id/play_games_sign_status"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="play-games signed?"
+            android:textAllCaps="false"
+            android:textColor="@color/black" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="42dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:onClick="onClick"
+            android:id="@+id/play_games_user"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="play-games user"
+            android:textAllCaps="false"
+            android:textColor="@color/black" />
+
+        <Button
+            android:onClick="onClick"
+            android:id="@+id/sign_facebook"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="sign facebook"
+            android:textAllCaps="false"
+            android:textColor="@color/black" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="42dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:onClick="onClick"
+            android:id="@+id/facebook_user"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="facebook user"
+            android:textAllCaps="false"
+            android:textColor="@color/black" />
+
+        <Button
+            android:onClick="onClick"
+            android:id="@+id/facebook_sign_status"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="facebook signed?"
+            android:textAllCaps="false"
+            android:textColor="@color/black" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="42dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:onClick="onClick"
+            android:id="@+id/sign_out_facebook"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="sign out facebook"
+            android:textAllCaps="false"
+            android:textColor="@color/black" />
+
+        <Button
+            android:onClick="onClick"
+            android:id="@+id/pay"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="pay"
+            android:textAllCaps="false"
+            android:textColor="@color/black" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="42dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:onClick="onClick"
+            android:id="@+id/query_purchases"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="query purchases"
+            android:textAllCaps="false"
+            android:textColor="@color/black" />
+
+        <Button
+            android:onClick="onClick"
+
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text=""
+            android:textAllCaps="false"
+            android:textColor="@color/black" />
+    </LinearLayout>
+
+</LinearLayout>

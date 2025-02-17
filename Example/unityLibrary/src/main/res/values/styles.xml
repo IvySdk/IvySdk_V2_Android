@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<style name="UnityThemeSelector" parent="BaseUnityTheme">
+	<item name="android:windowBackground">@android:color/black</item>
+</style>
+<style name="BaseUnityTheme" parent="android:Theme.Holo.Light.NoActionBar.Fullscreen">
+</style>
+<style name="UnityThemeSelector.Translucent" parent="@style/UnityThemeSelector">
+    <item name="android:windowIsTranslucent">true</item>
+    <item name="android:windowBackground">@android:color/transparent</item>
+</style>
+    <style name="loadingDialog" >
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:backgroundDimAmount">0.5</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:statusBarColor">@null</item>
+        <item name="android:windowFullscreen">true</item>
+
+    </style>
+</resources>

@@ -1,0 +1,13 @@
+[
+    {
+       "minAppVersion":1,                               //应用版本
+       "minOSVersion":28,                               //系统版本
+       "countries":["CN", "US"],                        //国家
+       "OSRams":[0, 1000],                              // 内存区间
+       "mediaSources": [],                              // 广告源
+       "campaignIds":["applovinmax", "google_admob"],   // 广告源
+       "deviceCategory":["huawei", "vivo"],             //设备类型， 默认 all
+       "livingDays":[],                                 //活跃天数
+       "configFileName":""                               //配置文件名称
+    }
+]

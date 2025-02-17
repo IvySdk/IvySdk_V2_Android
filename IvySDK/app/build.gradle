@@ -1,0 +1,139 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+    id 'com.google.gms.google-services'
+    id 'com.google.firebase.crashlytics'
+}
+
+android {
+    namespace 'com.example.ivy'
+    compileSdk rootProject.ext.android.compileSdk
+
+    defaultConfig {
+        applicationId "com.bubblegame.bubbleshooterpop"
+        minSdk rootProject.ext.android.minSdk
+        targetSdk rootProject.ext.android.compileSdk
+        versionCode 10000
+        versionName "1.0"
+
+        vectorDrawables {
+            useSupportLibrary true
+        }
+
+        manifestPlaceholders = [
+                "ivy_debug"            : true,
+                "ivy_app_id"           : "2732",
+                "facebook_app_id"      : "443246477338698",
+                "facebook_client_token": "e27c126af9b1fc8b66b42111eabab047",
+                "admob_application_id" : "ca-app-pub-3940256099942544~3347511713",
+                "gms_play_services_id" : "16951538787",
+                "applovin_sdk_key" : "E8pVhU9mykQd3y0TD0Ksoq4vpf_Muat6ifcP9m96UakTWk5klQaWEeQ2IPOA-GHgxu54eEA8pvgKcn2MBdtQGH",
+                "ivy_notch": true,
+                "aps_id"   : ""
+        ]
+    }
+
+    signingConfigs {
+
+        release {
+            storeFile file('com.bubblegame.bubbleshooterpop.keystore')
+            storePassword '123456'
+            keyAlias 'com.bubblegame.bubbleshooterpop'
+            keyPassword '123456'
+        }
+    }
+
+    buildTypes {
+        debug {
+            debuggable true
+            jniDebuggable true
+            minifyEnabled true
+            signingConfig signingConfigs.release
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+
+        release {
+            signingConfig signingConfigs.release
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+    kotlinOptions {
+        jvmTarget = '17'
+    }
+    buildFeatures {
+        buildConfig true
+
+    }
+//    composeOptions {
+//        kotlinCompilerExtensionVersion '1.5.13'
+//    }
+    packaging {
+        resources {
+            excludes += '/META-INF/{AL2.0,LGPL2.1}'
+        }
+    }
+}
+
+dependencies {
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+//    implementation libs.androidx.core.ktx
+//    implementation libs.androidx.lifecycle.runtime.ktx
+////    implementation libs.androidx.activity.compose
+////    implementation platform(libs.androidx.compose.bom)
+//    implementation libs.androidx.ui
+//    implementation libs.androidx.ui.graphics
+//    implementation libs.androidx.ui.tooling.preview
+//    implementation libs.androidx.material3
+
+    implementation project(':Core')
+    implementation project(':Admob')
+    implementation project(':Max')
+    implementation project(':thinkingsdk')
+    implementation project(':Appsflyer')
+    implementation project(':Facebook')
+    implementation project(':Firebase')
+//    implementation project(':IvyBase')
+    implementation project(':GooglePay')
+    implementation project(':PlayGames')
+    implementation project(':Firestore')
+    implementation project(':AIHelp')
+    implementation project(':Yandex')
+
+//    implementation 'com.rise:Core:10.0.0-test3'
+////implementation 'com.rise:Admob:10.0.0-test3'
+//    implementation 'com.rise:Max:10.0.0-test3'
+//    implementation 'com.rise:GooglePay:10.0.0-test3'
+//    implementation 'com.rise:Appsflyer:10.0.0-test3'
+//    implementation 'com.rise:Facebook:10.0.0-test3'
+//    implementation 'com.rise:Facebook:10.0.0-test3'
+//    implementation 'com.rise:Firebase:10.0.0-test3'
+//    implementation 'com.rise:thinkingsdk:10.0.0-test3'
+//    implementation 'com.rise:AIHelp:10.0.0-test3'
+//    implementation 'com.rise:Firestore:10.0.0-test3'
+
+//    testImplementation libs.junit
+//    androidTestImplementation libs.androidx.junit
+//    androidTestImplementation libs.androidx.espresso.core
+//    androidTestImplementation platform(libs.androidx.compose.bom)
+//    androidTestImplementation libs.androidx.ui.test.junit4
+//    debugImplementation libs.androidx.ui.tooling
+//    debugImplementation libs.androidx.ui.test.manifest
+
+
+    implementation 'com.applovin.mediation:vungle-adapter:+'
+    implementation 'com.applovin.mediation:inmobi-adapter:+'
+    implementation 'com.applovin.mediation:google-ad-manager-adapter:+'
+    implementation 'com.applovin.mediation:verve-adapter:+'
+    implementation 'com.applovin.mediation:google-adapter:23.3.0.1'
+    implementation 'com.applovin.mediation:unityads-adapter:+'
+
+}
+
+apply plugin: 'com.google.gms.google-services'
+apply plugin: 'com.google.firebase.crashlytics'

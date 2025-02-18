@@ -5,6 +5,7 @@
 1. sdk aar文件目录        /Assets/Plugins/Android/
 2. 示例default.json文件   /Assets/Plugins/Android/default.json
 3. Uniyt平台接口文件       /Assets/Plugins/IvySdk/
+4. 示例Android项目        /Example
 <br>
 
 # 原生配置
@@ -32,27 +33,32 @@ android {
 # SDK引入
 ```js
 模块引入说明:
-sdk_version = 10.0.0-test34
+    def sdk_version = "10.0.0"
 // 核心模块，必须引入
-  implementation("io.github.ivysdk:Core:sdk_version")
+    implementation("io.github.ivysdk:Core:$sdk_version")
 //google 支付模块，可以根据需要引入
-  implementation("io.github.ivysdk:GooglePay:sdk_version")
+    implementation("io.github.ivysdk:GooglePay:$sdk_version")
 //广告聚合平台，根据需要选择引入
-  implementation("io.github.ivysdk:Admob:sdk_version")
-  implementation("io.github.ivysdk:Max:sdk_version")
-  implementation("io.github.ivysdk:Yandex:sdk_version")
+    implementation("io.github.ivysdk:Admob:$sdk_version")
+    implementation("io.github.ivysdk:Max:$sdk_version")
+    implementation("io.github.ivysdk:Yandex:$sdk_version")
 //游戏排行榜、成就等，根据需要选择引入
-  implementation("io.github.ivysdk:PlayGames:sdk_version")
+    implementation("io.github.ivysdk:PlayGames:$sdk_version")
 //事件统计平台，根据需要引入
-  implementation("io.github.ivysdk:Appsflyer:sdk_version")
-  implementation("io.github.ivysdk:Facebook:sdk_version")
-  implementation("io.github.ivysdk:Firebase:sdk_version")
-  implementation("io.github.ivysdk:thinkingsdk:sdk_version")
+    implementation("io.github.ivysdk:Appsflyer:$sdk_version")
+    implementation("io.github.ivysdk:Facebook:$sdk_version")
+    implementation("io.github.ivysdk:Firebase:$sdk_version")
+    implementation("io.github.ivysdk:thinkingsdk:$sdk_version")
 //云存档模块，根据需要引入
-  implementation("io.github.ivysdk:Firestore:sdk_version")
+    implementation("io.github.ivysdk:Firestore:$sdk_version")
 //客服模块，根据需要引入
-  implementation("io.github.ivysdk:AIHelp:sdk_version")
+    implementation("io.github.ivysdk:AIHelp:$sdk_version")
 ```
+
+# 广告平台引入
+- [Admob](https://developers.google.com/admob/android/mediation/applovin?hl=zh-cn)
+- [Max](https://developers.applovin.com/en/max/android/preparing-mediated-networks)
+
 
 # 混淆
 ```js

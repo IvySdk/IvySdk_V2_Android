@@ -2,11 +2,7 @@ apply plugin: 'com.android.application'
 
 dependencies {
     implementation project(':unityLibrary')
-    implementation("io.github.ivysdk:Core:10.0.0-test34")
-    implementation("io.github.ivysdk:Admob:10.0.0-test34")
-    implementation "com.google.android.gms:play-services-ads:23.3.0"
-//    implementation("io.github.ivysdk:GooglePay:10.0.0-test34")
-    implementation("io.github.ivysdk:PlayGames:10.0.0-test34")
+
     }
 
 android {

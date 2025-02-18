@@ -3,26 +3,26 @@ apply plugin: 'com.android.library'
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-
-
-//    implementation("io.github.ivysdk:IvyBase:1.0.0")
-
-//    implementation("io.github.ivysdk:Admob:10.0.0-test29")
-
-//    implementation(name: 'com_rise_GooglePay_10.0.0.28', ext:'aar')
-//    implementation(name: 'com_rise_Admob_10.0.0.28', ext:'aar')
-//    implementation "com.google.android.gms:play-services-ads:23.3.0"
-//
-//    implementation(name: 'com_rise_AIHelp_10.0..0.28', ext:'aar')
-//    implementation(name: 'com_rise_Facebook_10.0.0.28', ext:'aar')
-//    implementation(name: 'com_rise_Firestore_10.0.0.28', ext:'aar')
-//    implementation(name: 'com_rise_Firebase_10.0.0.28', ext:'aar')
-//    implementation(name: 'com_rise_PlayGames_10.0.0.28', ext:'aar')
-//    implementation(name: 'com_rise_Yandex_10.0.0.28', ext:'aar')
-//    implementation(name: 'com_rise_thinkingsdk_10.0.0.28', ext:'aar')
-//    implementation(name: 'com_rise_Appsflyer_10.0.0.28', ext:'aar')
-//    implementation(name: 'com_rise_Max_10.0.0.28', ext:'aar')
-//    implementation(name: 'com_rise_Core_10.0.0.28', ext:'aar')
+    def sdk_version = "10.0.0"
+// 核心模块，必须引入
+    implementation("io.github.ivysdk:Core:$sdk_version")
+//google 支付模块，可以根据需要引入
+    implementation("io.github.ivysdk:GooglePay:$sdk_version")
+//广告聚合平台，根据需要选择引入
+    implementation("io.github.ivysdk:Admob:$sdk_version")
+    implementation("io.github.ivysdk:Max:$sdk_version")
+    implementation("io.github.ivysdk:Yandex:$sdk_version")
+//游戏排行榜、成就等，根据需要选择引入
+    implementation("io.github.ivysdk:PlayGames:$sdk_version")
+//事件统计平台，根据需要引入
+    implementation("io.github.ivysdk:Appsflyer:$sdk_version")
+    implementation("io.github.ivysdk:Facebook:$sdk_version")
+    implementation("io.github.ivysdk:Firebase:$sdk_version")
+    implementation("io.github.ivysdk:thinkingsdk:$sdk_version")
+//云存档模块，根据需要引入
+    implementation("io.github.ivysdk:Firestore:$sdk_version")
+//客服模块，根据需要引入
+    implementation("io.github.ivysdk:AIHelp:$sdk_version")
 
 }
 

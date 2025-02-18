@@ -8,4 +8,5 @@ Packages/**
 UserSettings/**
 Temp/**
 Example/**/build/**
+Example/.idea/**
 IvySdk/app/proguardMapping.txt

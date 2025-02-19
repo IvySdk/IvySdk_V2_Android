@@ -1220,17 +1220,17 @@ namespace com.ivy.sdk
 
         public enum ConfigKeys
         {
-            CONFIG_KEY_APP_ID = 1,
+            CONFIG_KEY_APP_ID = 1,              // app id
             CONFIG_KEY_LEADER_BOARD_URL = 2,
-            CONFIG_KEY_API_VERSION = 3,
-            CONFIG_KEY_SCREEN_WIDTH = 4,
-            CONFIG_KEY_SCREEN_HEIGHT = 5,
-            CONFIG_KEY_LANGUAGE = 6,
-            CONFIG_KEY_COUNTRY = 7,
-            CONFIG_KEY_VERSION_CODE = 8,
-            CONFIG_KEY_VERSION_NAME = 9,
-            CONFIG_KEY_PACKAGE_NAME = 10,
-            CONFIG_KEY_UUID = 11,
+            CONFIG_KEY_API_VERSION = 3,         
+            CONFIG_KEY_SCREEN_WIDTH = 4,        // 屏幕宽度
+            CONFIG_KEY_SCREEN_HEIGHT = 5,       // 屏幕高度
+            CONFIG_KEY_LANGUAGE = 6,            // 设备语言
+            CONFIG_KEY_COUNTRY = 7,             // 设备国家
+            CONFIG_KEY_VERSION_CODE = 8,        //版本号
+            CONFIG_KEY_VERSION_NAME = 9,        //版本名
+            CONFIG_KEY_PACKAGE_NAME = 10,       // 包名
+            CONFIG_KEY_UUID = 11,               // role id
             SDK_CONFIG_KEY_JSON_VERSION = 21,
         }
 

@@ -770,6 +770,10 @@ IvySDK.Instance.OpenAppStore(String url);
   ```int size = IvySDK.Instance.GetFreeDiskSize();```
   <br>
 
+- 获取配置信息
+  ```string result = IvySDK.Instance.GetConfig(ConfigKeys key);```
+  <br>
+
 # 配置文件
 
 ## 配置说明

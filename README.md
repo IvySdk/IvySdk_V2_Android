@@ -44,7 +44,7 @@
 ```js
 Android studio 2024.1.1 
 Gradle version 8.7
-gradle plugin version 8.5.0
+Gradle plugin version 8.5.0
 ```
 
 # 原生配置

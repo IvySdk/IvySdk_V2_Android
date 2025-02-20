@@ -41,9 +41,11 @@
 <br>
 
 ## 原生开发平台
-Android studio 2024.1.1
+```js
+Android studio 2024.1.1 
 Gradle version 8.7
 gradle plugin version 8.5.0
+```
 
 # 原生配置
 ```js

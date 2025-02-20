@@ -10,7 +10,7 @@
 
 
 ## 引入Google基础服务
-**此步骤务必严格按照步骤配置**
+**此步骤务必严格按照步骤配置** <br>
 **如果在Google play console中选择了签名托管，请务必重复第1、2、3部操作**
 >> 参考 [Google 服务 Gradle 插件](https://developers.google.com/android/guides/google-services-plugin?hl=zh-cn)
 1. 请研发端提供签名文件(keystore) SHA1、SHA256 值
@@ -39,6 +39,11 @@
 2. 研发端在**module目录**内build.gradle文件**最底部**添加
 ```js apply plugin: 'com.google.firebase.crashlytics' ```
 <br>
+
+## 原生开发平台
+Android studio 2024.1.1
+Gradle version 8.7
+gradle plugin version 8.5.0
 
 # 原生配置
 ```js

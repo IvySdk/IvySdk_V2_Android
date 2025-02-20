@@ -24,7 +24,7 @@
     }
 ```
 5. 研发端在**module目录**内build.gradle文件**最底部**添加
-```js apply plugin: 'com.google.gms.google-services' ```
+``` apply plugin: 'com.google.gms.google-services' ```
 <br>
 
 ##  引入 Firebase 崩溃分析

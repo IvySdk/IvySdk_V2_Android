@@ -12,6 +12,7 @@
 ## 引入Google基础服务
 **此步骤务必严格按照步骤配置**
 **如果在Google play console中选择了签名托管，请务必重复第1、2、3部操作**
+>> 参考 [Google 服务 Gradle 插件](https://developers.google.com/android/guides/google-services-plugin?hl=zh-cn)
 1. 请研发端提供签名文件(keystore) SHA1、SHA256 值
 2. 由运营人员在Firebase上创建Android项目，填入正确的SHA1、SHA256值后，下载GooglePlay-services.json文件，并交给研发端
 3. 研发端获取GooglePlay-services.json，并复制到项目根目录
@@ -27,6 +28,7 @@
 <br>
 
 ##  引入 Firebase 崩溃分析
+>> 参考 [将 Firebase 添加到您的 Android 项目](https://firebase.google.com/docs/android/setup?hl=zh-cn)
 1. 研发端在项目根目录build.gradle文件中 添加
 ```js
    dependencies {
@@ -36,7 +38,7 @@
 ```
 2. 研发端在**module目录**内build.gradle文件**最底部**添加
 ```js apply plugin: 'com.google.firebase.crashlytics' ```
-
+<br>
 
 # 原生配置
 ```js

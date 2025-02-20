@@ -63,7 +63,7 @@ android {
 # SDK引入
 ```js
 模块引入说明:
-    def sdk_version = "10.0.0"
+    def sdk_version = "10.0.1"
 // 核心模块，必须引入
     implementation("io.github.ivysdk:Core:$sdk_version")
 //google 支付模块，可以根据需要引入

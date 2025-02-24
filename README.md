@@ -1,6 +1,9 @@
 @[TOC](Android SDK 接入文档)
 
 
+[Android原生文档](README_ANDROID_NATIVE.md)
+
+
 # 文件位置说明
 1. sdk aar文件目录        /Assets/Plugins/Android/
 2. 示例default.json文件   /Assets/Plugins/Android/default.json

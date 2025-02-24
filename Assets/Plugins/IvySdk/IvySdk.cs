@@ -274,7 +274,7 @@ namespace com.ivy.sdk
         {
             if (_class != null)
             {
-                _class.CallStatic<string>("getPaymentDatas");
+                return _class.CallStatic<string>("getPaymentDatas");
             }
             return "[]";
         }
@@ -689,7 +689,7 @@ namespace com.ivy.sdk
         {
             if (_class != null)
             {
-                _class.CallStatic<bool>("isFacebookLoggedIn");
+                return _class.CallStatic<bool>("isFacebookLoggedIn");
             }
             return false;
         }
@@ -701,7 +701,7 @@ namespace com.ivy.sdk
         {
             if (_class != null)
             {
-                _class.CallStatic<string>("getFacebookFriends");
+                return _class.CallStatic<string>("getFacebookFriends");
             }
             return "[]";
         }
@@ -713,7 +713,7 @@ namespace com.ivy.sdk
         {
             if (_class != null)
             {
-                _class.CallStatic<string>("getFacebookUserInfo");
+                return _class.CallStatic<string>("getFacebookUserInfo");
             }
             return "{}";
         }
@@ -1222,7 +1222,7 @@ namespace com.ivy.sdk
         {
             CONFIG_KEY_APP_ID = 1,              // app id
             CONFIG_KEY_LEADER_BOARD_URL = 2,
-            CONFIG_KEY_API_VERSION = 3,         
+            CONFIG_KEY_API_VERSION = 3,
             CONFIG_KEY_SCREEN_WIDTH = 4,        // 屏幕宽度
             CONFIG_KEY_SCREEN_HEIGHT = 5,       // 屏幕高度
             CONFIG_KEY_LANGUAGE = 6,            // 设备语言

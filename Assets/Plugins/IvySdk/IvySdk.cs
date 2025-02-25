@@ -938,22 +938,11 @@ namespace com.ivy.sdk
          * @param collection     数据集合
          * @param jsonData       
          */
-        public void SaveCloudData(string collection, string jsonData)
+        public void SaveCloudData(string collection, string documentId, string jsonData)
         {
             if (_class != null)
             {
-                _class.CallStatic("saveCloudData", collection);
-            }
-        }
-
-        /**
-         * 读取指定数据集合
-         */
-        public void ReadCloudData(string collection)
-        {
-            if (_class != null)
-            {
-                _class.CallStatic("readCloudData", collection);
+                _class.CallStatic("saveCloudData", collection, documentId, jsonData);
             }
         }
 
@@ -975,11 +964,11 @@ namespace com.ivy.sdk
          * @param collection     数据集合
          * @param jsonData
          */
-        public void MergeCloudData(string collection, string jsonData)
+        public void MergeCloudData(string collection, string documentId, string jsonData)
         {
             if (_class != null)
             {
-                _class.CallStatic("mergeCloudData", collection, jsonData);
+                _class.CallStatic("mergeCloudData", collection, documentId, jsonData);
             }
         }
 
@@ -999,11 +988,11 @@ namespace com.ivy.sdk
          * 删除数据
          * @param collection     数据集合
          */
-        public void DeleteCloudData(string collection)
+        public void DeleteCloudData(string collection, string documentId)
         {
             if (_class != null)
             {
-                _class.CallStatic("deleteCloudData", collection);
+                _class.CallStatic("deleteCloudData", collection, documentId);
             }
         }
 
@@ -1013,23 +1002,11 @@ namespace com.ivy.sdk
          * @param transactionId     事务Id
          * @param jsonData      
          */
-        public void UpdateCloudData(string collection, string transactionId, string jsonData)
+        public void UpdateCloudData(string collection, string documentId, string transactionId, string jsonData)
         {
             if (_class != null)
             {
-                _class.CallStatic("updateCloudData", collection, transactionId, jsonData);
-            }
-        }
-
-        /**
-         * 备份数据
-         * @param collection    数据集合
-         */
-        public void SnapshotCloudData(string collection)
-        {
-            if (_class != null)
-            {
-                _class.CallStatic("snapshotCloudData", collection);
+                _class.CallStatic("updateCloudData", collection, documentId, transactionId, jsonData);
             }
         }
 

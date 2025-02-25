@@ -31,12 +31,12 @@ namespace com.ivy.sdk
 
         public static event Action<string, bool> OnFirebaseUnlinkEvent;
 
-        public static event Action<string, bool> OnCloudDataSaveEvent;
+        public static event Action<string, string, bool> OnCloudDataSaveEvent;
         public static event Action<string, string, string, bool> OnCloudDataReadEvent;
-        public static event Action<string, bool> OnCloudDataMergeEvent;
+        public static event Action<string, string, bool> OnCloudDataMergeEvent;
         public static event Action<string, string, bool> OnCloudDataQueryEvent;
-        public static event Action<string, bool> OnCloudDataDeleteEvent;
-        public static event Action<string, string, bool> OnCloudDataUpdateEvent;
+        public static event Action<string, string, bool> OnCloudDataDeleteEvent;
+        public static event Action<string, string, string, bool> OnCloudDataUpdateEvent;
         public static event Action<string, string, bool> OnCloudDataSnapshotEvent;
 
 
@@ -578,9 +578,13 @@ namespace com.ivy.sdk
         {
             if (!string.IsNullOrEmpty(data))
             {
-                if (OnCloudDataSaveEvent != null && OnCloudDataSaveEvent.GetInvocationList().Length > 0)
+                string[] args = data.Split('|');
+                if (args != null && args.Length == 3)
                 {
-                    OnCloudDataSaveEvent.Invoke(data, true);
+                    if (OnCloudDataSaveEvent != null && OnCloudDataSaveEvent.GetInvocationList().Length > 0)
+                    {
+                        OnCloudDataSaveEvent.Invoke(args[0], args[1],  true);
+                    }
                 }
             }
         }
@@ -591,9 +595,13 @@ namespace com.ivy.sdk
         {
             if (!string.IsNullOrEmpty(data))
             {
-                if (OnCloudDataSaveEvent != null && OnCloudDataSaveEvent.GetInvocationList().Length > 0)
+                string[] args = data.Split('|');
+                if (args != null && args.Length == 2)
                 {
-                    OnCloudDataSaveEvent.Invoke(data, false);
+                    if (OnCloudDataSaveEvent != null && OnCloudDataSaveEvent.GetInvocationList().Length > 0)
+                    {
+                        OnCloudDataSaveEvent.Invoke(args[0], args[1], false);
+                    }
                 }
             }
         }
@@ -640,9 +648,13 @@ namespace com.ivy.sdk
         {
             if (!string.IsNullOrEmpty(data))
             {
-                if (OnCloudDataMergeEvent != null && OnCloudDataMergeEvent.GetInvocationList().Length > 0)
+                string[] args = data.Split('|');
+                if (args != null && args.Length == 2)
                 {
-                    OnCloudDataMergeEvent.Invoke(data, true);
+                    if (OnCloudDataMergeEvent != null && OnCloudDataMergeEvent.GetInvocationList().Length > 0)
+                    {
+                        OnCloudDataMergeEvent.Invoke(args[0], args[1], true);
+                    }
                 }
             }
         }
@@ -654,9 +666,13 @@ namespace com.ivy.sdk
         {
             if (!string.IsNullOrEmpty(data))
             {
-                if (OnCloudDataMergeEvent != null && OnCloudDataMergeEvent.GetInvocationList().Length > 0)
+                string[] args = data.Split('|');
+                if (args != null && args.Length == 2)
                 {
-                    OnCloudDataMergeEvent.Invoke(data, false);
+                    if (OnCloudDataMergeEvent != null && OnCloudDataMergeEvent.GetInvocationList().Length > 0)
+                    {
+                        OnCloudDataMergeEvent.Invoke(args[0], args[1], false);
+                    }
                 }
             }
         }
@@ -694,9 +710,13 @@ namespace com.ivy.sdk
         {
             if (!string.IsNullOrEmpty(data))
             {
-                if (OnCloudDataDeleteEvent != null && OnCloudDataDeleteEvent.GetInvocationList().Length > 0)
+                string[] args = data.Split('|');
+                if (args != null && args.Length == 2)
                 {
-                    OnCloudDataDeleteEvent.Invoke(data, true);
+                    if (OnCloudDataDeleteEvent != null && OnCloudDataDeleteEvent.GetInvocationList().Length > 0)
+                    {
+                        OnCloudDataDeleteEvent.Invoke(args[0], args[1], true);
+                    }
                 }
             }
         }
@@ -705,9 +725,13 @@ namespace com.ivy.sdk
         {
             if (!string.IsNullOrEmpty(data))
             {
-                if (OnCloudDataDeleteEvent != null && OnCloudDataDeleteEvent.GetInvocationList().Length > 0)
+                string[] args = data.Split('|');
+                if (args != null && args.Length == 2)
                 {
-                    OnCloudDataDeleteEvent.Invoke(data, false);
+                    if (OnCloudDataDeleteEvent != null && OnCloudDataDeleteEvent.GetInvocationList().Length > 0)
+                    {
+                        OnCloudDataDeleteEvent.Invoke(args[0], args[1], false);
+                    }
                 }
             }
         }
@@ -717,13 +741,14 @@ namespace com.ivy.sdk
             if (!string.IsNullOrEmpty(data))
             {
                 string[] args = data.Split('|');
-                if (args != null && args.Length == 2)
+                if (args != null && args.Length == 3)
                 {
                     string collection = args[0];
-                    string transactionId = args[1];
+                    string documentId = args[1];
+                    string transactionId = args[2];
                     if (OnCloudDataUpdateEvent != null && OnCloudDataUpdateEvent.GetInvocationList().Length > 0)
                     {
-                        OnCloudDataUpdateEvent.Invoke(collection, transactionId, true);
+                        OnCloudDataUpdateEvent.Invoke(collection, documentId, transactionId, true);
                     }
                 }
             }
@@ -734,13 +759,14 @@ namespace com.ivy.sdk
             if (!string.IsNullOrEmpty(data))
             {
                 string[] args = data.Split('|');
-                if (args != null && args.Length == 2)
+                if (args != null && args.Length == 3)
                 {
                     string collection = args[0];
-                    string transactionId = args[1];
+                    string documentId = args[1];
+                    string transactionId = args[2];
                     if (OnCloudDataUpdateEvent != null && OnCloudDataUpdateEvent.GetInvocationList().Length > 0)
                     {
-                        OnCloudDataUpdateEvent.Invoke(collection, transactionId, false);
+                        OnCloudDataUpdateEvent.Invoke(collection, documentId, transactionId, false);
                     }
                 }
             }

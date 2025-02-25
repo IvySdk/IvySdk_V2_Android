@@ -526,26 +526,18 @@ private void IvySdkListener_OnFirebaseLoginEvent(string platform, bool status)
  * @param collection     数据集合
  * @param jsonData       
  */
-IvySDK.Instance.SaveCloudData(string collection, string jsonData);
+IvySDK.Instance.SaveCloudData(string collection, string documentId, string jsonData);
 ```
 
 - 存储结果监听
 ```js
 IvySdkListener.OnCloudDataSaveEvent += IvySdkListener_OnCloudDataSaveEvent;
 IvySdkListener.OnCloudDataSaveEvent -= IvySdkListener_OnCloudDataSaveEvent;
-private void IvySdkListener_OnCloudDataSaveEvent(string collection, bool status)
+private void IvySdkListener_OnCloudDataSaveEvent(string collection, string documentId, bool status)
 {
 }
 ```
 <br>
-
-- 读取指定数据集合
-```js
-/**
- * @param collection     数据集合  
- */
-IvySDK.Instance.ReadCloudData(string collection);
-```
 
 - 读取指定数据集合内文档
 ```js
@@ -572,14 +564,14 @@ private void IvySdkListener_OnCloudDataReadEvent(string collection, string doucu
  * @param collection     数据集合
  * @param jsonData       
  */
-IvySDK.Instance.MergeCloudData(string collection, string jsonData);
+IvySDK.Instance.MergeCloudData(string collection, string documentId, string jsonData);
 ```
 
 - 合并结果监听
 ```js
 IvySdkListener.OnCloudDataMergeEvent += IvySdkListener_OnCloudDataMergeEvent;
 IvySdkListener.OnCloudDataMergeEvent -= IvySdkListener_OnCloudDataMergeEvent;
-private void IvySdkListener_OnCloudDataMergeEvent(string collection, bool status)
+private void IvySdkListener_OnCloudDataMergeEvent(string collection, string documentId, bool status)
 {
 }
 ```
@@ -608,14 +600,14 @@ private void IvySdkListener_OnCloudDataQueryEvent(string collection, string data
 /**
  * @param collection     数据集合  
  */
-IvySDK.Instance.DeleteCloudData(string collection);
+IvySDK.Instance.DeleteCloudData(string collection, string documentId);
 ```
 
 - 删除结果监听
 ```js
 IvySdkListener.OnCloudDataDeleteEvent += IvySdkListener_OnCloudDataDeleteEvent;
 IvySdkListener.OnCloudDataDeleteEvent -= IvySdkListener_OnCloudDataDeleteEvent;
-private void IvySdkListener_OnCloudDataDeleteEvent(string collection, bool status)
+private void IvySdkListener_OnCloudDataDeleteEvent(string collection, string documentId, bool status)
 {
 }
 ```
@@ -628,26 +620,18 @@ private void IvySdkListener_OnCloudDataDeleteEvent(string collection, bool statu
  * @param transactionId     事务Id
  * @param jsonData      
  */
-IvySDK.Instance.UpdateCloudData(string collection, string transactionId, string jsonData);
+IvySDK.Instance.UpdateCloudData(string collection, string documentId, string transactionId, string jsonData);
 ```
 
 - 更新结果监听
 ```js
 IvySdkListener.OnCloudDataUpdateEvent += IvySdkListener_OnCloudDataUpdateEvent;
 IvySdkListener.OnCloudDataUpdateEvent -= IvySdkListener_OnCloudDataUpdateEvent;
-private void IvySdkListener_OnCloudDataDeleteEvent(string collection, string transactionId, bool status)
+private void IvySdkListener_OnCloudDataDeleteEvent(string collection, string documentId, string transactionId, bool status)
 {
 }
 ```
 <br>
-
-- 备份数据
-```js
-/**
- * @param collection     数据集合  
- */
-IvySDK.Instance.SnapshotCloudData(string collection);
-```
 
 - 备份数据
 ```js

@@ -522,31 +522,14 @@ String value = AndroidSdk.getIvyRemoteConfigString(string key);//默认值 ""
  * @param collection     数据集合
  * @param jsonData       
  */
-        AndroidSdk.setArchive(String collection, String jsonData, new IArchiveResult() {
+      AndroidSdk.setArchive(collection, documentId, jsonData, new IArchiveResult() {
             @Override
-            public void onSuccess(@NonNull String collection, @Nullable String document, @Nullable String data) {
-
+            public void onSuccess(@NonNull String collection, @Nullable String documentId, @Nullable String data) {
+        
             }
 
             @Override
-            public void onFailure(@NonNull String collection, @Nullable String document, @Nullable String reason) {
-                
-            }
-        });
-```
-
-- 读取数据集合
-```js
-/**
- * @param collection     数据集合  
- */
-      AndroidSdk.readArchive(String collection, null, new IArchiveResult() {
-            @Override
-            public void onSuccess(@NonNull String collection, @Nullable String document, @Nullable String data) {
-            }
-
-            @Override
-            public void onFailure(@NonNull String collection, @Nullable String document, @Nullable String reason) {
+            public void onFailure(@NonNull String collection, @Nullable String documentId, @Nullable String reason) {
 
             }
         });
@@ -577,15 +560,15 @@ String value = AndroidSdk.getIvyRemoteConfigString(string key);//默认值 ""
  * @param collection     数据集合
  * @param jsonData       
  */
-        AndroidSdk.mergeArchive(String collection, String jsonData, new IArchiveResult() {
+        AndroidSdk.mergeArchive(collection, documentId, jsonData, new IArchiveResult() {
             @Override
-            public void onSuccess(@NonNull String collection, @Nullable String document, @Nullable String data) {
-      
+            public void onSuccess(@NonNull String collection, @Nullable String documentId, @Nullable String data) {
+       
             }
 
             @Override
-            public void onFailure(@NonNull String collection, @Nullable String document, @Nullable String reason) {
-           
+            public void onFailure(@NonNull String collection, @Nullable String documentId, @Nullable String reason) {
+            
             }
         });
 ```
@@ -614,14 +597,14 @@ String value = AndroidSdk.getIvyRemoteConfigString(string key);//默认值 ""
 /**
  * @param collection     数据集合  
  */
-        AndroidSdk.deleteArchive(String collection, new IArchiveResult() {
+        AndroidSdk.deleteArchive(collection, documentId, new IArchiveResult() {
             @Override
-            public void onSuccess(@NonNull String collection, @Nullable String document, @Nullable String data) {
+            public void onSuccess(@NonNull String collection, @Nullable String documentId, @Nullable String data) {
 
             }
 
             @Override
-            public void onFailure(@NonNull String collection, @Nullable String document, @Nullable String reason) {
+            public void onFailure(@NonNull String collection, @Nullable String documentId, @Nullable String reason) {
 
             }
         });
@@ -634,15 +617,13 @@ String value = AndroidSdk.getIvyRemoteConfigString(string key);//默认值 ""
  * @param transactionId     事务Id
  * @param jsonData      
  */
-        AndroidSdk.updateArchive(String collection, String jsonData, new IArchiveResult() {
+        AndroidSdk.updateArchive(collection, documentId, jsonData, new IArchiveResult() {
             @Override
-            public void onSuccess(@NonNull String collection, @Nullable String document, @Nullable String data) {
-
+            public void onSuccess(@NonNull String collection, @Nullable String documentId, @Nullable String data) {
             }
 
             @Override
-            public void onFailure(@NonNull String collection, @Nullable String document, @Nullable String reason) {
-
+            public void onFailure(@NonNull String collection, @Nullable String documentId, @Nullable String reason) {
             }
         });
 ```

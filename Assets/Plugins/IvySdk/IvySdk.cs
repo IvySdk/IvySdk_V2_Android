@@ -658,6 +658,53 @@ namespace com.ivy.sdk
         }
         #endregion
 
+        #region G+
+        public void LoginGoogle()
+        {
+            if (_class != null)
+            {
+                _class.CallStatic("loginGoogle");
+            }
+        }
+
+        public void LogoutGoogle()
+        {
+            if (_class != null)
+            {
+                _class.CallStatic("logoutGoogle");
+            }
+        }
+
+        public bool IsGoogleLogged()
+        {
+            if (_class != null)
+            {
+                return _class.CallStatic<bool>("isGoogleLogged");
+            }
+            return false;
+        }
+
+        public String GetGoogleUserInfo()
+        {
+            if (_class != null)
+            {
+                return _class.CallStatic<string>("getGoogleUserInfo");
+            }
+            return "{}";
+        }
+
+        public String GetGoogleUserId()
+        {
+            if (_class != null)
+            {
+                return _class.CallStatic<string>("getGoogleUserId");
+            }
+            return "";
+        }
+
+
+        #endregion
+
         #region facebook
 
         /**

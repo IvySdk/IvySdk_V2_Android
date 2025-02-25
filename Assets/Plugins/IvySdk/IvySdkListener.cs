@@ -16,6 +16,7 @@ namespace com.ivy.sdk
         public static event Action<int> HelperUnreadMsgCountEvent;
 
         public static event Action<bool> OnPlayGamesLoginEvent;
+        public static event Action<bool> OnGoogleLoginEvent;
         public static event Action<bool> OnFacebookLoginEvent;
         public static event Action<string, bool> OnFirebaseLoginEvent;
 
@@ -181,6 +182,12 @@ namespace com.ivy.sdk
                         {
                             OnFacebookLoginEvent.Invoke(true);
                         }
+                    } else if (data.Equals("google"))
+                    {
+                        if (OnGoogleLoginEvent != null && OnGoogleLoginEvent.GetInvocationList().Length > 0)
+                        {
+                            OnGoogleLoginEvent.Invoke(true);
+                        }
                     }
                 }
                 catch { }
@@ -212,6 +219,13 @@ namespace com.ivy.sdk
                                 OnFacebookLoginEvent.Invoke(false);
                             }
                         }
+                        else if (platform.Equals("google"))
+                        {
+                            if (OnGoogleLoginEvent != null && OnGoogleLoginEvent.GetInvocationList().Length > 0)
+                            {
+                                OnGoogleLoginEvent.Invoke(false);
+                            }
+                        }
                     }
                 }
                 catch { }
@@ -236,6 +250,13 @@ namespace com.ivy.sdk
                         if (OnFacebookLoginEvent != null && OnFacebookLoginEvent.GetInvocationList().Length > 0)
                         {
                             OnFacebookLoginEvent.Invoke(false);
+                        }
+                    }
+                    else if (data.Equals("google"))
+                    {
+                        if (OnGoogleLoginEvent != null && OnGoogleLoginEvent.GetInvocationList().Length > 0)
+                        {
+                            OnGoogleLoginEvent.Invoke(false);
                         }
                     }
                 }

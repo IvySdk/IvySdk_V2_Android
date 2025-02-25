@@ -385,6 +385,41 @@ private void IvySdkListener_OnPlayGamesLoginEvent(bool status)
   ```IvySDK.Instance.UpdateLeaderboard(string leaderboardId, long score);```
   <br>
 
+> G+
+- 事件监听
+```js
+IvySdkListener.OnGoogleLoginEvent += IvySdkListener_OnGoogleLoginEvent;
+IvySdkListener.OnGoogleLoginEvent -= IvySdkListener_OnGoogleLoginEventt;
+private void IvySdkListener_OnGoogleLoginEvent(bool status)
+{
+// status 登陆状态
+}
+```
+- 登陆<br>
+  ```IvySDK.Instance.LoginGoogle();```
+  <br>
+- 登出<br>
+  ```IvySDK.Instance.LogoutGoogle();```
+  <br>
+- 登陆状态<br>
+  ```bool isLogin = IvySDK.Instance.IsGoogleLogged();```
+  <br>
+- 获取用户信息<br>
+  ```js
+    /**
+     *  @returns data   结构示例  
+     * {
+     *     "id":"",
+     *     "name":"",
+     *     "photo":"",
+     *     "email":""
+     *   }
+     */
+    string data = IvySDK.Instance.GetGoogleUserInfo();
+  ```
+- 用户id<br>
+  ```string user_id = IvySDK.Instance.GetGoogleUserId();```
+
 > Facebook
 - 事件监听
 ```js

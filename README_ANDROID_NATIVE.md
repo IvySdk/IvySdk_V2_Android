@@ -312,6 +312,34 @@ String value = AndroidSdk.getIvyRemoteConfigString(string key);//默认值 ""
   ```AndroidSdk.updateLeaderboard(String leaderboardId, long score);```
   <br>
 
+> G+
+
+- 登陆<br>
+  ```AndroidSdk.LoginGoogle();```
+  <br>
+- 登出<br>
+  ```AndroidSdk.LogoutGoogle();```
+  <br>
+- 登陆状态<br>
+  ```boolean isLogin = AndroidSdk.IsGoogleLogged();```
+  <br>
+- 获取用户信息<br>
+  ```js
+    /**
+     *  @returns data   结构示例  
+     * {
+     *     "id":"",
+     *     "name":"",
+     *     "photo":"",
+     *     "email":""
+     *   }
+     */
+    String data = AndroidSdk.GetGoogleUserInfo();
+  ```
+- 用户id<br>
+  ```String user_id = AndroidSdk.GetGoogleUserId();```
+
+
 > Facebook
 - 事件监听
 ```js

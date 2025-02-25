@@ -34,7 +34,7 @@ namespace com.ivy.sdk
         public static event Action<string, string, bool> OnCloudDataSaveEvent;
         public static event Action<string, string, string, bool> OnCloudDataReadEvent;
         public static event Action<string, string, bool> OnCloudDataMergeEvent;
-        public static event Action<string, string, bool> OnCloudDataQueryEvent;
+        public static event Action<string, string, string, bool> OnCloudDataQueryEvent;
         public static event Action<string, string, bool> OnCloudDataDeleteEvent;
         public static event Action<string, string, string, bool> OnCloudDataUpdateEvent;
         public static event Action<string, string, bool> OnCloudDataSnapshotEvent;
@@ -682,14 +682,15 @@ namespace com.ivy.sdk
             if (!string.IsNullOrEmpty(data))
             {
                 string[] args = data.Split('|');
-                if (args != null && args.Length == 2)
+                if (args != null && args.Length == 3)
                 {
 
                     string collection = args[0];
-                    string cData = args[1];
+                    string documentId = args[1];
+                    string cData = args[2];
                     if (OnCloudDataQueryEvent != null && OnCloudDataQueryEvent.GetInvocationList().Length > 0)
                     {
-                        OnCloudDataQueryEvent.Invoke(collection, cData, true);
+                        OnCloudDataQueryEvent.Invoke(collection, documentId, cData, true);
                     }
                 }
             }
@@ -699,9 +700,15 @@ namespace com.ivy.sdk
         {
             if (!string.IsNullOrEmpty(data))
             {
-                if (OnCloudDataQueryEvent != null && OnCloudDataQueryEvent.GetInvocationList().Length > 0)
+                string[] args = data.Split('|');
+                if (args != null && args.Length == 3)
                 {
-                    OnCloudDataQueryEvent.Invoke(data, null, false);
+                    string collection = args[0];
+                    string documentId = args[1];
+                    if (OnCloudDataQueryEvent != null && OnCloudDataQueryEvent.GetInvocationList().Length > 0)
+                    {
+                        OnCloudDataQueryEvent.Invoke(data, documentId, null, false);
+                    }
                 }
             }
         }

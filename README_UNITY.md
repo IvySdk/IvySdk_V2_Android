@@ -582,14 +582,14 @@ private void IvySdkListener_OnCloudDataMergeEvent(string collection, string docu
 /**
  * @param collection     数据集合  
  */
-IvySDK.Instance.QueryCloudData(string collection);
+IvySDK.Instance.QueryCloudData(string collection, string documentId);
 ```
 
 - 查询结果监听
 ```js
 IvySdkListener.OnCloudDataQueryEvent += IvySdkListener_OnCloudDataQueryEvent;
 IvySdkListener.OnCloudDataQueryEvent -= IvySdkListener_OnCloudDataQueryEvent;
-private void IvySdkListener_OnCloudDataQueryEvent(string collection, string data, bool status)
+private void IvySdkListener_OnCloudDataQueryEvent(string collection, string documentId, string data, bool status)
 {
 }
 ```

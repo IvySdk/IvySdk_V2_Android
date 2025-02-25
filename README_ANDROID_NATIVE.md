@@ -578,14 +578,13 @@ String value = AndroidSdk.getIvyRemoteConfigString(string key);//默认值 ""
 /**
  * @param collection     数据集合  
  */
-    AndroidSdk.queryArchive(String collection, new IArchiveResult() {
+        AndroidSdk.queryArchive(collection, documentId, new IArchiveResult() {
             @Override
-            public void onSuccess(@NonNull String collection, @Nullable String document, @Nullable String data) {
-
+            public void onSuccess(@NonNull String collection, @Nullable String documentId, @Nullable String data) {
             }
 
             @Override
-            public void onFailure(@NonNull String collection, @Nullable String document, @Nullable String reason) {
+            public void onFailure(@NonNull String collection, @Nullable String documentId, @Nullable String reason) {
 
             }
         });

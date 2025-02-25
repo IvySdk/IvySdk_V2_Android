@@ -976,11 +976,11 @@ namespace com.ivy.sdk
          * 查询数据
          * @param collection     数据集合
          */
-        public void QueryCloudData(string collection)
+        public void QueryCloudData(string collection, string documentId)
         {
             if (_class != null)
             {
-                _class.CallStatic("queryCloudData", collection);
+                _class.CallStatic("queryCloudData", collection, documentId);
             }
         }
 

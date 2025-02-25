@@ -473,6 +473,9 @@ private void IvySdkListener_OnFirebaseLoginEvent(string platform, bool status)
 - 匿名登陆<br>
   ```IvySDK.Instance.LoginFBWithAnonymous()```
   <br>
+  - Google渠道登陆<br>
+  ```IvySDK.Instance.LoginFBWithGoogle()```
+  <br>
 - PlayGames渠道登陆<br>
   ```IvySDK.Instance.LoginFBWithPlayGames()```
   <br>

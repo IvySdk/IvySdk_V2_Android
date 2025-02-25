@@ -771,6 +771,7 @@ namespace com.ivy.sdk
         {
             public static string ANONYMOUS = "anonymous";
             public static string PLAY_GAMES = "playgames";
+            public static string GOOGLE = "google";
             public static string FACEBOOK = "facebook";
             public static string EMAIL = "email";
             public static string DEFAULT = "default";
@@ -882,6 +883,17 @@ namespace com.ivy.sdk
             if (_class != null)
             {
                 _class.CallStatic("loginFBWithAnonymous");
+            }
+        }
+
+        /**
+         * 通过Google渠道登陆Firebase
+         */
+        public void LoginFBWithGoogle()
+        {
+            if (_class != null)
+            {
+                _class.CallStatic("loginFBWithGoogle");
             }
         }
 

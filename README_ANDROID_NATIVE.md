@@ -418,6 +418,18 @@ String value = AndroidSdk.getIvyRemoteConfigString(string key);//默认值 ""
     });
 ```
 
+- Google渠道登陆<br>
+```js
+        AndroidSdk.signWithGoogle(new IAuthResponse() {
+
+            @Override
+            public void onLoginResult(@NonNull String platform, boolean status, String channel, @Nullable String reason) {
+                // channel   登陆渠道，仅在Firebase登陆中有效，参考 FirebaseLinkChannel
+                // reason    失败原因
+            }
+        });
+```
+
 - PlayGames渠道登陆<br>
   ```js
         AndroidSdk.signWithPlayGames(new IAuthResponse() {

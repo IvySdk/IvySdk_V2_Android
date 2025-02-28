@@ -1061,7 +1061,7 @@ namespace com.ivy.sdk
         {
             if (_class != null)
             {
-                _class.CallStatic("ShowHelper", entranceId, meta, tags, welcomeMessage);
+                _class.CallStatic("showHelper", entranceId, meta, tags, welcomeMessage);
             }
         }
 

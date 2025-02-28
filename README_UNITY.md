@@ -72,7 +72,7 @@ android {
 # SDK引入
 ```js
 模块引入说明:
-    def sdk_version = "10.0.1"
+    def sdk_version = "xxx"
 // 核心模块，必须引入
     implementation("io.github.ivysdk:Core:$sdk_version")
 //google 支付模块，可以根据需要引入
@@ -108,6 +108,11 @@ android {
 
 #unity 2021及之后版本混淆需要添加
 -keep class com.google.androidgamesdk.**{*;}
+
+-if class androidx.credentials.CredentialManager
+-keep class androidx.credentials.playservices.** {
+  *;
+}
 ```
 
 # 原生配置

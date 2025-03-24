@@ -104,7 +104,7 @@ namespace com.ivy.sdk
             return false;
         }
 
-        public void ShowBannerAd(string tag, BannerAdPosition position, int placement)
+        public void ShowBannerAd(string tag, BannerAdPosition position, string placement)
         {
             if (_class != null)
             {
@@ -120,7 +120,7 @@ namespace com.ivy.sdk
          *  @param clientInfo   客户端自定义信息，字典结构，注意 bool值会被转换位1/0
          * 
          */
-        public void ShowBannerAd(string tag, BannerAdPosition position, int placement, string clientInfo)
+        public void ShowBannerAd(string tag, BannerAdPosition position, string placement, string clientInfo)
         {
             if (_class != null)
             {
@@ -132,7 +132,7 @@ namespace com.ivy.sdk
          *  关闭banner 广告
          *  @param placement    广告位
          */
-        public void CloseBannerAd(int placement)
+        public void CloseBannerAd(string placement)
         {
             if (_class != null)
             {
@@ -155,7 +155,7 @@ namespace com.ivy.sdk
          *  @param placement    广告位，
          *  @param clientInfo   客户端自定义信息，字典结构，注意 bool值会被转换位1/0
          */
-        public void ShowInterstitialAd(string tag, int placement = 0, string clientInfo = null)
+        public void ShowInterstitialAd(string tag, string placement, string clientInfo = null)
         {
             if (_class != null)
             {
@@ -178,7 +178,7 @@ namespace com.ivy.sdk
          *  @param placement    广告位，可以用于标记奖励点
          *  @param clientInfo   客户端自定义信息，字典结构，注意 bool值会被转换位1/0
          */
-        public void ShowRewardedAd(string tag, int placement, string clientInfo = null)
+        public void ShowRewardedAd(string tag, string placement, string clientInfo = null)
         {
             if (_class != null)
             {

@@ -26,9 +26,9 @@ namespace com.ivy.sdk
         /**
          * int 为广告位, 其中AD_LOADED、AD_LOAD_FAILED事件中无效
          */
-        public static event Action<IvySdk.AdEvents, int> OnInterstitialAdEvent;
-        public static event Action<IvySdk.AdEvents, int> OnRewardedAdEvent;
-        public static event Action<IvySdk.AdEvents, int> OnBannerAdEvent;
+        public static event Action<IvySdk.AdEvents, string> OnInterstitialAdEvent;
+        public static event Action<IvySdk.AdEvents, string> OnRewardedAdEvent;
+        public static event Action<IvySdk.AdEvents, string> OnBannerAdEvent;
 
         public static event Action<string, bool> OnFirebaseUnlinkEvent;
 
@@ -355,7 +355,7 @@ namespace com.ivy.sdk
                 if (args != null && args.Length == 3)
                 {
                     int adType = int.Parse(args[0]);
-                    int placement = int.Parse(args[2]);
+                    string placement = args[2];
                     if (adType == (int)IvySdk.ADTypes.AD_TYPE_INTERSTITIAL)
                     {
                         if (OnInterstitialAdEvent != null && OnInterstitialAdEvent.GetInvocationList().Length > 0)
@@ -389,7 +389,7 @@ namespace com.ivy.sdk
                 if (args != null && args.Length == 3)
                 {
                     int adType = int.Parse(args[0]);
-                    int placement = int.Parse(args[2]);
+                    string placement = args[2];
                     if (adType == (int)IvySdk.ADTypes.AD_TYPE_INTERSTITIAL)
                     {
                         if (OnInterstitialAdEvent != null && OnInterstitialAdEvent.GetInvocationList().Length > 0)
@@ -423,7 +423,7 @@ namespace com.ivy.sdk
                 if (args != null && args.Length == 3)
                 {
                     int adType = int.Parse(args[0]);
-                    int placement = int.Parse(args[2]);
+                    string placement = args[2];
                     if (adType == (int)IvySdk.ADTypes.AD_TYPE_INTERSTITIAL)
                     {
                         if (OnInterstitialAdEvent != null && OnInterstitialAdEvent.GetInvocationList().Length > 0)
@@ -457,7 +457,7 @@ namespace com.ivy.sdk
                 if (args != null && args.Length == 3)
                 {
                     int adType = int.Parse(args[0]);
-                    int placement = int.Parse(args[2]);
+                    string placement = args[2];
                     if (adType == (int)IvySdk.ADTypes.AD_TYPE_INTERSTITIAL)
                     {
                         if (OnInterstitialAdEvent != null && OnInterstitialAdEvent.GetInvocationList().Length > 0)
@@ -493,7 +493,7 @@ namespace com.ivy.sdk
                     int gotReward = int.Parse(args[0]);
                     if (gotReward == 1)
                     {
-                        int placement = int.Parse(args[2]);
+                        string placement = args[2];
                         if (OnRewardedAdEvent != null && OnRewardedAdEvent.GetInvocationList().Length > 0)
                         {
                             OnRewardedAdEvent.Invoke(IvySdk.AdEvents.AD_REWARD_USER, placement);

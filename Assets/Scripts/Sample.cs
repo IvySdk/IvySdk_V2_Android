@@ -179,26 +179,26 @@ public class Sample : MonoBehaviour
 
         // firestore
         // 默认文档id为用户的 firebase user id
-        IvySdkListener.OnCloudDataSaveEvent += IvySdkListener_OnCloudDataSaveEvent;
-        IvySdkListener.OnCloudDataSaveEvent -= IvySdkListener_OnCloudDataSaveEvent;
+        //IvySdkListener.OnCloudDataSaveEvent += IvySdkListener_OnCloudDataSaveEvent;
+        //IvySdkListener.OnCloudDataSaveEvent -= IvySdkListener_OnCloudDataSaveEvent;
 
-        IvySdkListener.OnCloudDataReadEvent += IvySdkListener_OnCloudDataReadEvent;
-        IvySdkListener.OnCloudDataReadEvent -= IvySdkListener_OnCloudDataReadEvent;
+        //IvySdkListener.OnCloudDataReadEvent += IvySdkListener_OnCloudDataReadEvent;
+        //IvySdkListener.OnCloudDataReadEvent -= IvySdkListener_OnCloudDataReadEvent;
 
-        IvySdkListener.OnCloudDataMergeEvent += IvySdkListener_OnCloudDataMergeEvent;
-        IvySdkListener.OnCloudDataMergeEvent -= IvySdkListener_OnCloudDataMergeEvent;
+        //IvySdkListener.OnCloudDataMergeEvent += IvySdkListener_OnCloudDataMergeEvent;
+        //IvySdkListener.OnCloudDataMergeEvent -= IvySdkListener_OnCloudDataMergeEvent;
 
-        IvySdkListener.OnCloudDataQueryEvent += IvySdkListener_OnCloudDataQueryEvent;
-        IvySdkListener.OnCloudDataQueryEvent -= IvySdkListener_OnCloudDataQueryEvent;
+        //IvySdkListener.OnCloudDataQueryEvent += IvySdkListener_OnCloudDataQueryEvent;
+        //IvySdkListener.OnCloudDataQueryEvent -= IvySdkListener_OnCloudDataQueryEvent;
 
-        IvySdkListener.OnCloudDataDeleteEvent += IvySdkListener_OnCloudDataDeleteEvent;
-        IvySdkListener.OnCloudDataDeleteEvent -= IvySdkListener_OnCloudDataDeleteEvent;
+        //IvySdkListener.OnCloudDataDeleteEvent += IvySdkListener_OnCloudDataDeleteEvent;
+        //IvySdkListener.OnCloudDataDeleteEvent -= IvySdkListener_OnCloudDataDeleteEvent;
 
-        IvySdkListener.OnCloudDataUpdateEvent += IvySdkListener_OnCloudDataUpdateEvent;
-        IvySdkListener.OnCloudDataUpdateEvent -= IvySdkListener_OnCloudDataUpdateEvent;
+        //IvySdkListener.OnCloudDataUpdateEvent += IvySdkListener_OnCloudDataUpdateEvent;
+        //IvySdkListener.OnCloudDataUpdateEvent -= IvySdkListener_OnCloudDataUpdateEvent;
 
-        IvySdkListener.OnCloudDataSnapshotEvent += IvySdkListener_OnCloudDataSnapshotEvent;
-        IvySdkListener.OnCloudDataSnapshotEvent -= IvySdkListener_OnCloudDataSnapshotEvent;
+        //IvySdkListener.OnCloudDataSnapshotEvent += IvySdkListener_OnCloudDataSnapshotEvent;
+        //IvySdkListener.OnCloudDataSnapshotEvent -= IvySdkListener_OnCloudDataSnapshotEvent;
 
         firestoreDropDown.options = new List<TMP_Dropdown.OptionData>
         {
@@ -768,40 +768,40 @@ public class Sample : MonoBehaviour
         Debug.Log($"received unread message count --> {obj}");
     }
 
-    private void IvySdkListener_OnCloudDataSnapshotEvent(string collection, string documentId, bool status)
-    {
-        Debug.Log($"snapshot result --> {collection};{documentId};{status}");
-    }
+    //private void IvySdkListener_OnCloudDataSnapshotEvent(string collection, string documentId, bool status)
+    //{
+    //    Debug.Log($"snapshot result --> {collection};{documentId};{status}");
+    //}
 
-    private void IvySdkListener_OnCloudDataUpdateEvent(string collection, string transactionId, bool status)
-    {
-        Debug.Log($"update result --> {collection};{transactionId};{status}");
-    }
+    //private void IvySdkListener_OnCloudDataUpdateEvent(string collection, string transactionId, bool status)
+    //{
+    //    Debug.Log($"update result --> {collection};{transactionId};{status}");
+    //}
 
-    private void IvySdkListener_OnCloudDataDeleteEvent(string data, bool status)
-    {
-        Debug.Log($"delete result --> {data};{status}");
-    }
+    //private void IvySdkListener_OnCloudDataDeleteEvent(string data, bool status)
+    //{
+    //    Debug.Log($"delete result --> {data};{status}");
+    //}
 
-    private void IvySdkListener_OnCloudDataQueryEvent(string collection, string data, bool status)
-    {
-        Debug.Log($"query result --> {collection};{data};{status}");
-    }
+    //private void IvySdkListener_OnCloudDataQueryEvent(string collection, string data, bool status)
+    //{
+    //    Debug.Log($"query result --> {collection};{data};{status}");
+    //}
 
-    private void IvySdkListener_OnCloudDataMergeEvent(string data, bool status)
-    {
-        Debug.Log($"merge result --> {data};{status}");
-    }
+    //private void IvySdkListener_OnCloudDataMergeEvent(string data, bool status)
+    //{
+    //    Debug.Log($"merge result --> {data};{status}");
+    //}
 
-    private void IvySdkListener_OnCloudDataReadEvent(string collection, string doucumentId, string data, bool status)
-    {
-        Debug.Log($"read result --> {collection};{doucumentId};{data};{status}");
-    }
+    //private void IvySdkListener_OnCloudDataReadEvent(string collection, string doucumentId, string data, bool status)
+    //{
+    //    Debug.Log($"read result --> {collection};{doucumentId};{data};{status}");
+    //}
 
-    private void IvySdkListener_OnCloudDataSaveEvent(string data, bool status)
-    {
-        Debug.Log($"save result --> {data};{status}");
-    }
+    //private void IvySdkListener_OnCloudDataSaveEvent(string data, bool status)
+    //{
+    //    Debug.Log($"save result --> {data};{status}");
+    //}
 
     private void IvySdkListener_OnFirebaseUnlinkEvent(string platform, bool status)
     {

@@ -298,21 +298,21 @@ namespace com.ivy.sdk
                 {
                     if (OnInterstitialAdEvent != null && OnInterstitialAdEvent.GetInvocationList().Length > 0)
                     {
-                        OnInterstitialAdEvent.Invoke(IvySdk.AdEvents.AD_LOADED, 0);
+                        OnInterstitialAdEvent.Invoke(IvySdk.AdEvents.AD_LOADED, "0");
                     }
                 }
                 else if (adType == (int)IvySdk.ADTypes.AD_TYPE_REWARDED)
                 {
                     if (OnRewardedAdEvent != null && OnRewardedAdEvent.GetInvocationList().Length > 0)
                     {
-                        OnRewardedAdEvent.Invoke(IvySdk.AdEvents.AD_LOADED, 0);
+                        OnRewardedAdEvent.Invoke(IvySdk.AdEvents.AD_LOADED, "0");
                     }
                 }
                 else if (adType == (int)IvySdk.ADTypes.AD_TYPE_BANNER)
                 {
                     if (OnBannerAdEvent != null && OnBannerAdEvent.GetInvocationList().Length > 0)
                     {
-                        OnBannerAdEvent.Invoke(IvySdk.AdEvents.AD_LOADED, 0);
+                        OnBannerAdEvent.Invoke(IvySdk.AdEvents.AD_LOADED, "0");
                     }
                 }
             }
@@ -327,21 +327,21 @@ namespace com.ivy.sdk
                 {
                     if (OnInterstitialAdEvent != null && OnInterstitialAdEvent.GetInvocationList().Length > 0)
                     {
-                        OnInterstitialAdEvent.Invoke(IvySdk.AdEvents.AD_LOAD_FAILED, 0);
+                        OnInterstitialAdEvent.Invoke(IvySdk.AdEvents.AD_LOAD_FAILED, "0");
                     }
                 }
                 else if (adType == (int)IvySdk.ADTypes.AD_TYPE_REWARDED)
                 {
                     if (OnRewardedAdEvent != null && OnRewardedAdEvent.GetInvocationList().Length > 0)
                     {
-                        OnRewardedAdEvent.Invoke(IvySdk.AdEvents.AD_LOAD_FAILED, 0);
+                        OnRewardedAdEvent.Invoke(IvySdk.AdEvents.AD_LOAD_FAILED, "0");
                     }
                 }
                 else if (adType == (int)IvySdk.ADTypes.AD_TYPE_BANNER)
                 {
                     if (OnBannerAdEvent != null && OnBannerAdEvent.GetInvocationList().Length > 0)
                     {
-                        OnBannerAdEvent.Invoke(IvySdk.AdEvents.AD_LOAD_FAILED, 0);
+                        OnBannerAdEvent.Invoke(IvySdk.AdEvents.AD_LOAD_FAILED, "0");
                     }
                 }
             }

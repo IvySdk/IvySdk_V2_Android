@@ -1414,6 +1414,14 @@ namespace com.ivy.sdk
             return 0;
         }
 
+        public void ForceQuit()
+        {
+            if (_class != null)
+            {
+                _class.CallStatic("forceQuit");
+            }
+        }
+
 
         //#endif
     }

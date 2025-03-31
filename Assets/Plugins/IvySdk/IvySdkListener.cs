@@ -18,7 +18,9 @@ namespace com.ivy.sdk
         public static event Action OnAuthPlatformInitializeEvent; // 三方登录 平台初始化回调
         public static event Action<bool> OnPlayGamesLoginEvent;
         public static event Action<bool> OnGoogleLoginEvent;
+        public static event Action<bool> OnGoogleLogoutEvent;
         public static event Action<bool> OnFacebookLoginEvent;
+        public static event Action<bool> OnFacebookLogoutEvent;
         public static event Action<string, bool> OnFirebaseLoginEvent;
 
         public static event Action<string> OnReceivedNotificationEvent;
@@ -247,25 +249,18 @@ namespace com.ivy.sdk
             {
                 try
                 {
-                    if (data.Equals("play_games"))
+                    if (data.Equals("facebook"))
                     {
-                        if (OnPlayGamesLoginEvent != null && OnPlayGamesLoginEvent.GetInvocationList().Length > 0)
+                        if (OnFacebookLogoutEvent != null && OnFacebookLogoutEvent.GetInvocationList().Length > 0)
                         {
-                            OnPlayGamesLoginEvent.Invoke(false);
-                        }
-                    }
-                    else if (data.Equals("facebook"))
-                    {
-                        if (OnFacebookLoginEvent != null && OnFacebookLoginEvent.GetInvocationList().Length > 0)
-                        {
-                            OnFacebookLoginEvent.Invoke(false);
+                            OnFacebookLogoutEvent.Invoke(true);
                         }
                     }
                     else if (data.Equals("google"))
                     {
-                        if (OnGoogleLoginEvent != null && OnGoogleLoginEvent.GetInvocationList().Length > 0)
+                        if (OnGoogleLogoutEvent != null && OnGoogleLogoutEvent.GetInvocationList().Length > 0)
                         {
-                            OnGoogleLoginEvent.Invoke(false);
+                            OnGoogleLogoutEvent.Invoke(true);
                         }
                     }
                 }

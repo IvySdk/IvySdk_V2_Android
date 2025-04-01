@@ -1274,7 +1274,7 @@ namespace com.ivy.sdk
         {
             if (_class != null)
             {
-                return _class.CallStatic<string>("getConfig", ((int)key).ToString());
+                return _class.CallStatic<string>("getConfig", ((int)key));
             }
             return "";
         }

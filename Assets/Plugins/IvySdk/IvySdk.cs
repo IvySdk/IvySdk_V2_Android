@@ -104,6 +104,14 @@ namespace com.ivy.sdk
             return false;
         }
 
+        public void TriggerBannerAd(string placement)
+        {
+            if (_class != null)
+            {
+                _class.CallStatic("triggerBannerAd", placement);
+            }
+        }
+
         public void ShowBannerAd(string tag, BannerAdPosition position, string placement)
         {
             if (_class != null)
@@ -149,6 +157,14 @@ namespace com.ivy.sdk
             return false;
         }
 
+        public void TriggerInterstitialAd(string placement)
+        {
+            if (_class != null)
+            {
+                _class.CallStatic("triggerInterstitialAd", placement);
+            }
+        }
+
         /**
          *  展示 插屏 广告
          *  @param tag          广告标签，默认为 default
@@ -170,6 +186,14 @@ namespace com.ivy.sdk
                 return _class.CallStatic<bool>("hasRewardedAd");
             }
             return false;
+        }
+
+        public void TriggerRewardedAd(string placement)
+        {
+            if (_class != null)
+            {
+                _class.CallStatic("triggerRewardedAd", placement);
+            }
         }
 
         /**
@@ -1160,7 +1184,7 @@ namespace com.ivy.sdk
         {
             if (_class != null)
             {
-                _class.CallStatic<int>("requestNotificationPermission");
+                _class.CallStatic("requestNotificationPermission");
             }
         }
 

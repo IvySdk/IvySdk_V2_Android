@@ -1446,6 +1446,13 @@ namespace com.ivy.sdk
             }
         }
 
+        public void OpenFacebookPage(string pageId)
+        {
+            if (_class != null)
+            {
+                _class.CallStatic("openFacebookPage", pageId);
+            }
+        }
 
         //#endif
     }

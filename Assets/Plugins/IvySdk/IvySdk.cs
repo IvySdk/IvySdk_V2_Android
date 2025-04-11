@@ -1446,6 +1446,10 @@ namespace com.ivy.sdk
             }
         }
 
+        /**
+         * 跳转facebook公共主页
+         * @param pageId 公共主页id
+         */
         public void OpenFacebookPage(string pageId)
         {
             if (_class != null)

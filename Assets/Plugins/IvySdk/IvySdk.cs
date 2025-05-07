@@ -338,7 +338,7 @@ namespace com.ivy.sdk
                     _class.CallStatic("trackEvent", eventName, param);
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 Debug.LogError($"track event:{eventName} failed!!!, param convert failed");
             }
@@ -364,7 +364,7 @@ namespace com.ivy.sdk
                     _class.CallStatic("trackEventToConversion", eventName, param);
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 Debug.LogError($"track event to conversion:{eventName} failed!!!, param convert failed");
             }
@@ -390,7 +390,7 @@ namespace com.ivy.sdk
                     _class.CallStatic("trackEventToFirebase", eventName, param);
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 Debug.LogError($"track event to firebase:{eventName} failed!!!, param convert failed");
             }
@@ -416,7 +416,7 @@ namespace com.ivy.sdk
                     _class.CallStatic("trackEventToFacebook", eventName, param);
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 Debug.LogError($"track event to facebook:{eventName} failed!!!, param convert failed");
             }
@@ -442,7 +442,7 @@ namespace com.ivy.sdk
                     _class.CallStatic("trackEventToAppsflyer", eventName, param);
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 Debug.LogError($"track event to appsflyer:{eventName} failed!!!, param convert failed");
             }
@@ -468,7 +468,7 @@ namespace com.ivy.sdk
                     _class.CallStatic("trackEventToIvy", eventName, param);
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 Debug.LogError($"track event to ivy:{eventName} failed!!!, param convert failed");
             }

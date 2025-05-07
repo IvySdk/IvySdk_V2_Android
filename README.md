@@ -7,3 +7,8 @@
 <br>
 
 > [Android原生文档](README_ANDROID_NATIVE.md)
+
+
+
+#### 2025.5.7 
+    1. 事件接口中事件属性参数格式修改为字典结构

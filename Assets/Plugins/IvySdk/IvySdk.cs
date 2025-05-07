@@ -318,6 +318,11 @@ namespace com.ivy.sdk
         #endregion
 
         #region track
+        /**
+         * 统计事件至 所有平台
+         * @params  eventName    事件名
+         *          data         事件属性，字典结构
+         */
         public void TrackEvent(string eventName, string data)
         {
             if (_class != null)
@@ -328,6 +333,8 @@ namespace com.ivy.sdk
 
         /**
          * 统计事件至 所有平台
+         * @params  eventName    事件名
+         *          data         事件属性，字典结构
          */
         public void TrackEventToConversion(string eventName, string data)
         {
@@ -339,6 +346,8 @@ namespace com.ivy.sdk
 
         /**
           * 统计事件至 Firebase
+          * @params  eventName    事件名
+          *          data         事件属性，字典结构
           */
         public void TrackEventToFirebase(string eventName, string data)
         {
@@ -350,6 +359,8 @@ namespace com.ivy.sdk
 
         /**
           * 统计事件至 Facebook
+          * @params  eventName    事件名
+          *          data         事件属性，字典结构
           */
         public void TrackEventToFacebook(string eventName, string data)
         {
@@ -361,6 +372,8 @@ namespace com.ivy.sdk
 
         /**
           * 统计事件至 Appsflyer
+          * @params  eventName    事件名
+          *          data         事件属性，字典结构
           */
         public void TrackEventToAppsflyer(string eventName, string data)
         {
@@ -372,6 +385,8 @@ namespace com.ivy.sdk
 
         /**
           * 统计事件至 自有平台
+          * @params  eventName    事件名
+          *          data         事件属性，字典结构
           */
         public void TrackEventToIvy(string eventName, string data)
         {

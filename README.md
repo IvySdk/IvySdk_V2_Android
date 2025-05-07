@@ -11,4 +11,4 @@
 
 ## 修改记录
 ## 10.0.24 (2025.5.7)
-- 事件接口中事件属性参数格式修改为字典结构
+- TrackEvent、TrackEventToConversion、TrackEventToFirebase、TrackEventToFacebook、TrackEventToAppsflyer、TrackEventToIvy接口中事件属性参数格式修改为字典结构

@@ -125,14 +125,14 @@ namespace com.ivy.sdk
          *  @param tag          广告标签，默认为 default
          *  @param position     广告位置，参考BannerAdPosition
          *  @param placement    广告位，
-         *  @param clientInfo   客户端自定义信息，字典结构，注意 bool值会被转换位1/0
+         *  @param clientInfo   客户端自定义信息，JSONObject结构，注意 bool值会被转换位1/0
          * 
          */
         public void ShowBannerAd(string tag, BannerAdPosition position, string placement, string clientInfo)
         {
             if (_class != null)
             {
-                _class.CallStatic("showBannerAd", tag, ((int)position), placement);
+                _class.CallStatic("showBannerAd", tag, ((int)position), placement, clientInfo);
             }
         }
 
@@ -169,7 +169,7 @@ namespace com.ivy.sdk
          *  展示 插屏 广告
          *  @param tag          广告标签，默认为 default
          *  @param placement    广告位，
-         *  @param clientInfo   客户端自定义信息，字典结构，注意 bool值会被转换位1/0
+         *  @param clientInfo   客户端自定义信息，JSONObject结构，注意 bool值会被转换位1/0
          */
         public void ShowInterstitialAd(string tag, string placement, string clientInfo = null)
         {
@@ -200,7 +200,7 @@ namespace com.ivy.sdk
          *  展示 激励视频 广告
          *  @param tag          广告标签，默认为 default
          *  @param placement    广告位，可以用于标记奖励点
-         *  @param clientInfo   客户端自定义信息，字典结构，注意 bool值会被转换位1/0
+         *  @param clientInfo   客户端自定义信息，JSONObject结构，注意 bool值会被转换位1/0
          */
         public void ShowRewardedAd(string tag, string placement, string clientInfo = null)
         {
@@ -234,7 +234,7 @@ namespace com.ivy.sdk
          *  支付
          *  @param id           计费点位id
          *  @param payload      
-         *  @param clientInfo   客户端自定义信息，字典结构，注意 bool值会被转换位1/0
+         *  @param clientInfo   客户端自定义信息，JSONObject结构，注意 bool值会被转换位1/0
          */
         public void Pay(int id, string payload, string clientInfo)
         {
@@ -323,11 +323,24 @@ namespace com.ivy.sdk
          * @params  eventName    事件名
          *          data         事件属性，字典结构
          */
-        public void TrackEvent(string eventName, string data)
+        public void TrackEvent(string eventName, Dictionary<string, object> data)
         {
-            if (_class != null)
+            try
             {
-                _class.CallStatic("trackEvent", eventName, data);
+                string param = "{}";
+                if(data != null)
+                {
+                    param = IvyJson.Serialize(data);
+                }
+
+                if (_class != null)
+                {
+                    _class.CallStatic("trackEvent", eventName, param);
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.LogError($"track event:{eventName} failed!!!, param convert failed");
             }
         }
 
@@ -336,11 +349,24 @@ namespace com.ivy.sdk
          * @params  eventName    事件名
          *          data         事件属性，字典结构
          */
-        public void TrackEventToConversion(string eventName, string data)
+        public void TrackEventToConversion(string eventName, Dictionary<string, object> data)
         {
-            if (_class != null)
+            try
             {
-                _class.CallStatic("trackEventToConversion", eventName, data);
+                string param = "{}";
+                if (data != null)
+                {
+                    param = IvyJson.Serialize(data);
+                }
+
+                if (_class != null)
+                {
+                    _class.CallStatic("trackEventToConversion", eventName, param);
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.LogError($"track event to conversion:{eventName} failed!!!, param convert failed");
             }
         }
 
@@ -349,11 +375,24 @@ namespace com.ivy.sdk
           * @params  eventName    事件名
           *          data         事件属性，字典结构
           */
-        public void TrackEventToFirebase(string eventName, string data)
+        public void TrackEventToFirebase(string eventName, Dictionary<string, object> data)
         {
-            if (_class != null)
+            try
             {
-                _class.CallStatic("trackEventToFirebase", eventName, data);
+                string param = "{}";
+                if (data != null)
+                {
+                    param = IvyJson.Serialize(data);
+                }
+
+                if (_class != null)
+                {
+                    _class.CallStatic("trackEventToFirebase", eventName, param);
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.LogError($"track event to firebase:{eventName} failed!!!, param convert failed");
             }
         }
 
@@ -362,11 +401,24 @@ namespace com.ivy.sdk
           * @params  eventName    事件名
           *          data         事件属性，字典结构
           */
-        public void TrackEventToFacebook(string eventName, string data)
+        public void TrackEventToFacebook(string eventName, Dictionary<string, object> data)
         {
-            if (_class != null)
+            try
             {
-                _class.CallStatic("trackEventToFacebook", eventName, data);
+                string param = "{}";
+                if (data != null)
+                {
+                    param = IvyJson.Serialize(data);
+                }
+
+                if (_class != null)
+                {
+                    _class.CallStatic("trackEventToFacebook", eventName, param);
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.LogError($"track event to facebook:{eventName} failed!!!, param convert failed");
             }
         }
 
@@ -375,11 +427,24 @@ namespace com.ivy.sdk
           * @params  eventName    事件名
           *          data         事件属性，字典结构
           */
-        public void TrackEventToAppsflyer(string eventName, string data)
+        public void TrackEventToAppsflyer(string eventName, Dictionary<string, object> data)
         {
-            if (_class != null)
+            try
             {
-                _class.CallStatic("trackEventToAppsflyer", eventName, data);
+                string param = "{}";
+                if (data != null)
+                {
+                    param = IvyJson.Serialize(data);
+                }
+
+                if (_class != null)
+                {
+                    _class.CallStatic("trackEventToAppsflyer", eventName, param);
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.LogError($"track event to appsflyer:{eventName} failed!!!, param convert failed");
             }
         }
 
@@ -388,11 +453,24 @@ namespace com.ivy.sdk
           * @params  eventName    事件名
           *          data         事件属性，字典结构
           */
-        public void TrackEventToIvy(string eventName, string data)
+        public void TrackEventToIvy(string eventName, Dictionary<string, object> data)
         {
-            if (_class != null)
+            try
             {
-                _class.CallStatic("trackEventToIvy", eventName, data);
+                string param = "{}";
+                if (data != null)
+                {
+                    param = IvyJson.Serialize(data);
+                }
+
+                if (_class != null)
+                {
+                    _class.CallStatic("trackEventToIvy", eventName, param);
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.LogError($"track event to ivy:{eventName} failed!!!, param convert failed");
             }
         }
 
@@ -1141,8 +1219,8 @@ namespace com.ivy.sdk
 
         /**
          * 更新用户属性
-         * @param data      用户属性，字典格式
-         * @param tags      用户标签，AIHelp需要预先在后台定义用户标签
+         * @param data      用户属性，JSONObject格式
+         * @param tags      用户标签，AIHelp需要预先在后台定义用户标签,逗号分隔的字符串
          */
         public void UpdateHelperUserInfo(string data, string tags)
         {

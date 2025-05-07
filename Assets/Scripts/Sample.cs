@@ -36,11 +36,15 @@ public class Sample : MonoBehaviour
     void Start()
     {
 
-
-
-
-
-
+        Dictionary<string, object> dict = new Dictionary<string, object>();
+        dict.Add("key1", 1);
+        dict.Add("key2", 2.0);
+        dict.Add("key3", true);
+        dict.Add("key4", "str");
+        dict.Add("key5", DateTime.Now);
+        dict.Add("key6", DateTime.Now.Date);
+        string result = IvyJson.Serialize(dict);
+        Debug.Log($"serialize result:{result}");
 
 
         //广告
@@ -270,7 +274,7 @@ public class Sample : MonoBehaviour
             new TMP_Dropdown.OptionData("copy_text"),
             new TMP_Dropdown.OptionData("device_total_memory"),
             new TMP_Dropdown.OptionData("device_free_memory"),
-              new TMP_Dropdown.OptionData("device_total_disk_size"),
+            new TMP_Dropdown.OptionData("device_total_disk_size"),
             new TMP_Dropdown.OptionData("device_free_disk_size"),
         };
         othersDropDown.onValueChanged.AddListener(OnOthersinviteDropDown);
@@ -286,11 +290,11 @@ public class Sample : MonoBehaviour
                 Debug.Log($"is_banner_ready --> {isBannerReady}");
                 break;
             case 1:
-                IvySdk.Instance.ShowBannerAd("default", IvySdk.BannerAdPosition.POSITION_CENTER_BOTTOM, 1);
+                IvySdk.Instance.ShowBannerAd("default", IvySdk.BannerAdPosition.POSITION_CENTER_BOTTOM, "1");
                 Debug.Log("show_banner_ad called");
                 break;
             case 2:
-                IvySdk.Instance.CloseBannerAd(1);
+                IvySdk.Instance.CloseBannerAd("1");
                 Debug.Log("close_banner called");
                 break;
             case 3:
@@ -298,7 +302,7 @@ public class Sample : MonoBehaviour
                 Debug.Log($"is_interstitial_ready --> {isInterstitialReady}");
                 break;
             case 4:
-                IvySdk.Instance.ShowInterstitialAd("default", 2, null);
+                IvySdk.Instance.ShowInterstitialAd("default", "2", null);
                 Debug.Log("show_interstital_ad called");
                 break;
             case 5:
@@ -306,7 +310,7 @@ public class Sample : MonoBehaviour
                 Debug.Log($"is_rewarded_ready --> {isRewardedReady}");
                 break;
             case 6:
-                IvySdk.Instance.ShowRewardedAd("default", 3, null);
+                IvySdk.Instance.ShowRewardedAd("default", "3", null);
                 Debug.Log("show_rewarded_ad called");
                 break;
         }
@@ -357,23 +361,23 @@ public class Sample : MonoBehaviour
         switch (value)
         {
             case 0:
-                IvySdk.Instance.TrackEventToFacebook("event_name", "key1,value1,key2,value2");
+                IvySdk.Instance.TrackEventToFacebook("event_name", null);
                 Debug.Log("log_to_all_platform called");
                 break;
             case 1:
-                IvySdk.Instance.TrackEventToFirebase("event_name", "key1,value1,key2,value2");
+                IvySdk.Instance.TrackEventToFirebase("event_name", null);
                 Debug.Log("log_to_firebase called");
                 break;
             case 2:
-                IvySdk.Instance.TrackEventToFacebook("event_name", "key1,value1,key2,value2");
+                IvySdk.Instance.TrackEventToFacebook("event_name", null);
                 Debug.Log("log_to_facebook called");
                 break;
             case 3:
-                IvySdk.Instance.TrackEventToAppsflyer("event_name", "key1,value1,key2,value2");
+                IvySdk.Instance.TrackEventToAppsflyer("event_name", null);
                 Debug.Log("log_to_appsflyer called");
                 break;
             case 4:
-                IvySdk.Instance.TrackEventToIvy("event_name", "key1,value1,key2,value2");
+                IvySdk.Instance.TrackEventToIvy("event_name", null);
                 Debug.Log("log_to_ivy called");
                 break;
             case 5:
@@ -572,31 +576,31 @@ public class Sample : MonoBehaviour
         switch (value)
         {
             case 0:
-                IvySdk.Instance.SaveCloudData("collection", "{}");
+                IvySdk.Instance.SaveCloudData("collection", "documentId", "{}");
                 Debug.Log("save called");
                 break;
             case 1:
-                IvySdk.Instance.ReadCloudData("collection");
+                IvySdk.Instance.ReadCloudData("collection", "documentId");
                 Debug.Log("read called");
                 break;
             case 2:
-                IvySdk.Instance.MergeCloudData("collection", "{}");
+                IvySdk.Instance.MergeCloudData("collection", "documentId", "{}");
                 Debug.Log("merge called");
                 break;
             case 3:
-                IvySdk.Instance.QueryCloudData("collection");
+                IvySdk.Instance.QueryCloudData("collection", "documentId");
                 Debug.Log("query called");
                 break;
             case 4:
-                IvySdk.Instance.DeleteCloudData("collection");
+                IvySdk.Instance.DeleteCloudData("collection", "documentId");
                 Debug.Log("delete called");
                 break;
             case 5:
-                IvySdk.Instance.UpdateCloudData("collection", "transactionId", "{}");
+                IvySdk.Instance.UpdateCloudData("collection", "documentId", "transactionId", "{}");
                 Debug.Log("update called");
                 break;
             case 6:
-                IvySdk.Instance.SnapshotCloudData("collection");
+                IvySdk.Instance.SnapshotCloudData("collection", "documentId");
                 Debug.Log("snapshot called");
                 break;
         }
@@ -833,7 +837,7 @@ public class Sample : MonoBehaviour
         Debug.Log($"pay result --> {result};{payId};{merchantTransactionId}");
     }
 
-    private void IvySdkListener_OnBannerAdEvent(IvySdk.AdEvents adEvent, int placement)
+    private void IvySdkListener_OnBannerAdEvent(IvySdk.AdEvents adEvent, string placement)
     {
         switch (adEvent)
         {
@@ -858,7 +862,7 @@ public class Sample : MonoBehaviour
         }
     }
 
-    private void IvySdkListener_OnRewardedAdEvent(IvySdk.AdEvents adEvent, int placement)
+    private void IvySdkListener_OnRewardedAdEvent(IvySdk.AdEvents adEvent, string placement)
     {
         switch (adEvent)
         {
@@ -886,7 +890,7 @@ public class Sample : MonoBehaviour
         }
     }
 
-    private void IvySdkListener_OnInterstitialAdEvent(IvySdk.AdEvents adEvent, int placement)
+    private void IvySdkListener_OnInterstitialAdEvent(IvySdk.AdEvents adEvent, string placement)
     {
         switch (adEvent)
         {

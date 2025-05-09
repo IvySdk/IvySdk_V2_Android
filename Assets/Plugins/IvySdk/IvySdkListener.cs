@@ -42,6 +42,9 @@ namespace com.ivy.sdk
         public static event Action<string, string, string, bool> OnCloudDataUpdateEvent;
         public static event Action<string, string, bool> OnCloudDataSnapshotEvent;
 
+        //firebase cloud function
+        // 方法名、返回值\失败原因、状态（成功\失败）
+        public static event Action<string, string, bool> OnFirebaseCloudFunctionEvent;
 
         public static IvySdkListener Instance
         {
@@ -145,7 +148,6 @@ namespace com.ivy.sdk
         }
 
         #endregion
-
 
         #region 客服
         public void unreadHelperMsgCount(string data)
@@ -574,7 +576,7 @@ namespace com.ivy.sdk
         }
         #endregion
 
-        #region
+        #region 存档
         /**
          * @params data:  collection
          */
@@ -818,6 +820,43 @@ namespace com.ivy.sdk
         }
 
         #endregion
+
+        #region firebase cloud function
+        public void onCloudFunctionSuccess(string data)
+        {
+            if (!string.IsNullOrEmpty(data))
+            {
+                string[] args = data.Split('|');
+                if (args != null && args.Length == 2)
+                {
+                    string functionName = args[0];
+                    string response = args[1];
+                    if (OnFirebaseCloudFunctionEvent != null && OnFirebaseCloudFunctionEvent.GetInvocationList().Length > 0)
+                    {
+                        OnFirebaseCloudFunctionEvent.Invoke(functionName, response, true);
+                    }
+                }
+            }
+        }
+
+        public void onCloudFunctionFailure(string data)
+        {
+            if (!string.IsNullOrEmpty(data))
+            {
+                string[] args = data.Split('|');
+                if (args != null && args.Length == 2)
+                {
+                    string functionName = args[0];
+                    string reason = args[1];
+                    if (OnFirebaseCloudFunctionEvent != null && OnFirebaseCloudFunctionEvent.GetInvocationList().Length > 0)
+                    {
+                        OnFirebaseCloudFunctionEvent.Invoke(functionName, reason, false);
+                    }
+                }
+            }
+        }
+        #endregion
+
 
     }
 

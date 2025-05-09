@@ -531,6 +531,28 @@ namespace com.ivy.sdk
 
         #endregion
 
+        #region firebase cloud function
+        public void FirebaseCloudFunction(string functionName)
+        {
+            if (_class != null)
+            {
+                _class.CallStatic("firebaseCloudFunction", functionName);
+            }
+        }
+
+        /**
+         * @param   functionName    方法名
+         *          parameters      参数，要求JSONObject格式
+         */
+        public void FirebaseCloudFunction(string functionName, string parameters)
+        {
+            if (_class != null)
+            {
+                _class.CallStatic("firebaseCloudFunction", functionName, parameters);
+            }
+        }
+        #endregion
+
         #region remote config
         /**
          * 获取 Firebase Remote Config 配置值

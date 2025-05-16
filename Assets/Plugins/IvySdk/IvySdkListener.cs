@@ -585,7 +585,7 @@ namespace com.ivy.sdk
             if (!string.IsNullOrEmpty(data))
             {
                 string[] args = data.Split('|');
-                if (args != null && args.Length == 3)
+                if (args != null && args.Length == 2)
                 {
                     if (OnCloudDataSaveEvent != null && OnCloudDataSaveEvent.GetInvocationList().Length > 0)
                     {
@@ -707,7 +707,7 @@ namespace com.ivy.sdk
             if (!string.IsNullOrEmpty(data))
             {
                 string[] args = data.Split('|');
-                if (args != null && args.Length == 3)
+                if (args != null && args.Length == 2)
                 {
                     string collection = args[0];
                     string documentId = args[1];

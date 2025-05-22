@@ -158,6 +158,79 @@ namespace com.ivy.sdk
             }
         }
 
+
+        public bool GetAbConfigBoolean(string key, bool defaultValue)
+        {
+            if (_class != null)
+            {
+               return _class.CallStatic<bool>("getAbConfigBoolean", key, defaultValue);
+            } else
+            {
+                return defaultValue;
+            }
+        }
+
+        public int GetAbConfigInt(string key, int defaultValue)
+        {
+            if (_class != null)
+            {
+                return _class.CallStatic<int>("getAbConfigInt", key, defaultValue);
+            }
+            else
+            {
+                return defaultValue;
+            }
+        }
+
+        public long GetAbConfigLong(string key, long defaultValue)
+        {
+            if (_class != null)
+            {
+                return _class.CallStatic<long>("getAbConfigLong", key, defaultValue);
+            }
+            else
+            {
+                return defaultValue;
+            }
+        }
+
+        public float GetAbConfigFloat(string key, float defaultValue)
+        {
+            if (_class != null)
+            {
+                return _class.CallStatic<float>("getAbConfigFloat", key, defaultValue);
+            }
+            else
+            {
+                return defaultValue;
+            }
+        }
+
+        public double GetAbConfigDouble(string key, double defaultValue)
+        {
+            if (_class != null)
+            {
+                return _class.CallStatic<double>("getAbConfigDouble", key, defaultValue);
+            }
+            else
+            {
+                return defaultValue;
+            }
+        }
+
+        public string GetAbConfigString(string key, string defaultValue)
+        {
+            if (_class != null)
+            {
+                return _class.CallStatic<string>("getAbConfigString", key, defaultValue);
+            }
+            else
+            {
+                return defaultValue;
+            }
+        }
+
+
         #region ads
         public enum BannerAdPosition
         {

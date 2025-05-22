@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SocialPlatforms.Impl;
+using UnityEngine.UIElements;
+using static com.ivy.sdk.IvySdk;
 
 namespace com.ivy.sdk
 {
@@ -38,6 +40,12 @@ namespace com.ivy.sdk
             AD_TYPE_INTERSTITIAL = 1,
             AD_TYPE_REWARDED = 2,
             AD_TYPE_BANNER = 3,
+        }
+
+        public enum ABChannel : int
+        {
+            IVY = 0,
+            HUOSHAN = 1,
         }
 
         public static IvySdk Instance
@@ -80,6 +88,73 @@ namespace com.ivy.sdk
             catch (Exception e)
             {
                 Debug.LogException(e);
+            }
+        }
+
+        public void EnableAbTest(ABChannel channel)
+        {
+            if (_class != null)
+            {
+                _class.CallStatic("enableAbTest", (int)channel);
+            }
+        }
+
+        public void SetHeaderInfo(Dictionary<string, object> data)
+        {
+            try
+            {
+                string param = "{}";
+                if (data != null)
+                {
+                    param = IvyJson.Serialize(data);
+                }
+
+                if (_class != null)
+                {
+                    _class.CallStatic("setHeaderInfo", param);
+                }
+            }
+            catch (Exception)
+            {
+                Debug.LogError($"SetHeaderInfo failed!!!, param convert failed");
+            }
+        }
+
+        public void SetUserInfo(Dictionary<string, object> data)
+        {
+            try
+            {
+                string param = "{}";
+                if (data != null)
+                {
+                    param = IvyJson.Serialize(data);
+                }
+
+                if (_class != null)
+                {
+                    _class.CallStatic("setUserInfo", param);
+                }
+            }
+            catch (Exception)
+            {
+                Debug.LogError($"SetUserInfo failed!!!, param convert failed");
+            }
+        }
+
+
+        public void StartTrackEvent()
+        {
+            if (_class != null)
+            {
+                _class.CallStatic("startTrackEvent");
+            }
+        }
+
+        public void PullAbTestConfigs()
+        {
+            if (_class != null)
+            {
+                _class.CallStatic("pullAbTestConfigs");
             }
         }
 

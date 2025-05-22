@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking.Types;
 
 namespace com.ivy.sdk
 {
@@ -46,6 +47,9 @@ namespace com.ivy.sdk
         // 方法名、返回值\失败原因、状态（成功\失败）
         public static event Action<string, string, bool> OnFirebaseCloudFunctionEvent;
 
+        //Ab test 配置同步完成回调
+        public static event Action OnAbTestConfigsSyncEvent;
+
         public static IvySdkListener Instance
         {
             get
@@ -61,6 +65,16 @@ namespace com.ivy.sdk
                     }
                 }
                 return _instance;
+            }
+        }
+
+
+
+        public void onAbTestConfigsSynced()
+        {
+            if (OnAbTestConfigsSyncEvent != null && OnAbTestConfigsSyncEvent.GetInvocationList().Length > 0)
+            {
+                OnAbTestConfigsSyncEvent.Invoke();
             }
         }
 

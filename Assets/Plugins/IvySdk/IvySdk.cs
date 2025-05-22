@@ -158,6 +158,14 @@ namespace com.ivy.sdk
             }
         }
 
+        public string getHuoShanSSID()
+        {
+            if (_class != null)
+            {
+                return _class.CallStatic<string>("getHuoShanSSID");
+            }
+            return null;
+        }
 
         public bool GetAbConfigBoolean(string key, bool defaultValue)
         {

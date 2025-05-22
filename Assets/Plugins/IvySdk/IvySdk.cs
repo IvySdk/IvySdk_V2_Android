@@ -158,7 +158,7 @@ namespace com.ivy.sdk
             }
         }
 
-        public string getHuoShanSSID()
+        public string GetHuoShanSSID()
         {
             if (_class != null)
             {

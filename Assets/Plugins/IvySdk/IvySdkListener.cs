@@ -50,6 +50,9 @@ namespace com.ivy.sdk
         //Ab test 配置同步完成回调
         public static event Action OnAbTestConfigsSyncEvent;
 
+        //remote data 同步完成回调
+        public static event Action OnRemoteDataSyncEvent;
+
         public static IvySdkListener Instance
         {
             get
@@ -68,7 +71,13 @@ namespace com.ivy.sdk
             }
         }
 
-
+        public void onRemoteConfigSynced()
+        {
+            if (OnRemoteDataSyncEvent != null && OnRemoteDataSyncEvent.GetInvocationList().Length > 0)
+            {
+                OnRemoteDataSyncEvent.Invoke();
+            }
+        }
 
         public void onAbTestConfigsSynced()
         {

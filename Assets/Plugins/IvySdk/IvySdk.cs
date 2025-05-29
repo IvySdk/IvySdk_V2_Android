@@ -1633,6 +1633,24 @@ namespace com.ivy.sdk
             return 0;
         }
 
+        public bool HasGestureBar()
+        {
+            if (_class != null)
+            {
+                return _class.CallStatic<bool>("hasGestureBar");
+            }
+            return false;
+        }
+
+        public int GetGestureBarHeight()
+        {
+            if (_class != null)
+            {
+                return _class.CallStatic<int>("getGestureBarHeight");
+            }
+            return 0;
+        }
+
         /**
          * 跳转应用商店
          * @param url           1.null，指定本游戏；2.指定游戏包名；3.应用商店地址

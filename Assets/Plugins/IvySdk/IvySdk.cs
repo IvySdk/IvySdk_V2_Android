@@ -1,5 +1,8 @@
 using System;
 using System.Collections.Generic;
+#if UNITY_IOS
+using System.Runtime.InteropServices;
+#endif
 using UnityEngine;
 
 namespace com.ivy.sdk
@@ -38,6 +41,44 @@ namespace com.ivy.sdk
             AD_TYPE_BANNER = 3,
         }
 
+        public enum BannerAdPosition
+        {
+            POSITION_LEFT_TOP = 1,
+            POSITION_LEFT_BOTTOM = 2,
+            POSITION_CENTER_TOP = 3,
+            POSITION_CENTER_BOTTOM = 4,
+            POSITION_CENTER = 5,
+            POSITION_RIGHT_TOP = 6,
+            POSITION_RIGHT_BOTTOM = 7,
+        }
+
+        public class FirebaseLinkChannel
+        {
+            public static string ANONYMOUS = "anonymous";
+            public static string PLAY_GAMES = "playgames";
+            public static string GOOGLE = "google";
+            public static string FACEBOOK = "facebook";
+            public static string EMAIL = "email";
+            public static string APPLE = "apple";
+            public static string DEFAULT = "default";
+        }
+
+        public enum ConfigKeys
+        {
+            CONFIG_KEY_APP_ID = 1,              // app id
+            CONFIG_KEY_LEADER_BOARD_URL = 2,
+            CONFIG_KEY_API_VERSION = 3,
+            CONFIG_KEY_SCREEN_WIDTH = 4,        // 屏幕宽度
+            CONFIG_KEY_SCREEN_HEIGHT = 5,       // 屏幕高度
+            CONFIG_KEY_LANGUAGE = 6,            // 设备语言
+            CONFIG_KEY_COUNTRY = 7,             // 设备国家
+            CONFIG_KEY_VERSION_CODE = 8,        //版本号
+            CONFIG_KEY_VERSION_NAME = 9,        //版本名
+            CONFIG_KEY_PACKAGE_NAME = 10,       // 包名
+            CONFIG_KEY_UUID = 11,               // role id
+            SDK_CONFIG_KEY_JSON_VERSION = 21,
+        }
+
         public enum ABChannel : int
         {
             IVY = 0,
@@ -55,7 +96,7 @@ namespace com.ivy.sdk
                 return _instance;
             }
         }
-
+#if UNITY_ANDROID
         public void Init()
         {
             if (_class != null)
@@ -452,7 +493,7 @@ namespace com.ivy.sdk
             {
                 return _class.CallStatic<string>("getPaymentDatas");
             }
-            return "[]";
+            return "{}";
         }
 
         /**
@@ -1659,7 +1700,7 @@ namespace com.ivy.sdk
             }
         }
 
-        public void toast(string message)
+        public void Toast(string message)
         {
             if (_class != null)
             {
@@ -1743,6 +1784,1230 @@ namespace com.ivy.sdk
             }
         }
 
-        //#endif
+#elif UNITY_IOS
+        [DllImport ("__Internal")]
+        private static extern void onCreate();
+        [DllImport ("__Internal")]
+        private static extern void requestATT();
+        [DllImport ("__Internal")]
+        private static extern void requestATTForCustomUMP();
+        [DllImport ("__Internal")]
+        private static extern int loadATTStatus();
+        [DllImport ("__Internal")]
+        private static extern void triggerBannerAd(string placement);
+        [DllImport ("__Internal")]
+        private static extern bool hasBannerAd();
+        [DllImport ("__Internal")]
+        private static extern void showBannerAd(string tag, int pos, string placemnet, string clientInfo);
+        [DllImport ("__Internal")]
+        private static extern void closeBannerAd(string placement);
+        [DllImport ("__Internal")]
+        private static extern void triggerInterstitialAd(string placement);
+        [DllImport ("__Internal")]
+        private static extern bool hasInterstitialAd();
+        [DllImport ("__Internal")]
+        private static extern void showInterstitialAd(string tag, string placement, string clientInfo);
+        [DllImport ("__Internal")]
+        private static extern void triggerRewardedAd(string placement);
+        [DllImport ("__Internal")]
+        private static extern bool hasRewardedAd();
+        [DllImport ("__Internal")]
+        private static extern void showRewardedAd(string tag, string placement, string clientInfo);
+        [DllImport ("__Internal")]
+        private static extern void pay(int payId, string payload, string clientInfo);
+        [DllImport ("__Internal")]
+        private static extern void shippingGoods(string merchantTransactionId);
+        [DllImport ("__Internal")]
+        private static extern void queryPaymentOrders();
+        [DllImport ("__Internal")]
+        private static extern string getPaymentData(int payId);
+        [DllImport ("__Internal")]
+        private static extern string getPaymentDatas();
+        [DllImport ("__Internal")]
+        private static extern bool isPaymentValid();
+        [DllImport ("__Internal")]
+        private static extern void trackEvent(string eventName, string param);
+        [DllImport ("__Internal")]
+        private static extern void trackEventToConversion(string eventName, string param);
+        [DllImport ("__Internal")]
+        private static extern void trackEventToFacebook(string eventName, string param);
+        [DllImport ("__Internal")]
+        private static extern void trackEventToFirebase(string eventName, string param);
+        [DllImport ("__Internal")]
+        private static extern void trackEventToAppsflyer(string eventName, string param);
+        [DllImport ("__Internal")]
+        private static extern void trackEventToIvy(string eventName, string param);
+        [DllImport ("__Internal")]
+        private static extern int getRemoteConfigInt(string key);
+        [DllImport ("__Internal")]
+        private static extern long getRemoteConfigLong(string key);
+        [DllImport ("__Internal")]
+        private static extern double getRemoteConfigDouble(string key);
+        [DllImport ("__Internal")]
+        private static extern bool getRemoteConfigBoolean(string key);
+        [DllImport ("__Internal")]
+        private static extern string getRemoteConfigString(string key);
+        [DllImport ("__Internal")]
+        private static extern int getIvyRemoteConfigInt(string key);
+        [DllImport ("__Internal")]
+        private static extern long getIvyRemoteConfigLong(string key);
+        [DllImport ("__Internal")]
+        private static extern double getIvyRemoteConfigDouble(string key);
+        [DllImport ("__Internal")]
+        private static extern bool getIvyRemoteConfigBoolean(string key);
+        [DllImport ("__Internal")]
+        private static extern string getIvyRemoteConfigString(string key);
+        [DllImport ("__Internal")]
+        private static extern void loginFacebook();
+        [DllImport ("__Internal")]
+        private static extern bool isFacebookLoggedIn();
+        [DllImport ("__Internal")]
+        private static extern void logoutFacebook();
+        [DllImport ("__Internal")]
+        private static extern string getFacebookUserId();
+        [DllImport ("__Internal")]
+        private static extern string getFacebookUserInfo();
+        [DllImport ("__Internal")]
+        private static extern string getFacebookFriends();
+        [DllImport ("__Internal")]
+        private static extern void loginApple();
+        [DllImport ("__Internal")]
+        private static extern void logoutApple();
+        [DllImport ("__Internal")]
+        private static extern string getAppleUserId();
+        [DllImport ("__Internal")]
+        private static extern string getAppleUserInfo();
+        [DllImport ("__Internal")]
+        private static extern void logoutFirebase();
+        [DllImport ("__Internal")]
+        private static extern string getFirebaseUserInfo(string channel);
+        [DllImport ("__Internal")]
+        private static extern string getFirebaseUserId();
+        [DllImport ("__Internal")]
+        private static extern bool isFirebaseAnoymousLoggedIn();
+        [DllImport ("__Internal")]
+        private static extern bool isFirebaseLinkedWithChannel(string channel);
+        [DllImport ("__Internal")]
+        private static extern bool canFirebaseUnlinkWithChannel(string channel);
+        [DllImport ("__Internal")]
+        private static extern void unlinkFirebaseWithChannel(string channel);
+        [DllImport ("__Internal")]
+        private static extern void reloadFirebaseLogStatus();
+        [DllImport ("__Internal")]
+        private static extern void loginFBWithAnoymous();
+        [DllImport ("__Internal")]
+        private static extern void loginFBWithApple();
+        [DllImport ("__Internal")]
+        private static extern void loginFBWithFacebook();
+        [DllImport ("__Internal")]
+        private static extern void loginFBWithEmailAndPwd(string email, string password);
+        [DllImport ("__Internal")]
+        private static extern void firebaseCloudFunction(string method, string param);
+        [DllImport ("__Internal")]
+        private static extern void saveCloudData(string collection, string documentId, string jsonData);
+        [DllImport ("__Internal")]
+        private static extern void readCloudData(string collection, string documentId);
+        [DllImport ("__Internal")]
+        private static extern void mergeCloudData(string collection, string documentId, string jsonData);
+        [DllImport ("__Internal")]
+        private static extern void queryCloudData(string collection, string documentId);
+        [DllImport ("__Internal")]
+        private static extern void deleteCloudData(string collection, string documentId);
+        [DllImport ("__Internal")]
+        private static extern void updateCloudData(string collection, string documentId, string transactionId, string jsonData);
+        [DllImport ("__Internal")]
+        private static extern void snapshotCloudData(string collection, string documentId);
+        [DllImport ("__Internal")]
+        private static extern string getAppsflyerInviterId();
+        [DllImport ("__Internal")]
+        private static extern void appsflyerInviteUser(string inviterId, string inviterAppId);
+        [DllImport ("__Internal")]
+        private static extern string getConfig(int key);
+        [DllImport ("__Internal")]
+        private static extern void showToast(string message);   
+
+
+
+
+        private bool hasCalledInit = false;
+
+
+
+        public void Init()
+        {
+            if (hasCalledInit)
+            {
+                return;
+            }
+            hasCalledInit = true;
+            onCreate();
+        }
+
+        //public void EnableAbTest(ABChannel channel)
+        //{
+        //    if (_class != null)
+        //    {
+        //        _class.CallStatic("enableAbTest", (int)channel);
+        //    }
+        //}
+
+        //public void SetHeaderInfo(Dictionary<string, object> data)
+        //{
+        //    try
+        //    {
+        //        string param = "{}";
+        //        if (data != null)
+        //        {
+        //            param = IvyJson.Serialize(data);
+        //        }
+
+        //        if (_class != null)
+        //        {
+        //            _class.CallStatic("setHeaderInfo", param);
+        //        }
+        //    }
+        //    catch (Exception)
+        //    {
+        //        Debug.LogError($"SetHeaderInfo failed!!!, param convert failed");
+        //    }
+        //}
+
+        //public void SetUserInfo(Dictionary<string, object> data)
+        //{
+        //    try
+        //    {
+        //        string param = "{}";
+        //        if (data != null)
+        //        {
+        //            param = IvyJson.Serialize(data);
+        //        }
+
+        //        if (_class != null)
+        //        {
+        //            _class.CallStatic("setUserInfo", param);
+        //        }
+        //    }
+        //    catch (Exception)
+        //    {
+        //        Debug.LogError($"SetUserInfo failed!!!, param convert failed");
+        //    }
+        //}
+
+
+        //public void StartTrackEvent()
+        //{
+        //    if (_class != null)
+        //    {
+        //        _class.CallStatic("startTrackEvent");
+        //    }
+        //}
+
+        //public void PullAbTestConfigs()
+        //{
+        //    if (_class != null)
+        //    {
+        //        _class.CallStatic("pullAbTestConfigs");
+        //    }
+        //}
+
+        //public string GetHuoShanSSID()
+        //{
+        //    if (_class != null)
+        //    {
+        //        return _class.CallStatic<string>("getHuoShanSSID");
+        //    }
+        //    return null;
+        //}
+
+        //public bool GetAbConfigBoolean(string key, bool defaultValue)
+        //{
+        //    if (_class != null)
+        //    {
+        //       return _class.CallStatic<bool>("getAbConfigBoolean", key, defaultValue);
+        //    } else
+        //    {
+        //        return defaultValue;
+        //    }
+        //}
+
+        //public int GetAbConfigInt(string key, int defaultValue)
+        //{
+        //    if (_class != null)
+        //    {
+        //        return _class.CallStatic<int>("getAbConfigInt", key, defaultValue);
+        //    }
+        //    else
+        //    {
+        //        return defaultValue;
+        //    }
+        //}
+
+        //public long GetAbConfigLong(string key, long defaultValue)
+        //{
+        //    if (_class != null)
+        //    {
+        //        return _class.CallStatic<long>("getAbConfigLong", key, defaultValue);
+        //    }
+        //    else
+        //    {
+        //        return defaultValue;
+        //    }
+        //}
+
+        //public float GetAbConfigFloat(string key, float defaultValue)
+        //{
+        //    if (_class != null)
+        //    {
+        //        return _class.CallStatic<float>("getAbConfigFloat", key, defaultValue);
+        //    }
+        //    else
+        //    {
+        //        return defaultValue;
+        //    }
+        //}
+
+        //public double GetAbConfigDouble(string key, double defaultValue)
+        //{
+        //    if (_class != null)
+        //    {
+        //        return _class.CallStatic<double>("getAbConfigDouble", key, defaultValue);
+        //    }
+        //    else
+        //    {
+        //        return defaultValue;
+        //    }
+        //}
+
+        //public string GetAbConfigString(string key, string defaultValue)
+        //{
+        //    if (_class != null)
+        //    {
+        //        return _class.CallStatic<string>("getAbConfigString", key, defaultValue);
+        //    }
+        //    else
+        //    {
+        //        return defaultValue;
+        //    }
+        //}
+
+
+        #region ads
+        
+
+        public bool HasBannerAd()
+        {
+            return hasBannerAd();
+        }
+
+        public void TriggerBannerAd(string placement)
+        {
+            triggerBannerAd(placement);
+        }
+
+        public void ShowBannerAd(string tag, BannerAdPosition position, string placement)
+        {
+            showBannerAd(tag, (int)position, placement, null);
+        }
+
+        /**
+         *  展示banner 广告
+         *  @param tag          广告标签，默认为 default
+         *  @param position     广告位置，参考BannerAdPosition
+         *  @param placement    广告位，
+         *  @param clientInfo   客户端自定义信息，JSONObject结构，注意 bool值会被转换位1/0
+         * 
+         */
+        public void ShowBannerAd(string tag, BannerAdPosition position, string placement, string clientInfo)
+        {
+            showBannerAd(tag, (int)position, placement, clientInfo);
+        }
+
+        /**
+         *  关闭banner 广告
+         *  @param placement    广告位
+         */
+        public void CloseBannerAd(string placement)
+        {
+            closeBannerAd(placement);
+        }
+
+        public bool HasInterstitialAd()
+        {
+            return hasInterstitialAd();
+        }
+
+        public void TriggerInterstitialAd(string placement)
+        {
+            triggerInterstitialAd(placement);
+        }
+
+        /**
+         *  展示 插屏 广告
+         *  @param tag          广告标签，默认为 default
+         *  @param placement    广告位，
+         *  @param clientInfo   客户端自定义信息，JSONObject结构，注意 bool值会被转换位1/0
+         */
+        public void ShowInterstitialAd(string tag, string placement, string clientInfo = null)
+        {
+            showInterstitialAd(tag, placement, clientInfo);
+        }
+
+        public bool HasRewardedAd()
+        {
+            return hasRewardedAd();
+        }
+
+        public void TriggerRewardedAd(string placement)
+        {
+            triggerRewardedAd(placement);
+        }
+
+        /**
+         *  展示 激励视频 广告
+         *  @param tag          广告标签，默认为 default
+         *  @param placement    广告位，可以用于标记奖励点
+         *  @param clientInfo   客户端自定义信息，JSONObject结构，注意 bool值会被转换位1/0
+         */
+        public void ShowRewardedAd(string tag, string placement, string clientInfo = null)
+        {
+            showRewardedAd(tag, placement, clientInfo);
+        }
+
+        #endregion
+
+        #region 计费
+
+        public void Pay(int id)
+        {
+            pay(id, null, null);
+        }
+
+        public void Pay(int id, string payload)
+        {
+            pay(id, payload, null);
+        }
+
+        /**
+         *  支付
+         *  @param id           计费点位id
+         *  @param payload      
+         *  @param clientInfo   客户端自定义信息，JSONObject结构，注意 bool值会被转换位1/0
+         */
+        public void Pay(int id, string payload, string clientInfo)
+        {
+            pay(id, payload, clientInfo);
+        }
+
+        /**
+         *  如果在使用在线计费校验时，请在客户端发放奖励时调用此接口通知服务端发货
+         *  @param merchantTransactionId    预下单id
+         */
+        public void ShippingGoods(string merchantTransactionId)
+        {
+            shippingGoods(merchantTransactionId);
+        }
+
+        /**
+         * 查询指定计费点位是否存在未处理支付记录
+         * @param id    计费点位 id 
+         */
+        public void QueryPaymentOrder(int id)
+        {
+            queryPaymentOrders();
+        }
+
+        /**
+         * 查询所有未处理支付记录
+         */
+        public void QueryPaymentOrders()
+        {
+            queryPaymentOrders();
+        }
+
+        /**
+         *  查询指定计费点位详情
+         */
+        public string GetPaymentData(int id)
+        {
+            return getPaymentData(id);
+        }
+
+        /**
+         *  查询所有计费点位详情
+         */
+        public string GetPaymentDatas()
+        {
+            return getPaymentDatas();
+        }
+
+        /**
+         * 计费系统是否可用
+         */
+        public bool IsPaymentValid()
+        {
+            return isPaymentValid();
+        }
+
+        #endregion
+
+        #region track
+        /**
+         * 统计事件至 所有平台
+         * @params  eventName    事件名
+         *          data         事件属性，字典结构
+         */
+        public void TrackEvent(string eventName, Dictionary<string, object> data)
+        {
+            try
+            {
+                string param = "{}";
+                if(data != null)
+                {
+                    param = IvyJson.Serialize(data);
+                }
+                trackEvent(eventName, param);
+            }
+            catch (Exception)
+            {
+                Debug.LogError($"track event:{eventName} failed!!!, param convert failed");
+            }
+        }
+
+        /**
+         * 统计事件至 所有平台
+         * @params  eventName    事件名
+         *          data         事件属性，字典结构
+         */
+        public void TrackEventToConversion(string eventName, Dictionary<string, object> data)
+        {
+            try
+            {
+                string param = "{}";
+                if (data != null)
+                {
+                    param = IvyJson.Serialize(data);
+                }
+                trackEventToConversion(eventName, param);
+            }
+            catch (Exception)
+            {
+                Debug.LogError($"track event to conversion:{eventName} failed!!!, param convert failed");
+            }
+        }
+
+        /**
+          * 统计事件至 Firebase
+          * @params  eventName    事件名
+          *          data         事件属性，字典结构
+          */
+        public void TrackEventToFirebase(string eventName, Dictionary<string, object> data)
+        {
+            try
+            {
+                string param = "{}";
+                if (data != null)
+                {
+                    param = IvyJson.Serialize(data);
+                }
+                trackEventToFirebase(eventName, param);
+            }
+            catch (Exception)
+            {
+                Debug.LogError($"track event to firebase:{eventName} failed!!!, param convert failed");
+            }
+        }
+
+        /**
+          * 统计事件至 Facebook
+          * @params  eventName    事件名
+          *          data         事件属性，字典结构
+          */
+        public void TrackEventToFacebook(string eventName, Dictionary<string, object> data)
+        {
+            try
+            {
+                string param = "{}";
+                if (data != null)
+                {
+                    param = IvyJson.Serialize(data);
+                }
+                trackEventToFacebook(eventName, param);
+            }
+            catch (Exception)
+            {
+                Debug.LogError($"track event to facebook:{eventName} failed!!!, param convert failed");
+            }
+        }
+
+        /**
+          * 统计事件至 Appsflyer
+          * @params  eventName    事件名
+          *          data         事件属性，字典结构
+          */
+        public void TrackEventToAppsflyer(string eventName, Dictionary<string, object> data)
+        {
+            try
+            {
+                string param = "{}";
+                if (data != null)
+                {
+                    param = IvyJson.Serialize(data);
+                }
+                trackEventToAppsflyer(eventName, param);
+            }
+            catch (Exception)
+            {
+                Debug.LogError($"track event to appsflyer:{eventName} failed!!!, param convert failed");
+            }
+        }
+
+        /**
+          * 统计事件至 自有平台
+          * @params  eventName    事件名
+          *          data         事件属性，字典结构
+          */
+        public void TrackEventToIvy(string eventName, Dictionary<string, object> data)
+        {
+            try
+            {
+                string param = "{}";
+                if (data != null)
+                {
+                    param = IvyJson.Serialize(data);
+                }
+
+                trackEventToIvy(eventName, param);
+            }
+            catch (Exception)
+            {
+                Debug.LogError($"track event to ivy:{eventName} failed!!!, param convert failed");
+            }
+        }
+
+        /**
+         *  设置用户属性 至 所有平台
+         */
+        public void SetUserProperty(string key, string value)
+        {
+           
+        }
+
+        /**
+         *  设置用户属性 至 Firebase
+         */
+        public void SetUserPropertyToFirebase(string key, string value)
+        {
+           
+        }
+
+        /**
+         *  设置用户属性 至 Appsflyer
+         */
+        //public void SetUserPropertyToAppsflyer(string key, string value)
+        //{
+        //    if (_class != null)
+        //    {
+        //        _class.CallStatic("setUserPropertyToAppsflyer", key, value);
+        //    }
+        //}
+
+        /**
+         *  设置用户属性 至 自有平台
+         */
+        public void SetUserPropertyToIvy(string key, string value)
+        {
+            
+        }
+
+        /**
+         *  设置自定义用户 id
+         */
+        public void SetCustomUserId(string value)
+        {
+            
+        }
+
+        #endregion
+
+        #region firebase cloud function
+        public void FirebaseCloudFunction(string functionName)
+        {
+            firebaseCloudFunction(functionName, null);
+        }
+
+        /**
+         * @param   functionName    方法名
+         *          parameters      参数，要求JSONObject格式
+         */
+        public void FirebaseCloudFunction(string functionName, string parameters)
+        {
+            firebaseCloudFunction(functionName, parameters);
+        }
+        #endregion
+
+        #region remote config
+        /**
+         * 获取 Firebase Remote Config 配置值
+         */
+        public int GetRemoteConfigInt(string key)
+        {
+            return getRemoteConfigInt(key);
+        }
+
+        /**
+         * 获取 Firebase Remote Config 配置值
+         */
+        public long GetRemoteConfigLong(string key)
+        {
+            return getRemoteConfigLong(key);
+        }
+
+        /**
+         * 获取 Firebase Remote Config 配置值
+         */
+        public double GetRemoteConfigDouble(string key)
+        {
+            return getIvyRemoteConfigDouble(key);
+        }
+
+        /**
+         * 获取 Firebase Remote Config 配置值
+         */
+        public bool GetRemoteConfigBoolean(string key)
+        {
+            return getRemoteConfigBoolean(key);
+        }
+
+        /**
+         * 获取 Firebase Remote Config 配置值
+         */
+        public string GetRemoteConfigString(string key)
+        {
+            return getRemoteConfigString(key);
+        }
+
+        /**
+         * 获取 自有 Remote Config 配置值
+         */
+        public int GetIvyRemoteConfigInt(string key)
+        {
+            return getIvyRemoteConfigInt(key);
+        }
+
+        /**
+         * 获取 自有 Remote Config 配置值
+         */
+        public long GetIvyRemoteConfigLong(string key)
+        {
+            return getIvyRemoteConfigLong(key);
+        }
+
+        /**
+         * 获取 自有 Remote Config 配置值
+         */
+        public double GetIvyRemoteConfigDouble(string key)
+        {
+            return getIvyRemoteConfigDouble(key);
+        }
+
+        /**
+         * 获取 自有 Remote Config 配置值
+         */
+        public bool GetIvyRemoteConfigBoolean(string key)
+        {
+            return getIvyRemoteConfigBoolean(key);
+        }
+
+        /**
+         * 获取 自有 Remote Config 配置值
+         */
+        public string GetIvyRemoteConfigString(string key)
+        {
+            return getIvyRemoteConfigString(key);
+        }
+        #endregion
+
+    
+
+        #region facebook
+
+        /**
+         * 登录Facebook
+         */
+        public void LogInFacebook()
+        {
+            loginFacebook();
+        }
+
+        /**
+         * 登出Facebook
+         */
+        public void LogoutFacebook()
+        {
+            logoutFacebook();
+        }
+
+        /**
+         * 查询Facebook 登录状态
+         */
+        public bool IsFacebookLoggedIn()
+        {
+            return isFacebookLoggedIn();
+        }
+
+        /**
+         * 查询Facebook用户 朋友列表
+         */
+        public string GetFacebookFriends()
+        {
+            return getFacebookFriends();
+        }
+
+        /**
+         * 查询Facebook用户信息
+         */
+        public string GetFacebookUserInfo()
+        {
+            return getFacebookUserInfo();
+        }
+        #endregion
+
+        #region firebase
+        
+
+        /**
+         * 登出Firebase
+         */
+        public void LogoutFirebase()
+        {
+            logoutFirebase();
+        }
+
+        /**
+         * 查询Firebase用户信息
+         * @param channel   登陆渠道，参考 FirebaseLinkChannel
+         */
+        public string GetFirebaseUserInfo(string channel)
+        {
+            return getFirebaseUserInfo(channel);
+        }
+
+        /**
+       * 查询Firebase用户 id
+       * @param channel   登陆渠道，参考 FirebaseLinkChannel
+       */
+        public string GetFirebaseUserId()
+        {
+            return getFirebaseUserId();
+        }
+
+        /**
+         * 查询Firebase是否为匿名登陆
+         */
+        public bool IsFirebaseAnonymousLoggedIn()
+        {
+            return isFirebaseAnoymousLoggedIn();
+        }
+
+        /**
+         * 查询Firebase是否登陆指定渠道
+         * @param channel   登陆渠道，参考 FirebaseLinkChannel 
+         */
+        public bool IsFirebaseLinkedWithChannel(string channel)
+        {
+            return isFirebaseLinkedWithChannel(channel);
+        }
+
+        /**
+         * 查询Firebase是否可登出指定渠道
+         * @param channel   登陆渠道，参考 FirebaseLinkChannel
+         */
+        public bool CanFirebaseUnlinkWithChannel(string channel)
+        {
+            return canFirebaseUnlinkWithChannel(channel);
+        }
+
+        /**
+         * Firebase登出指定渠道
+         * @param channel   登陆渠道，参考 FirebaseLinkChannel
+         */
+        public void UnlinkFirebaseWithChannel(string channel)
+        {
+            unlinkFirebaseWithChannel(channel);
+        }
+
+        /**
+         * 重载Firebase的登陆状态
+         */
+        public void ReloadFirebaseLogStatus()
+        {
+            reloadFirebaseLogStatus();
+        }
+
+        /**
+         * 匿名登陆Firebase
+         */
+        public void LoginFBWithAnonymous()
+        {
+            loginFBWithAnoymous();
+        }
+
+        public void LoginFBWithApple()
+        {
+            loginFBWithApple();
+        }
+
+        /**
+         * 通过Facebook渠道登陆Firebase
+         */
+        public void LoginFBWithFacebook()
+        {
+            loginFBWithFacebook();
+        }
+
+        /**
+         * 通过Email渠道登陆Firebase
+         */
+        public void LoginFBWithEmailAndPwd(string email, string password)
+        {
+            loginFBWithEmailAndPwd(email, password);
+        }
+
+        #endregion
+
+        #region 存档
+        /**
+         * 存储数据到指定数据集合
+         * @param collection     数据集合
+         * @param jsonData       
+         */
+        public void SaveCloudData(string collection, string documentId, string jsonData)
+        {
+            saveCloudData(collection, documentId, jsonData);
+        }
+
+        /**
+         * 读取指定数据集合内文档
+         * @param collection     数据集合
+         * @param documentId     文档id
+         */
+        public void ReadCloudData(string collection, string documentId)
+        {
+            readCloudData(collection, documentId);
+        }
+
+        /**
+         * 合并数据
+         * @param collection     数据集合
+         * @param jsonData
+         */
+        public void MergeCloudData(string collection, string documentId, string jsonData)
+        {
+            mergeCloudData(collection, documentId, jsonData);
+        }
+
+        /**
+         * 查询数据
+         * @param collection     数据集合
+         */
+        public void QueryCloudData(string collection, string documentId)
+        {
+            queryCloudData(collection, documentId);
+        }
+
+        /**
+         * 删除数据
+         * @param collection     数据集合
+         */
+        public void DeleteCloudData(string collection, string documentId)
+        {
+            deleteCloudData(collection, documentId);
+        }
+
+        /**
+         * 更新数据 
+         * @param collection        数据集合
+         * @param transactionId     事务Id
+         * @param jsonData      
+         */
+        public void UpdateCloudData(string collection, string documentId, string transactionId, string jsonData)
+        {
+            updateCloudData(collection, documentId, transactionId, jsonData);
+        }
+
+        /**
+         * 备份数据
+         * @param collection    数据集合
+         * @param documentId    文档id
+         */
+        public void SnapshotCloudData(string collection, string documentId)
+        {
+            snapshotCloudData(collection, documentId);
+        }
+
+        #endregion
+
+        #region 客服
+        /**
+         * 客服 准备状态
+         */
+        public bool IsHelperInitialized()
+        {
+            return false;
+        }
+
+        /**
+         * 是否有新的客服消息
+         */
+        public bool HasNewHelperMessage()
+        {
+            return false;
+        }
+
+        /**
+         * 跳转客服页面
+         * @param entranceId            自定义入口 ID
+         * @param meta                  自定义用户属性，字典格式
+         * @param tags                  用户标签，AIHelp需要预先在后台定义用户标签
+         * @param welcomeMessage        欢迎语
+         */
+        public void ShowHelper(string entranceId, string meta, string tags, string welcomeMessage)
+        {
+           
+        }
+
+        /**
+         * 跳转指定客服页面
+         * @param faqId     指定页面id
+         * @param monment   
+         */
+        public void ShowHelperSingleFAQ(string faqId, int moment = 3)
+        {
+            
+        }
+
+        /**
+         * 监听未读消息
+         */
+        public void ListenHelperUnreadMsgCount(bool onlyOnce)
+        {
+            
+        }
+
+        /**
+         * 停止监听未读消息
+         */
+        public void StopListenHelperUnreadMsgCount()
+        {
+           
+        }
+
+        /**
+         * 更新用户属性
+         * @param data      用户属性，JSONObject格式
+         * @param tags      用户标签，AIHelp需要预先在后台定义用户标签,逗号分隔的字符串
+         */
+        public void UpdateHelperUserInfo(string data, string tags)
+        {
+          
+        }
+
+        /**
+         * 重置用户属性
+         */
+        public void ResetHelperUserInfo()
+        {
+          
+        }
+
+        /**
+         * 关闭客服
+         */
+        public void CloseHelper()
+        {
+           
+        }
+
+        #endregion
+
+        #region 通知
+        /**
+         *  通知权限
+         *  @returns        0: 权限被彻底拒绝，需要跳转设置页面开启
+         *                  1: 权限已开启
+         *                  2: 权限状态待定，仍可通过系统接口请求
+         */
+        public int LoadNotificationPermissionState()
+        {
+            return 0;
+        }
+
+        /**
+         * 请求通知权限
+         */
+        public void RequestNotificationPermission()
+        {
+           
+        }
+
+        /**
+         * 跳转通知权限设置页
+         */
+        public void OpenNotificationSettings()
+        {
+           
+        }
+
+        /**
+         *
+         * @param tag                   任务 id
+         * @param title                 通知栏标题
+         * @param subtitle              通知栏副标题
+         * @param bigText               长文本
+         * @param smallIcon             小图标
+         * @param largeIcon             大图标
+         * @param bigPicture            大图
+         * @param delay                 延迟时间
+         * @param autoCancel            可关闭
+         * @param action                通知栏点击事件行为
+         * @param repeat                重复触发通知栏
+         * @param requireNetwork        要求联网状态展示通知栏
+         * @param requireCharging       要求充电状态展示通知栏
+         */
+        public void PushNotificationTask(string tag, string title, string subtitle, string bigText, string smallIcon, string largeIcon, string bigPicture, long delay, bool autoCancel, string action, bool repeat, bool requireNetwork, bool requireCharging)
+        {
+            
+        }
+
+        public void CancelNotification(string tag)
+        {
+           
+        }
+
+        #endregion
+
+        #region Appsflyer 用户互邀
+
+        /**
+         * 通过af邀请用户
+         * @param inviterId         邀请者id
+         * @param inviterAppId      邀请者 app id
+         */
+        public void AppsflyerInviteUser(string inviterId, string inviterAppId)
+        {
+            appsflyerInviteUser(inviterId, inviterAppId);
+        }
+
+        /**
+         * @returns inviterId  格式为 inviterId|inviterAppId
+         */
+        public string GetAppsflyerInviterId()
+        {
+            return getAppsflyerInviterId();
+        }
+
+        #endregion
+
+        public void SendEmail(string email, string extra)
+        {
+            
+        }
+
+        public void SendEmail(string email, string title, string extra)
+        {
+          
+        }
+
+        
+
+        public string GetConfig(ConfigKeys key)
+        {
+            return getConfig((int)key);
+        }
+
+        public bool IsNetworkConnected()
+        {
+            
+            return true;
+        }
+
+        public void Rate()
+        {
+            
+        }
+
+        public void SystemShareText(String txt)
+        {
+            
+        }
+
+        public void SystemShareImage(String title, String imagePath)
+        {
+          
+        }
+
+        public void OpenUrl(String url)
+        {
+           
+        }
+
+        public bool HasNotch()
+        {
+           
+            return false;
+        }
+
+        public int GetNotchHeight()
+        {
+            return 0;   
+        }
+
+     
+
+        /**
+         * 跳转应用商店
+         * @param url           1.null，指定本游戏；2.指定游戏包名；3.应用商店地址
+         */
+        public void OpenAppStore(string url)
+        {
+            
+        }
+
+        public void Toast(string message)
+        {
+            showToast(message);
+        }
+
+        public void copyTxt(string message)
+        {
+           
+        }
+
+        
+
+        public void ForceQuit()
+        {
+            
+        }
+
+        /**
+         * 跳转facebook公共主页
+         * @param pageId 公共主页id
+         */
+        public void OpenFacebookPage(string pageId)
+        {
+          
+        }
+
+
+
+
+
+
+
+
+
+
+#endif
     }
 }

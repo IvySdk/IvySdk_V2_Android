@@ -1940,6 +1940,7 @@ namespace com.ivy.sdk
                 return;
             }
             hasCalledInit = true;
+            IvySdkListener.Instance.enabled = true;
             onCreate();
         }
 

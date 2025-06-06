@@ -1503,7 +1503,7 @@ namespace com.ivy.sdk
         {
             if (_class != null)
             {
-                _class.CallStatic<int>("openNotificationSettings");
+                _class.CallStatic("openNotificationSettings");
             }
         }
 
@@ -1527,7 +1527,7 @@ namespace com.ivy.sdk
         {
             if (_class != null)
             {
-                _class.CallStatic<int>("pushNotificationTask", tag, title, subtitle, bigText, smallIcon, largeIcon, bigPicture, delay, autoCancel, action, repeat, requireNetwork, requireCharging);
+                _class.CallStatic("pushNotificationTask", tag, title, subtitle, bigText, smallIcon, largeIcon, bigPicture, delay, autoCancel, action, repeat, requireNetwork, requireCharging);
             }
         }
 
@@ -1535,7 +1535,39 @@ namespace com.ivy.sdk
         {
             if (_class != null)
             {
-                _class.CallStatic<int>("cancelNotification", tag);
+                _class.CallStatic("cancelNotification", tag);
+            }
+        }
+
+        public void CancelAllNotification()
+        {
+            if (_class != null)
+            {
+                _class.CallStatic("cancelAllNotification", tag);
+            }
+        }
+
+        public void AddBootNotification(string tag, string title, string subtitle, string bigText, string smallIcon, string largeIcon, string bigPicture, string action)
+        {
+            if (_class != null)
+            {
+                _class.CallStatic("addBootNotification", tag, title, subtitle, bigText, smallIcon, largeIcon, bigPicture, action);
+            }
+        }
+
+        public void CancelBootNotification(string tag)
+        {
+            if (_class != null)
+            {
+                _class.CallStatic("removeBootNotification", tag);
+            }
+        }
+
+        public void ClearAllBootNotification()
+        {
+            if (_class != null)
+            {
+                _class.CallStatic("clearBootNotification", tag);
             }
         }
 

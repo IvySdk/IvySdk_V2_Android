@@ -868,6 +868,15 @@ namespace com.ivy.sdk
         }
         #endregion
 
+        public bool IsAuthPlatformReady()
+        {
+            if (_class != null)
+            {
+                return _class.CallStatic<bool>("isAuthPlatformReady");
+            }
+            return false;
+        }
+
         #region play games&成就&排行榜
 
         /**
@@ -1955,6 +1964,42 @@ namespace com.ivy.sdk
         private static extern void appsflyerInviteUser(string inviterId, string inviterAppId);
         [DllImport ("__Internal")]
         private static extern string getConfig(int key);
+        [DllImport("__Internal")]
+        private static extern void loadNotificationPermissionState();
+        [DllImport("__Internal")]
+        private static extern void requestNotificationPermission();
+        [DllImport("__Internal")]
+        private static extern void openNotificationSettings();
+        [DllImport("__Internal")]
+        private static extern void cancelNotificationWithIdentifier(string key);
+        [DllImport("__Internal")]
+        private static extern void cancelAllNotification();
+        [DllImport("__Internal")]
+        private static extern string getLocalNotificationData();
+        [DllImport("__Internal")]
+        private static extern void sendNotification(string key, string title, string msg, long pushTime, long interval, bool repeat, bool useSound, string soundNamem, string userInfo);
+        [DllImport("__Internal")]
+        private static extern void sendNotificationWithDate(string key, string title, string msg, string dateStr, long interval, bool repeat, bool useSound, string soundNamem, string userInfo);
+        [DllImport("__Internal")]
+        private static extern bool isHelperInitialized();
+        [DllImport("__Internal")]
+        private static extern bool hasNewHelperMessage();
+        [DllImport("__Internal")]
+        private static extern void showHelper(string entraceId, string meta, string tags, string welcome);
+        [DllImport("__Internal")]
+        private static extern void showHelperSingleFAQ(string faqId, int monment);
+        [DllImport("__Internal")]
+        private static extern void listenHelperUnreadMsgCount(bool onlyOnce);
+        [DllImport("__Internal")]
+        private static extern void stopListenHelperUnreadMsgCount();
+        [DllImport("__Internal")]
+        private static extern void updateHelperUserInfo(string meta, string tags);
+        [DllImport("__Internal")]
+        private static extern void resetHelperUserInfo();
+        [DllImport("__Internal")]
+        private static extern void closeHelper();
+
+
         [DllImport ("__Internal")]
         private static extern void showToast(string message);   
 
@@ -2995,11 +3040,9 @@ namespace com.ivy.sdk
             return 0;   
         }
 
-     
-
         /**
          * 跳转应用商店
-         * @param url           1.null，指定本游戏；2.指定游戏包名；3.应用商店地址
+         * @param url           1.null，默认本游戏；2.指定游戏 appStoreId；
          */
         public void OpenAppStore(string url)
         {

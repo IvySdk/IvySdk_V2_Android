@@ -1394,8 +1394,8 @@ namespace com.ivy.sdk
         /**
          * 跳转客服页面
          * @param entranceId            自定义入口 ID
-         * @param meta                  自定义用户属性，字典格式
-         * @param tags                  用户标签，AIHelp需要预先在后台定义用户标签
+         * @param meta                  自定义用户属性， JSONObject 格式
+         * @param tags                  用户标签，AIHelp需要预先在后台定义用户标签; JSONArray 格式
          * @param welcomeMessage        欢迎语
          */
         public void ShowHelper(string entranceId, string meta, string tags, string welcomeMessage)
@@ -1977,9 +1977,9 @@ namespace com.ivy.sdk
         [DllImport("__Internal")]
         private static extern string getLocalNotificationData();
         [DllImport("__Internal")]
-        private static extern void sendNotification(string key, string title, string msg, long pushTime, long interval, bool repeat, bool useSound, string soundNamem, string userInfo);
+        private static extern void sendNotification(string key, string title, string msg, long pushTime, long interval, bool repeat, bool useSound, string soundName, string userInfo);
         [DllImport("__Internal")]
-        private static extern void sendNotificationWithDate(string key, string title, string msg, string dateStr, long interval, bool repeat, bool useSound, string soundNamem, string userInfo);
+        private static extern void sendNotificationWithDate(string key, string title, string msg, string dateStr, long interval, bool repeat, bool useSound, string soundName, string userInfo);
         [DllImport("__Internal")]
         private static extern bool isHelperInitialized();
         [DllImport("__Internal")]
@@ -1998,8 +1998,30 @@ namespace com.ivy.sdk
         private static extern void resetHelperUserInfo();
         [DllImport("__Internal")]
         private static extern void closeHelper();
-
-
+        [DllImport("__Internal")]
+        private static extern void openFacebookPage(string pageId);
+        [DllImport("__Internal")]
+        private static extern bool hasNotch();
+        [DllImport("__Internal")]
+        private static extern int getNotchHeight();
+        [DllImport("__Internal")]
+        private static extern bool hasGestureBar();
+        [DllImport("__Internal")]
+        private static extern int getGestureBarHeight();
+        [DllImport("__Internal")]
+        private static extern void copyText(string text);
+        [DllImport("__Internal")]
+        private static extern void sendEmail(string email, string content);
+        [DllImport("__Internal")]
+        private static extern long getFreeMemory();
+        [DllImport("__Internal")]
+        private static extern long getTotalMemory();
+        [DllImport("__Internal")]
+        private static extern long getFreeDiskSize();
+        [DllImport("__Internal")]
+        private static extern long getTotalDiskSize();
+        [DllImport("__Internal")]
+        private static extern void openAppStore(string appStoreId);
         [DllImport ("__Internal")]
         private static extern void showToast(string message);   
 
@@ -2831,7 +2853,7 @@ namespace com.ivy.sdk
          */
         public bool IsHelperInitialized()
         {
-            return false;
+            return isHelperInitialized();
         }
 
         /**
@@ -2839,19 +2861,19 @@ namespace com.ivy.sdk
          */
         public bool HasNewHelperMessage()
         {
-            return false;
+            return hasNewHelperMessage();
         }
 
         /**
          * 跳转客服页面
          * @param entranceId            自定义入口 ID
-         * @param meta                  自定义用户属性，字典格式
-         * @param tags                  用户标签，AIHelp需要预先在后台定义用户标签
+         * @param meta                  自定义用户属性， JSONObject 格式
+         * @param tags                  用户标签，AIHelp需要预先在后台定义用户标签; JSONArray 格式
          * @param welcomeMessage        欢迎语
          */
         public void ShowHelper(string entranceId, string meta, string tags, string welcomeMessage)
         {
-           
+            showHelper(entranceId, meta, tags, welcomeMessage);
         }
 
         /**
@@ -2861,7 +2883,7 @@ namespace com.ivy.sdk
          */
         public void ShowHelperSingleFAQ(string faqId, int moment = 3)
         {
-            
+            showHelperSingleFAQ(faqId, moment);
         }
 
         /**
@@ -2869,7 +2891,7 @@ namespace com.ivy.sdk
          */
         public void ListenHelperUnreadMsgCount(bool onlyOnce)
         {
-            
+            listenHelperUnreadMsgCount(onlyOnce);
         }
 
         /**
@@ -2877,17 +2899,17 @@ namespace com.ivy.sdk
          */
         public void StopListenHelperUnreadMsgCount()
         {
-           
+            stopListenHelperUnreadMsgCount();
         }
 
         /**
          * 更新用户属性
          * @param data      用户属性，JSONObject格式
-         * @param tags      用户标签，AIHelp需要预先在后台定义用户标签,逗号分隔的字符串
+         * @param tags      用户标签，AIHelp需要预先在后台定义用户标签,JSONArray 格式
          */
         public void UpdateHelperUserInfo(string data, string tags)
         {
-          
+            updateHelperUserInfo(data, tags);
         }
 
         /**
@@ -2895,7 +2917,7 @@ namespace com.ivy.sdk
          */
         public void ResetHelperUserInfo()
         {
-          
+            resetHelperUserInfo();
         }
 
         /**
@@ -2903,7 +2925,7 @@ namespace com.ivy.sdk
          */
         public void CloseHelper()
         {
-           
+            closeHelper();
         }
 
         #endregion
@@ -2915,9 +2937,9 @@ namespace com.ivy.sdk
          *                  1: 权限已开启
          *                  2: 权限状态待定，仍可通过系统接口请求
          */
-        public int LoadNotificationPermissionState()
+        public void LoadNotificationPermissionState()
         {
-            return 0;
+            loadNotificationPermissionState();
         }
 
         /**
@@ -2925,7 +2947,7 @@ namespace com.ivy.sdk
          */
         public void RequestNotificationPermission()
         {
-           
+            requestNotificationPermission();
         }
 
         /**
@@ -2933,7 +2955,15 @@ namespace com.ivy.sdk
          */
         public void OpenNotificationSettings()
         {
-           
+            openNotificationSettings();
+        }
+
+        public enum NotificationInterval
+        {
+                  INTERVAL_YEAR = 4,
+                  INTERVAL_MONTH = 4,
+                  INTERVAL_DAY = 4,
+                  INTERVAL_HOUR = 4
         }
 
         /**
@@ -2952,14 +2982,24 @@ namespace com.ivy.sdk
          * @param requireNetwork        要求联网状态展示通知栏
          * @param requireCharging       要求充电状态展示通知栏
          */
-        public void PushNotificationTask(string tag, string title, string subtitle, string bigText, string smallIcon, string largeIcon, string bigPicture, long delay, bool autoCancel, string action, bool repeat, bool requireNetwork, bool requireCharging)
+        public void PushNotificationTask(string tag, string title, string subtitle, long pushTime, long interval, bool repeat, bool useSound, string soundName, string userInfo)
         {
-            
+            sendNotification(tag, title, subtitle, pushTime, interval, repeat, useSound, soundName, userInfo);
         }
+
+        //private static extern void sendNotification(string key, string title, string msg, long pushTime, long interval, bool repeat, bool useSound, string soundNamem, string userInfo);
+        //[DllImport("__Internal")]
+        //private static extern void sendNotificationWithDate(string key, string title, string msg, string dateStr, long interval, bool repeat, bool useSound, string soundNamem, string userInfo);
+        //[DllImport("__Internal")]
 
         public void CancelNotification(string tag)
         {
-           
+            cancelNotificationWithIdentifier(tag);
+        }
+
+        public void CancelAllNotification()
+        {
+            cancelAllNotification();
         }
 
         #endregion

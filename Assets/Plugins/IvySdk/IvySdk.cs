@@ -2627,8 +2627,6 @@ namespace com.ivy.sdk
         }
         #endregion
 
-    
-
         #region facebook
 
         /**
@@ -2961,9 +2959,11 @@ namespace com.ivy.sdk
         public enum NotificationInterval
         {
                   INTERVAL_YEAR = 4,
-                  INTERVAL_MONTH = 4,
-                  INTERVAL_DAY = 4,
-                  INTERVAL_HOUR = 4
+                  INTERVAL_MONTH = 8,
+                  INTERVAL_DAY = 16,
+                  INTERVAL_HOUR = 32,
+                  INTERVAL_MINUTE = 64,
+                  INTERVAL_WEEKDAY = 512,
         }
 
         /**
@@ -2982,15 +2982,15 @@ namespace com.ivy.sdk
          * @param requireNetwork        要求联网状态展示通知栏
          * @param requireCharging       要求充电状态展示通知栏
          */
-        public void PushNotificationTask(string tag, string title, string subtitle, long pushTime, long interval, bool repeat, bool useSound, string soundName, string userInfo)
+        public void PushNotificationTask(string tag, string title, string subtitle, long pushTime, NotificationInterval interval, bool repeat, bool useSound, string soundName, string userInfo)
         {
-            sendNotification(tag, title, subtitle, pushTime, interval, repeat, useSound, soundName, userInfo);
+            sendNotification(tag, title, subtitle, pushTime, (long)interval, repeat, useSound, soundName, userInfo);
         }
 
-        //private static extern void sendNotification(string key, string title, string msg, long pushTime, long interval, bool repeat, bool useSound, string soundNamem, string userInfo);
-        //[DllImport("__Internal")]
-        //private static extern void sendNotificationWithDate(string key, string title, string msg, string dateStr, long interval, bool repeat, bool useSound, string soundNamem, string userInfo);
-        //[DllImport("__Internal")]
+        public void PushNotificationTask(string tag, string title, string subtitle, string dateStr, NotificationInterval interval, bool repeat, bool useSound, string soundName, string userInfo)
+        {
+            sendNotificationWithDate(tag, title, subtitle, dateStr, (long)interval, repeat, useSound, soundName, userInfo);
+        }
 
         public void CancelNotification(string tag)
         {
@@ -3026,17 +3026,10 @@ namespace com.ivy.sdk
 
         #endregion
 
-        public void SendEmail(string email, string extra)
+        public void SendEmail(string email, string content)
         {
-            
+            sendEmail(email, content);
         }
-
-        public void SendEmail(string email, string title, string extra)
-        {
-          
-        }
-
-        
 
         public string GetConfig(ConfigKeys key)
         {
@@ -3045,13 +3038,12 @@ namespace com.ivy.sdk
 
         public bool IsNetworkConnected()
         {
-            
             return true;
         }
 
         public void Rate()
         {
-            
+            openAppStore(null);
         }
 
         public void SystemShareText(String txt)
@@ -3071,22 +3063,32 @@ namespace com.ivy.sdk
 
         public bool HasNotch()
         {
-           
-            return false;
+            return hasNotch();
         }
 
         public int GetNotchHeight()
         {
-            return 0;   
+            return getNotchHeight();   
+        }
+
+        public bool HasGestureBar()
+        {
+
+            return hasGestureBar();
+        }
+
+        public int GetGestureBarHeight()
+        {
+            return getGestureBarHeight();
         }
 
         /**
          * 跳转应用商店
          * @param url           1.null，默认本游戏；2.指定游戏 appStoreId；
          */
-        public void OpenAppStore(string url)
+        public void OpenAppStore(string appStoreId)
         {
-            
+            openAppStore(appStoreId);
         }
 
         public void Toast(string message)
@@ -3096,14 +3098,7 @@ namespace com.ivy.sdk
 
         public void copyTxt(string message)
         {
-           
-        }
-
-        
-
-        public void ForceQuit()
-        {
-            
+            copyText(message);
         }
 
         /**
@@ -3112,7 +3107,7 @@ namespace com.ivy.sdk
          */
         public void OpenFacebookPage(string pageId)
         {
-          
+            openFacebookPage(pageId);
         }
 
 

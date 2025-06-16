@@ -810,6 +810,15 @@ namespace com.ivy.sdk
         /**
          * 获取 自有 Remote Config 配置值
          */
+
+        public bool HasIvyRemoteConfigKey(string key){
+            if (_class != null)
+            {
+                return _class.CallStatic<bool>("hasIvyRemoteConfigKey", key);
+            }
+            return false;
+        }
+
         public int GetIvyRemoteConfigInt(string key)
         {
             if (_class != null)
@@ -2966,22 +2975,6 @@ namespace com.ivy.sdk
                   INTERVAL_WEEKDAY = 512,
         }
 
-        /**
-         *
-         * @param tag                   任务 id
-         * @param title                 通知栏标题
-         * @param subtitle              通知栏副标题
-         * @param bigText               长文本
-         * @param smallIcon             小图标
-         * @param largeIcon             大图标
-         * @param bigPicture            大图
-         * @param delay                 延迟时间
-         * @param autoCancel            可关闭
-         * @param action                通知栏点击事件行为
-         * @param repeat                重复触发通知栏
-         * @param requireNetwork        要求联网状态展示通知栏
-         * @param requireCharging       要求充电状态展示通知栏
-         */
         public void PushNotificationTask(string tag, string title, string subtitle, long pushTime, NotificationInterval interval, bool repeat, bool useSound, string soundName, string userInfo)
         {
             sendNotification(tag, title, subtitle, pushTime, (long)interval, repeat, useSound, soundName, userInfo);

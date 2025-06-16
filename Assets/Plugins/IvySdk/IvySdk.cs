@@ -277,16 +277,6 @@ namespace com.ivy.sdk
 
 
         #region ads
-        public enum BannerAdPosition
-        {
-            POSITION_LEFT_TOP = 1,
-            POSITION_LEFT_BOTTOM = 2,
-            POSITION_CENTER_TOP = 3,
-            POSITION_CENTER_BOTTOM = 4,
-            POSITION_CENTER = 5,
-            POSITION_RIGHT_TOP = 6,
-            POSITION_RIGHT_BOTTOM = 7,
-        }
 
         public bool HasBannerAd()
         {
@@ -1117,15 +1107,6 @@ namespace com.ivy.sdk
         #endregion
 
         #region firebase
-        public class FirebaseLinkChannel
-        {
-            public static string ANONYMOUS = "anonymous";
-            public static string PLAY_GAMES = "playgames";
-            public static string GOOGLE = "google";
-            public static string FACEBOOK = "facebook";
-            public static string EMAIL = "email";
-            public static string DEFAULT = "default";
-        }
 
         /**
          * 登出Firebase
@@ -1634,22 +1615,6 @@ namespace com.ivy.sdk
             {
                 _class.CallStatic<int>("sendEmail", email, title, extra);
             }
-        }
-
-        public enum ConfigKeys
-        {
-            CONFIG_KEY_APP_ID = 1,              // app id
-            CONFIG_KEY_LEADER_BOARD_URL = 2,
-            CONFIG_KEY_API_VERSION = 3,
-            CONFIG_KEY_SCREEN_WIDTH = 4,        // 屏幕宽度
-            CONFIG_KEY_SCREEN_HEIGHT = 5,       // 屏幕高度
-            CONFIG_KEY_LANGUAGE = 6,            // 设备语言
-            CONFIG_KEY_COUNTRY = 7,             // 设备国家
-            CONFIG_KEY_VERSION_CODE = 8,        //版本号
-            CONFIG_KEY_VERSION_NAME = 9,        //版本名
-            CONFIG_KEY_PACKAGE_NAME = 10,       // 包名
-            CONFIG_KEY_UUID = 11,               // role id
-            SDK_CONFIG_KEY_JSON_VERSION = 21,
         }
 
         public string GetConfig(ConfigKeys key)

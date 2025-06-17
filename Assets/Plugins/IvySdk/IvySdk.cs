@@ -1542,7 +1542,7 @@ namespace com.ivy.sdk
         {
             if (_class != null)
             {
-                _class.CallStatic("cancelAllNotification", tag);
+                _class.CallStatic("cancelAllNotification");
             }
         }
 
@@ -1566,7 +1566,7 @@ namespace com.ivy.sdk
         {
             if (_class != null)
             {
-                _class.CallStatic("clearBootNotification", tag);
+                _class.CallStatic("clearBootNotification");
             }
         }
 
@@ -1840,6 +1840,8 @@ namespace com.ivy.sdk
         private static extern string getPaymentDatas();
         [DllImport ("__Internal")]
         private static extern bool isPaymentValid();
+        [DllImport("__Internal")]
+        private static extern void restorePayments();
         [DllImport ("__Internal")]
         private static extern void trackEvent(string eventName, string param);
         [DllImport ("__Internal")]
@@ -2320,6 +2322,11 @@ namespace com.ivy.sdk
         public bool IsPaymentValid()
         {
             return isPaymentValid();
+        }
+
+        public void RestorePayments()
+        {
+            restorePayments();
         }
 
         #endregion

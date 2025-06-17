@@ -10,6 +10,10 @@ namespace com.ivy.sdk
 
         public static event Action<IvySdk.PaymentResult, int, string> OnPaymentEvent;
         public static event Action<IvySdk.PaymentResult, int, string, string> OnPaymentWithPayloadEvent;
+        public static event Action<string, bool> OnPaymentShippingEvent;
+#if UNITY_IOS
+        public static event Action<int, bool> OnPaymentRestoreEvent;
+#endif
 
         public static event Action<int> HelperUnreadMsgCountEvent;
 
@@ -20,6 +24,12 @@ namespace com.ivy.sdk
         public static event Action<bool> OnFacebookLoginEvent;
         public static event Action<bool> OnFacebookLogoutEvent;
         public static event Action<string, bool> OnFirebaseLoginEvent;
+
+
+#if UNITY_IOS
+        public static event Action<bool> OnAppleLoginEvent;
+        public static event Action<bool> OnAppleLogoutEvent;
+#endif
 
         public static event Action<string> OnReceivedNotificationEvent;
 
@@ -49,6 +59,10 @@ namespace com.ivy.sdk
 
         //remote data 同步完成回调
         public static event Action OnRemoteDataSyncEvent;
+
+#if UNITY_IOS
+        public static event Action<bool> OnNotificationPermissionEvent;
+#endif
 
         public static IvySdkListener Instance
         {
@@ -146,7 +160,10 @@ namespace com.ivy.sdk
                 {
                     int status = int.Parse(args[1]);
                     string merchantTransactionId = args[0];
-                    //TODO: 
+                    if (OnPaymentShippingEvent != null && OnPaymentShippingEvent.GetInvocationList().Length > 0)
+                    {
+                        OnPaymentShippingEvent.Invoke(merchantTransactionId, status == 1);
+                    }
                 }
             }
         }
@@ -167,7 +184,28 @@ namespace com.ivy.sdk
             }
         }
 
-        #endregion
+#if UNITY_IOS
+
+        public void onRestoreResult(string data)
+        {
+            if (!string.IsNullOrEmpty(data))
+            {
+                string[] args = data.Split('|');
+                if (args != null && args.Length == 2)
+                {
+                    int payId = int.Parse(args[0]);
+                    int status = int.Parse(args[1]);
+                    if (OnPaymentRestoreEvent != null && OnPaymentRestoreEvent.GetInvocationList().Length > 0)
+                    {
+                        OnPaymentRestoreEvent.Invoke(payId, status == 1);
+                    }
+                }
+            }
+        }
+
+#endif
+
+    #endregion
 
         #region 客服
         public void unreadHelperMsgCount(string data)
@@ -215,12 +253,22 @@ namespace com.ivy.sdk
                         {
                             OnFacebookLoginEvent.Invoke(true);
                         }
-                    } else if (data.Equals("google"))
+                    } 
+                    else if (data.Equals("google"))
                     {
                         if (OnGoogleLoginEvent != null && OnGoogleLoginEvent.GetInvocationList().Length > 0)
                         {
                             OnGoogleLoginEvent.Invoke(true);
                         }
+                    } 
+                    else if (data.Equals("apple"))
+                    {
+#if UNITY_IOS
+                        if (OnAppleLoginEvent != null && OnAppleLoginEvent.GetInvocationList().Length > 0)
+                        {
+                            OnAppleLoginEvent.Invoke(true);
+                        }
+#endif
                     }
                 }
                 catch { }
@@ -259,6 +307,15 @@ namespace com.ivy.sdk
                                 OnGoogleLoginEvent.Invoke(false);
                             }
                         }
+                        else if (data.Equals("apple"))
+                        {
+#if UNITY_IOS
+                            if (OnAppleLoginEvent != null && OnAppleLoginEvent.GetInvocationList().Length > 0)
+                            {
+                                OnAppleLoginEvent.Invoke(false);
+                            }
+#endif
+                        }
                     }
                 }
                 catch { }
@@ -285,6 +342,15 @@ namespace com.ivy.sdk
                             OnGoogleLogoutEvent.Invoke(true);
                         }
                     }
+                    else if (data.Equals("apple"))
+                    {
+#if UNITY_IOS
+                        if (OnAppleLogoutEvent != null && OnAppleLogoutEvent.GetInvocationList().Length > 0)
+                        {
+                            OnAppleLogoutEvent.Invoke(true);
+                        }
+#endif
+                    }
                 }
                 catch { }
             }
@@ -293,6 +359,23 @@ namespace com.ivy.sdk
         #endregion
 
         #region 通知
+#if UNITY_IOS
+        public void onNotificationPermissionState(string data)
+        {
+            if (!string.IsNullOrEmpty(data))
+            {
+                try
+                {
+                    int state = int.Parse(data);
+                    if (OnNotificationPermissionEvent != null && OnNotificationPermissionEvent.GetInvocationList().Length > 0)
+                    {
+                        OnNotificationPermissionEvent.Invoke(state);
+                    }
+                }
+                catch { }
+            }
+        }
+#endif
         public void onReceivedNotifyAction(string data)
         {
             if (!string.IsNullOrEmpty(data))

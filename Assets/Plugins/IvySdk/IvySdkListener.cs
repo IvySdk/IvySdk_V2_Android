@@ -27,8 +27,11 @@ namespace com.ivy.sdk
 
 
 #if UNITY_IOS
-        public static event Action<bool> OnAppleLoginEvent;
-        public static event Action<bool> OnAppleLogoutEvent;
+        public static event Action<bool> OnAppleLoginEvent; // apple 登入
+        public static event Action<bool> OnAppleLogoutEvent;//apple 登出
+        public static event Action<bool> OnAppleLogStatusEvent;//apple 登录状态
+
+        public static event Action<bool> OnFacebookLogStatusEvent;// facebook 登录状态
 #endif
 
         public static event Action<string> OnReceivedNotificationEvent;
@@ -61,7 +64,9 @@ namespace com.ivy.sdk
         public static event Action OnRemoteDataSyncEvent;
 
 #if UNITY_IOS
-        public static event Action<bool> OnNotificationPermissionEvent;
+        public static event Action<int> OnNotificationPermissionEvent; // 通知权限状态，0：已拒绝； 1：已允许；2：待申请
+        public static event Action OnCustomATTRequestEvent;  //自定义ATT引导
+        public static event Action OnCustomATTRequestEndEvent; //自定义ATT引导结束
 #endif
 
         public static IvySdkListener Instance
@@ -356,6 +361,58 @@ namespace com.ivy.sdk
             }
         }
 
+#if UNITY_IOS
+        public void onLogStatusSuccess(string data)
+        {
+            if (!string.IsNullOrEmpty(data))
+            {
+                try
+                {
+                    if (data.Equals("facebook"))
+                    {
+                        if (OnFacebookLogStatusEvent != null && OnFacebookLogStatusEvent.GetInvocationList().Length > 0)
+                        {
+                            OnFacebookLogStatusEvent.Invoke(true);
+                        }
+                    }
+                    else if (data.Equals("apple"))
+                    {
+                        if (OnAppleLogStatusEvent != null && OnAppleLogStatusEvent.GetInvocationList().Length > 0)
+                        {
+                            OnAppleLogStatusEvent.Invoke(true);
+                        }
+                    }
+                }
+                catch { }
+            }
+        }
+
+        public void onLogStatusFailed(string data)
+        {
+            if (!string.IsNullOrEmpty(data))
+            {
+                try
+                {
+                    if (data.Equals("facebook"))
+                    {
+                        if (OnFacebookLogStatusEvent != null && OnFacebookLogStatusEvent.GetInvocationList().Length > 0)
+                        {
+                            OnFacebookLogStatusEvent.Invoke(false);
+                        }
+                    }
+                    else if (data.Equals("apple"))
+                    {
+                        if (OnAppleLogStatusEvent != null && OnAppleLogStatusEvent.GetInvocationList().Length > 0)
+                        {
+                            OnAppleLogStatusEvent.Invoke(false);
+                        }
+                    }
+                }
+                catch { }
+            }
+        }
+#endif
+
         #endregion
 
         #region 通知
@@ -387,6 +444,28 @@ namespace com.ivy.sdk
             }
         }
         #endregion
+
+
+#if UNITY_IOS
+    #region ATT
+       public void onCustomATTRequest(string data)
+       {
+            if (OnCustomATTRequestEvent != null && OnCustomATTRequestEvent.GetInvocationList().Length > 0)
+            {
+                OnCustomATTRequestEvent.Invoke();
+            }
+        }
+
+        public void onCustomATTRequestEnd(string data)
+        {
+            if (OnCustomATTRequestEndEvent != null && OnCustomATTRequestEndEvent.GetInvocationList().Length > 0)
+            {
+                OnCustomATTRequestEndEvent.Invoke();
+            }
+        }
+
+        #endregion
+#endif
 
         #region ads
         public void onAdLoaded(string data)

@@ -1877,7 +1877,7 @@ namespace com.ivy.sdk
         [DllImport ("__Internal")]
         private static extern void loginFacebook();
         [DllImport ("__Internal")]
-        private static extern bool isFacebookLoggedIn();
+        private static extern void isFacebookLoggedIn();
         [DllImport ("__Internal")]
         private static extern void logoutFacebook();
         [DllImport ("__Internal")]
@@ -1890,6 +1890,8 @@ namespace com.ivy.sdk
         private static extern void loginApple();
         [DllImport ("__Internal")]
         private static extern void logoutApple();
+        [DllImport("__Internal")]
+        private static extern void isAppleLoggedIn();
         [DllImport ("__Internal")]
         private static extern string getAppleUserId();
         [DllImport ("__Internal")]
@@ -2510,6 +2512,34 @@ namespace com.ivy.sdk
 
         #endregion
 
+        #region Apple login
+        public void LoginApple()
+        {
+            loginApple();
+        }
+
+        public void LogoutApple()
+        {
+            logoutApple();
+        }
+
+        public void IsAppleLoggedIn()
+        {
+            isAppleLoggedIn();
+        }
+
+        public string GetAppleUserId()
+        {
+            return getAppleUserId();
+        }
+
+        public string GetAppleUserInfo()
+        {
+            return getAppleUserInfo();
+        }
+
+        #endregion
+
         #region firebase cloud function
         public void FirebaseCloudFunction(string functionName)
         {
@@ -2629,9 +2659,9 @@ namespace com.ivy.sdk
         /**
          * 查询Facebook 登录状态
          */
-        public bool IsFacebookLoggedIn()
+        public void IsFacebookLoggedIn()
         {
-            return isFacebookLoggedIn();
+            isFacebookLoggedIn();
         }
 
         /**

@@ -1799,6 +1799,15 @@ namespace com.ivy.sdk
             }
         }
 
+        public bool IsDebug()
+        {
+            if (_class != null)
+            {
+                return _class.CallStatic<bool>("isDebug");
+            }
+            return false;
+        }
+
 #elif UNITY_IOS
         [DllImport ("__Internal")]
         private static extern void onCreate();

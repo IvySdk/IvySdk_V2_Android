@@ -2179,9 +2179,9 @@ namespace com.ivy.sdk
             requestATTForCustomUMP();
         }
 
-        public void LoadATTStatus()
+        public int LoadATTStatus()
         {
-            loadATTStatus();
+            return loadATTStatus();
         }
 
         #region ads

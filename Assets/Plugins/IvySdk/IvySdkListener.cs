@@ -65,8 +65,9 @@ namespace com.ivy.sdk
 
 #if UNITY_IOS
         public static event Action<int> OnNotificationPermissionEvent; // 通知权限状态，0：已拒绝； 1：已允许；2：待申请
-        public static event Action OnCustomATTRequestEvent;  //自定义ATT引导
-        public static event Action OnCustomATTRequestEndEvent; //自定义ATT引导结束
+        public static event Action OnCustomATTRequestEvent;  //自定义UMP引导
+        public static event Action OnCustomATTRequestEndEvent; //自定义UMP引导结束
+        public static event Action<bool> OnATTRequestEvent; //自定义ATT引导结束
 #endif
 
         public static IvySdkListener Instance
@@ -461,6 +462,23 @@ namespace com.ivy.sdk
             if (OnCustomATTRequestEndEvent != null && OnCustomATTRequestEndEvent.GetInvocationList().Length > 0)
             {
                 OnCustomATTRequestEndEvent.Invoke();
+            }
+        }
+
+        public void onATTRequestResult(string data)
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(data))
+                {
+                    int arg = int.Parse(data);
+                    if (OnATTRequestEvent != null && OnATTRequestEvent.GetInvocationList().Length > 0)
+                    {
+                        OnATTRequestEvent.Invoke(arg == 1);
+                    }
+                }
+            }
+            catch (Exception e) {
             }
         }
 

@@ -2030,152 +2030,61 @@ namespace com.ivy.sdk
             onCreate();
         }
 
-        //public void EnableAbTest(ABChannel channel)
-        //{
-        //    if (_class != null)
-        //    {
-        //        _class.CallStatic("enableAbTest", (int)channel);
-        //    }
-        //}
+        public void EnableAbTest(ABChannel channel)
+        {
+        }
 
-        //public void SetHeaderInfo(Dictionary<string, object> data)
-        //{
-        //    try
-        //    {
-        //        string param = "{}";
-        //        if (data != null)
-        //        {
-        //            param = IvyJson.Serialize(data);
-        //        }
+        public void SetHeaderInfo(Dictionary<string, object> data)
+        {
+        }
 
-        //        if (_class != null)
-        //        {
-        //            _class.CallStatic("setHeaderInfo", param);
-        //        }
-        //    }
-        //    catch (Exception)
-        //    {
-        //        Debug.LogError($"SetHeaderInfo failed!!!, param convert failed");
-        //    }
-        //}
-
-        //public void SetUserInfo(Dictionary<string, object> data)
-        //{
-        //    try
-        //    {
-        //        string param = "{}";
-        //        if (data != null)
-        //        {
-        //            param = IvyJson.Serialize(data);
-        //        }
-
-        //        if (_class != null)
-        //        {
-        //            _class.CallStatic("setUserInfo", param);
-        //        }
-        //    }
-        //    catch (Exception)
-        //    {
-        //        Debug.LogError($"SetUserInfo failed!!!, param convert failed");
-        //    }
-        //}
+        public void SetUserInfo(Dictionary<string, object> data)
+        {
+        }
 
 
-        //public void StartTrackEvent()
-        //{
-        //    if (_class != null)
-        //    {
-        //        _class.CallStatic("startTrackEvent");
-        //    }
-        //}
+        public void StartTrackEvent()
+        {
+        }
 
-        //public void PullAbTestConfigs()
-        //{
-        //    if (_class != null)
-        //    {
-        //        _class.CallStatic("pullAbTestConfigs");
-        //    }
-        //}
+        public void PullAbTestConfigs()
+        {
+        }
 
-        //public string GetHuoShanSSID()
-        //{
-        //    if (_class != null)
-        //    {
-        //        return _class.CallStatic<string>("getHuoShanSSID");
-        //    }
-        //    return null;
-        //}
+        public string GetHuoShanSSID()
+        {
+            return null;
+        }
 
-        //public bool GetAbConfigBoolean(string key, bool defaultValue)
-        //{
-        //    if (_class != null)
-        //    {
-        //       return _class.CallStatic<bool>("getAbConfigBoolean", key, defaultValue);
-        //    } else
-        //    {
-        //        return defaultValue;
-        //    }
-        //}
+        public bool GetAbConfigBoolean(string key, bool defaultValue)
+        {
+            return defaultValue;
+        }
 
-        //public int GetAbConfigInt(string key, int defaultValue)
-        //{
-        //    if (_class != null)
-        //    {
-        //        return _class.CallStatic<int>("getAbConfigInt", key, defaultValue);
-        //    }
-        //    else
-        //    {
-        //        return defaultValue;
-        //    }
-        //}
+        public int GetAbConfigInt(string key, int defaultValue)
+        {
+            return defaultValue;
+        }
 
-        //public long GetAbConfigLong(string key, long defaultValue)
-        //{
-        //    if (_class != null)
-        //    {
-        //        return _class.CallStatic<long>("getAbConfigLong", key, defaultValue);
-        //    }
-        //    else
-        //    {
-        //        return defaultValue;
-        //    }
-        //}
+        public long GetAbConfigLong(string key, long defaultValue)
+        {
+            return defaultValue;
+        }
 
-        //public float GetAbConfigFloat(string key, float defaultValue)
-        //{
-        //    if (_class != null)
-        //    {
-        //        return _class.CallStatic<float>("getAbConfigFloat", key, defaultValue);
-        //    }
-        //    else
-        //    {
-        //        return defaultValue;
-        //    }
-        //}
+        public float GetAbConfigFloat(string key, float defaultValue)
+        {
+            return defaultValue;
+        }
 
-        //public double GetAbConfigDouble(string key, double defaultValue)
-        //{
-        //    if (_class != null)
-        //    {
-        //        return _class.CallStatic<double>("getAbConfigDouble", key, defaultValue);
-        //    }
-        //    else
-        //    {
-        //        return defaultValue;
-        //    }
-        //}
+        public double GetAbConfigDouble(string key, double defaultValue)
+        {
+            return defaultValue;
+        }
 
-        //public string GetAbConfigString(string key, string defaultValue)
-        //{
-        //    if (_class != null)
-        //    {
-        //        return _class.CallStatic<string>("getAbConfigString", key, defaultValue);
-        //    }
-        //    else
-        //    {
-        //        return defaultValue;
-        //    }
-        //}
+        public string GetAbConfigString(string key, string defaultValue)
+        {
+            return defaultValue;
+        }
 
 
         public void RequestATT()

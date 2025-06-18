@@ -18,7 +18,7 @@ namespace com.ivy.sdk
         public static event Action<int> HelperUnreadMsgCountEvent;
 
         public static event Action OnAuthPlatformInitializeEvent; // 三方登录 平台初始化回调
-        public static event Action<bool> OnPlayGamesLoginEvent;
+        public static event Action<bool> OnPlayGamesLoginEvent;// 
         public static event Action<bool> OnGoogleLoginEvent;
         public static event Action<bool> OnGoogleLogoutEvent;
         public static event Action<bool> OnFacebookLoginEvent;

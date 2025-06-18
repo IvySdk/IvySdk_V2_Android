@@ -2169,8 +2169,23 @@ namespace com.ivy.sdk
         //}
 
 
+        public void RequestATT()
+        {
+            requestATT();
+        }
+
+        public void RequestATTForCustomUMP()
+        {
+            requestATTForCustomUMP();
+        }
+
+        public void LoadATTStatus()
+        {
+            loadATTStatus();
+        }
+
         #region ads
-        
+
 
         public bool HasBannerAd()
         {

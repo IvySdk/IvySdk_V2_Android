@@ -210,8 +210,7 @@ AndroidSdk.shippingGoods(string merchantTransactionId);
 <br>
 
 # 事件统计 <br>
-++*所有事件接口中data参数结构为 逗号分隔的字符串，
-如:key,value,key,value,...*++
+++*所有事件接口中data参数结构为 单层JSONObject
 <br>
 
 - 事件流向所有平台<br>

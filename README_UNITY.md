@@ -277,32 +277,29 @@ private void IvySdkListener_OnPaymentWithPayloadEvent(IvySdk.PaymentResult resul
 <br>
 
 # 事件统计 <br>
-++*所有事件接口中data参数结构为 逗号分隔的字符串，
-如:key,value,key,value,...*++
-<br>
 
 - 事件流向所有平台<br>
-  ```IvySdk.Instance.TrackEventToConversion(string eventName, string data);```
+  ```IvySdk.Instance.TrackEventToConversion(string eventName, Dictionart<string, object> data);```
   <br>
 
 - 事件流向Firebase<br>
-  ```IvySdk.Instance.TrackEventToFirebase(string eventName, string data);```
+  ```IvySdk.Instance.TrackEventToFirebase(string eventName, Dictionart<string, object> data);```
   <br>
 
 - 事件流向Facebook<br>
-  ```IvySdk.Instance.TrackEventToFacebook(string eventName, string data);```
+  ```IvySdk.Instance.TrackEventToFacebook(string eventName, Dictionart<string, object> data);```
   <br>
 
 - 事件流向AppsFlyer<br>
-  ```IvySdk.Instance.TrackEventToAppsflyer(string eventName, string data);```
+  ```IvySdk.Instance.TrackEventToAppsflyer(string eventName, Dictionart<string, object> data);```
   <br>
 
 - 事件流向自有平台<br>
-  ```IvySdk.Instance.TrackEventToIvy(string eventName, string data);```
+  ```IvySdk.Instance.TrackEventToIvy(string eventName, Dictionart<string, object> data);```
   <br>
 
 - 设置用户属性至所有平台<br>
-  ```IvySdk.Instance.SetUserProperty(string key, string 		value);```
+  ```IvySdk.Instance.SetUserProperty(string key, string value);```
   <br>
 
 - 设置用户属性至Firebase<br>

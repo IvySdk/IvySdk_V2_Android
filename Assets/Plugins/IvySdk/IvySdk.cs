@@ -1883,6 +1883,8 @@ namespace com.ivy.sdk
         private static extern bool getIvyRemoteConfigBoolean(string key);
         [DllImport ("__Internal")]
         private static extern string getIvyRemoteConfigString(string key);
+        [DllImport("__Internal")]
+        private static extern bool isAuthPlatformReady();
         [DllImport ("__Internal")]
         private static extern void loginFacebook();
         [DllImport ("__Internal")]
@@ -2013,11 +2015,7 @@ namespace com.ivy.sdk
         private static extern void showToast(string message);   
 
 
-
-
         private bool hasCalledInit = false;
-
-
 
         public void Init()
         {
@@ -2444,6 +2442,11 @@ namespace com.ivy.sdk
         }
 
         #endregion
+
+        public bool IsAuthPlatformReady()
+        {
+            return isAuthPlatformReady();
+        }
 
         #region Apple login
         public void LoginApple()

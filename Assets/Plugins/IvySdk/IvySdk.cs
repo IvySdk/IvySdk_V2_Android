@@ -77,6 +77,7 @@ namespace com.ivy.sdk
             CONFIG_KEY_PACKAGE_NAME = 10,       // 包名
             CONFIG_KEY_UUID = 11,               // role id
             SDK_CONFIG_KEY_JSON_VERSION = 21,
+            SDK_KEY_NETWORK_TYPE = 22,
         }
 
         public enum ABChannel : int

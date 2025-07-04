@@ -1998,6 +1998,8 @@ namespace com.ivy.sdk
         [DllImport("__Internal")]
         private static extern int getGestureBarHeight();
         [DllImport("__Internal")]
+        private static extern bool isNetworkConnected();
+        [DllImport("__Internal")]
         private static extern void copyText(string text);
         [DllImport("__Internal")]
         private static extern void sendEmail(string email, string content);
@@ -2969,7 +2971,7 @@ namespace com.ivy.sdk
 
         public bool IsNetworkConnected()
         {
-            return true;
+            return isNetworkConnected();
         }
 
         public void Rate()

@@ -2015,7 +2015,9 @@ namespace com.ivy.sdk
         [DllImport("__Internal")]
         private static extern void openAppStore(string appStoreId);
         [DllImport ("__Internal")]
-        private static extern void showToast(string message);   
+        private static extern void showToast(string message);
+        [DllImport("__Internal")]
+        private static extern void openUrl(string url);
 
 
         private bool hasCalledInit = false;
@@ -2992,7 +2994,7 @@ namespace com.ivy.sdk
 
         public void OpenUrl(String url)
         {
-           
+            openUrl(url);
         }
 
         public bool HasNotch()

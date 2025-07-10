@@ -200,7 +200,7 @@ namespace com.ivy.sdk
         {
             if (_class != null)
             {
-                return _class.CallStatic<string>("getHuoShanSSID");
+                return _class.CallStatic<string>("getAbtestSSID");
             }
             return null;
         }

@@ -1,9 +1,13 @@
 using System;
 using System.Collections.Generic;
+using System.Collections;
 #if UNITY_IOS
 using System.Runtime.InteropServices;
 #endif
 using UnityEngine;
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 namespace com.ivy.sdk
 {
@@ -13,6 +17,10 @@ namespace com.ivy.sdk
         private static IvySdk _instance = null;
 
         private AndroidJavaClass _class = null;
+        
+        #if UNITY_EDITOR
+            public static bool hasRewardAd = true;
+        #endif
 
         public enum PaymentResult : int
         {
@@ -41,7 +49,7 @@ namespace com.ivy.sdk
             AD_TYPE_BANNER = 3,
         }
 
-        public enum BannerAdPosition
+        public enum BannerAdPosition : int
         {
             POSITION_LEFT_TOP = 1,
             POSITION_LEFT_BOTTOM = 2,
@@ -100,6 +108,7 @@ namespace com.ivy.sdk
 #if UNITY_ANDROID
         public void Init()
         {
+            RiseEditorAd.hasInit = true;
             if (_class != null)
             {
                 return;
@@ -298,6 +307,9 @@ namespace com.ivy.sdk
 
         public void ShowBannerAd(string tag, BannerAdPosition position, string placement)
         {
+#if UNITY_EDITOR
+        RiseEditorAd.EditorAdInstance.ShowBanner(tag, (int)position);
+#endif
             if (_class != null)
             {
                 _class.CallStatic("showBannerAd", tag, ((int)position), placement);
@@ -314,6 +326,9 @@ namespace com.ivy.sdk
          */
         public void ShowBannerAd(string tag, BannerAdPosition position, string placement, string clientInfo)
         {
+#if UNITY_EDITOR
+        RiseEditorAd.EditorAdInstance.ShowBanner(tag, (int)position);
+#endif
             if (_class != null)
             {
                 _class.CallStatic("showBannerAd", tag, ((int)position), placement, clientInfo);
@@ -326,6 +341,9 @@ namespace com.ivy.sdk
          */
         public void CloseBannerAd(string placement)
         {
+#if UNITY_EDITOR
+        RiseEditorAd.EditorAdInstance.CloseBanner();
+#endif
             if (_class != null)
             {
                 _class.CallStatic("closeBannerAd", placement);
@@ -334,6 +352,9 @@ namespace com.ivy.sdk
 
         public bool HasInterstitialAd()
         {
+    #if UNITY_EDITOR
+            return true;
+    #endif
             if (_class != null)
             {
                 return _class.CallStatic<bool>("hasInterstitialAd");
@@ -357,6 +378,9 @@ namespace com.ivy.sdk
          */
         public void ShowInterstitialAd(string tag, string placement, string clientInfo = null)
         {
+#if UNITY_EDITOR
+        RiseEditorAd.EditorAdInstance.ShowAd(tag);
+#endif
             if (_class != null)
             {
                 _class.CallStatic("showInterstitialAd", tag, placement, clientInfo);
@@ -365,6 +389,9 @@ namespace com.ivy.sdk
 
         public bool HasRewardedAd()
         {
+#if UNITY_EDITOR
+        return hasRewardAd;
+#endif
             if (_class != null)
             {
                 return _class.CallStatic<bool>("hasRewardedAd");
@@ -388,6 +415,9 @@ namespace com.ivy.sdk
          */
         public void ShowRewardedAd(string tag, string placement, string clientInfo = null)
         {
+#if UNITY_EDITOR
+        RiseEditorAd.EditorAdInstance.ShowRewardAd(tag, placement);
+#endif
             if (_class != null)
             {
                 _class.CallStatic("showRewardedAd", tag, placement, clientInfo);
@@ -400,6 +430,9 @@ namespace com.ivy.sdk
 
         public void Pay(int id)
         {
+#if UNITY_EDITOR
+        RiseEditorAd.EditorAdInstance.Pay (id);
+#endif
             if (_class != null)
             {
                 _class.CallStatic("pay", id);
@@ -408,6 +441,9 @@ namespace com.ivy.sdk
 
         public void Pay(int id, string payload)
         {
+#if UNITY_EDITOR
+        RiseEditorAd.EditorAdInstance.Pay (id);
+#endif
             if (_class != null)
             {
                 _class.CallStatic("pay", id, payload);
@@ -422,6 +458,9 @@ namespace com.ivy.sdk
          */
         public void Pay(int id, string payload, string clientInfo)
         {
+#if UNITY_EDITOR
+        RiseEditorAd.EditorAdInstance.Pay (id);
+#endif
             if (_class != null)
             {
                 _class.CallStatic("pay", id, payload, clientInfo);
@@ -2024,6 +2063,7 @@ namespace com.ivy.sdk
 
         public void Init()
         {
+            RiseEditorAd.hasInit = true;
             if (hasCalledInit)
             {
                 return;
@@ -3056,5 +3096,529 @@ namespace com.ivy.sdk
 
 
 #endif
+    /// <summary>
+    /// Editor模式下的广告测试类，不可以调用该类的方法。
+    /// </summary>
+    private class RiseEditorAd : MonoBehaviour {
+        private static RiseEditorAd _editorAdInstance = null;
+        public static bool hasInit = false;
+        private Rect bannerPos;
+        private bool bannerShow = false;
+        private string bannerContent = "";
+        private bool interstitialShow = false;
+        private string interstitialContent = "";
+        private bool rewardShow = false;
+        private string rewardContent = "";
+        private float scaleWidth = 1;
+        private float scaleHeight = 1;
+        private int originScreenWidth = 1;
+        private int originScreenHeight = 1;
+        private bool toastShow = false;
+        private List<string> toastList = new List<string> ();
+        private GUIStyle toastStyle = null;
+        private int rewardAdId = NONE_REWARD_ID;
+        private string rewardPlacement = "";
+        private string rewardAdTag = DEFAULT_REWARD_TAG;
+        private float iconAdWidth = 56;
+        private float iconAdXPercent = .2f;
+        private float iconAdYPercent = .2f;
+        private bool iconAdShow = false;
+        private string iconAdContent = "Icon Ad";
+#if UNITY_5 || UNITY_4_6 || UNITY_4_7 || UNITY_4_8 || UNITY_4_9
+        private EventSystem curEvent = null;
+#endif
+
+        private const int NONE_REWARD_ID = -10;
+        private const string DEFAULT_REWARD_TAG = "DEFAULT";
+        private const string BANNER_DEFAULT_TXT = "Banner AD";
+        private const string INTERSTITIAL_DEFAULT_TXT = "\nInterstitial AD Test";
+        private const string REWARD_DEFAULT_TXT = "Free Coin AD Test: ";
+        private const int SCREEN_WIDTH = 854;
+        private const int SCREEN_HEIGHT = 480;
+        private const int GUI_DEPTH = -99;
+        private const int BANNER_WIDTH = 320;
+        private const int BANNER_HEIGHT = 50;
+
+        void Awake () {
+            if (_editorAdInstance == null) {
+                _editorAdInstance = this;
+            }
+            DontDestroyOnLoad (gameObject);
+            if (Screen.width > Screen.height) {
+                originScreenWidth = SCREEN_WIDTH;
+                originScreenHeight = SCREEN_HEIGHT;
+            } else {
+                originScreenWidth = SCREEN_HEIGHT;
+                originScreenHeight = SCREEN_WIDTH;
+            }
+            scaleWidth = Screen.width * 1f / originScreenWidth;
+            scaleHeight = Screen.height * 1f / originScreenHeight;
+            toastStyle = new GUIStyle ();
+            toastStyle.fontStyle = FontStyle.Bold;
+            toastStyle.alignment = TextAnchor.MiddleCenter;
+            toastStyle.fontSize = 30;
+        }
+
+        public static RiseEditorAd EditorAdInstance {
+            get {
+                if (_editorAdInstance == null) {
+                    _editorAdInstance = FindObjectOfType<RiseEditorAd> () == null ? new GameObject ("RiseEditorAd").AddComponent<RiseEditorAd> () : _editorAdInstance;
+                }
+                if (!hasInit) {
+                    Debug.LogError ("Fatal Error: \nNeed Call RiseSdk.Instance.Init () First At Initialize Scene");
+                }
+                return _editorAdInstance;
+            }
+        }
+
+#if UNITY_EDITOR
+        void OnGUI () {
+#if UNITY_5 || UNITY_4_6 || UNITY_4_7 || UNITY_4_8 || UNITY_4_9
+            if (curEvent == null) {
+                curEvent = EventSystem.current;
+            }
+#endif
+            GUI.depth = GUI_DEPTH;
+            if (bannerShow) {
+                GUI.backgroundColor = Color.green;
+                GUI.color = Color.red;
+                if (GUI.Button (bannerPos, bannerContent)) {
+#if UNITY_5 || UNITY_4_6 || UNITY_4_7 || UNITY_4_8 || UNITY_4_9
+                    if (EventSystem.current != null) {
+                        EventSystem.current.enabled = false;
+                    }
+#endif
+                }
+                GUI.backgroundColor = Color.green;
+                if (GUI.Button (bannerPos, bannerContent)) {
+#if UNITY_5 || UNITY_4_6 || UNITY_4_7 || UNITY_4_8 || UNITY_4_9
+                    if (EventSystem.current != null) {
+                        EventSystem.current.enabled = false;
+                    }
+#endif
+                }
+                GUI.backgroundColor = Color.green;
+                if (GUI.Button (bannerPos, bannerContent)) {
+#if UNITY_5 || UNITY_4_6 || UNITY_4_7 || UNITY_4_8 || UNITY_4_9
+                    if (EventSystem.current != null) {
+                        EventSystem.current.enabled = false;
+                    }
+#endif
+                }
+                GUI.backgroundColor = Color.green;
+                if (GUI.Button (bannerPos, bannerContent)) {
+#if UNITY_5 || UNITY_4_6 || UNITY_4_7 || UNITY_4_8 || UNITY_4_9
+                    if (EventSystem.current != null) {
+                        EventSystem.current.enabled = false;
+                    }
+#endif
+                }
+            }
+            if (interstitialShow) {
+                GUI.backgroundColor = Color.black;
+                GUI.color = Color.white;
+                //GUI.backgroundColor = new Color (0, 0, 0, 1);
+                //GUI.color = new Color (1, 0, 0, 1);
+                if (GUI.Button (new Rect (Screen.width - 100 * scaleWidth, 0, 100 * scaleWidth, 50 * scaleHeight), "Close")) {
+                    InterstitialAdCallBack ();
+                    interstitialShow = false;
+                    // Instance.OnResume ();
+#if UNITY_5 || UNITY_4_6 || UNITY_4_7 || UNITY_4_8 || UNITY_4_9
+                    if (EventSystem.current != null) {
+                        EventSystem.current.enabled = false;
+                    }
+#endif
+                }
+                if (GUI.Button (new Rect (0, 0, Screen.width, Screen.height), interstitialContent)) {
+#if UNITY_5 || UNITY_4_6 || UNITY_4_7 || UNITY_4_8 || UNITY_4_9
+                    if (EventSystem.current != null) {
+                        EventSystem.current.enabled = false;
+                    }
+#endif
+                }
+                if (GUI.Button (new Rect (0, 0, Screen.width, Screen.height), interstitialContent)) {
+#if UNITY_5 || UNITY_4_6 || UNITY_4_7 || UNITY_4_8 || UNITY_4_9
+                    if (EventSystem.current != null) {
+                        EventSystem.current.enabled = false;
+                    }
+#endif
+                }
+                if (GUI.Button (new Rect (0, 0, Screen.width, Screen.height), interstitialContent)) {
+#if UNITY_5 || UNITY_4_6 || UNITY_4_7 || UNITY_4_8 || UNITY_4_9
+                    if (EventSystem.current != null) {
+                        EventSystem.current.enabled = false;
+                    }
+#endif
+                }
+                if (GUI.Button (new Rect (0, 0, Screen.width, Screen.height), interstitialContent)) {
+#if UNITY_5 || UNITY_4_6 || UNITY_4_7 || UNITY_4_8 || UNITY_4_9
+                    if (EventSystem.current != null) {
+                        EventSystem.current.enabled = false;
+                    }
+#endif
+                }
+                GUI.backgroundColor = Color.red;
+                if (GUI.Button (new Rect (Screen.width - 100 * scaleWidth, 0, 100 * scaleWidth, 50 * scaleHeight), "Close")) {
+                    InterstitialAdCallBack ();
+                    interstitialShow = false;
+#if UNITY_5 || UNITY_4_6 || UNITY_4_7 || UNITY_4_8 || UNITY_4_9
+                    if (EventSystem.current != null) {
+                        EventSystem.current.enabled = false;
+                    }
+#endif
+                }
+                if (GUI.Button (new Rect (Screen.width - 100 * scaleWidth, 0, 100 * scaleWidth, 50 * scaleHeight), "Close")) {
+                    InterstitialAdCallBack ();
+                    interstitialShow = false;
+#if UNITY_5 || UNITY_4_6 || UNITY_4_7 || UNITY_4_8 || UNITY_4_9
+                    if (EventSystem.current != null) {
+                        EventSystem.current.enabled = false;
+                    }
+#endif
+                }
+                if (GUI.Button (new Rect (Screen.width - 100 * scaleWidth, 0, 100 * scaleWidth, 50 * scaleHeight), "Close")) {
+                    InterstitialAdCallBack ();
+                    interstitialShow = false;
+#if UNITY_5 || UNITY_4_6 || UNITY_4_7 || UNITY_4_8 || UNITY_4_9
+                    if (EventSystem.current != null) {
+                        EventSystem.current.enabled = false;
+                    }
+#endif
+                }
+                if (GUI.Button (new Rect (Screen.width - 100 * scaleWidth, 0, 100 * scaleWidth, 50 * scaleHeight), "Close")) {
+                    InterstitialAdCallBack ();
+                    interstitialShow = false;
+#if UNITY_5 || UNITY_4_6 || UNITY_4_7 || UNITY_4_8 || UNITY_4_9
+                    if (EventSystem.current != null) {
+                        EventSystem.current.enabled = false;
+                    }
+#endif
+                }
+            }
+            if (rewardShow) {
+                GUI.backgroundColor = Color.black;
+                GUI.color = Color.white;
+                if (GUI.Button (new Rect (Screen.width - 100 * scaleWidth, 0, 100 * scaleWidth, 50 * scaleHeight), "Close")) {
+                    rewardShow = false;
+                    // Instance.OnResume ();
+#if UNITY_5 || UNITY_4_6 || UNITY_4_7 || UNITY_4_8 || UNITY_4_9
+                    if (EventSystem.current != null) {
+                        EventSystem.current.enabled = false;
+                    }
+#endif
+                    RewardAdCallBack ();
+                }
+                if (GUI.Button (new Rect (0, 0, Screen.width, Screen.height), rewardContent)) {
+#if UNITY_5 || UNITY_4_6 || UNITY_4_7 || UNITY_4_8 || UNITY_4_9
+                    if (EventSystem.current != null) {
+                        EventSystem.current.enabled = false;
+                    }
+#endif
+                }
+                if (GUI.Button (new Rect (0, 0, Screen.width, Screen.height), rewardContent)) {
+#if UNITY_5 || UNITY_4_6 || UNITY_4_7 || UNITY_4_8 || UNITY_4_9
+                    if (EventSystem.current != null) {
+                        EventSystem.current.enabled = false;
+                    }
+#endif
+                }
+                if (GUI.Button (new Rect (0, 0, Screen.width, Screen.height), rewardContent)) {
+#if UNITY_5 || UNITY_4_6 || UNITY_4_7 || UNITY_4_8 || UNITY_4_9
+                    if (EventSystem.current != null) {
+                        EventSystem.current.enabled = false;
+                    }
+#endif
+                }
+                if (GUI.Button (new Rect (0, 0, Screen.width, Screen.height), rewardContent)) {
+#if UNITY_5 || UNITY_4_6 || UNITY_4_7 || UNITY_4_8 || UNITY_4_9
+                    if (EventSystem.current != null) {
+                        EventSystem.current.enabled = false;
+                    }
+#endif
+                }
+                GUI.backgroundColor = Color.red;
+                if (GUI.Button (new Rect (Screen.width - 100 * scaleWidth, 0, 100 * scaleWidth, 50 * scaleHeight), "Close")) {
+                    rewardShow = false;
+#if UNITY_5 || UNITY_4_6 || UNITY_4_7 || UNITY_4_8 || UNITY_4_9
+                    if (EventSystem.current != null) {
+                        EventSystem.current.enabled = false;
+                    }
+#endif
+                    RewardAdCallBack ();
+                }
+                if (GUI.Button (new Rect (Screen.width - 100 * scaleWidth, 0, 100 * scaleWidth, 50 * scaleHeight), "Close")) {
+                    rewardShow = false;
+#if UNITY_5 || UNITY_4_6 || UNITY_4_7 || UNITY_4_8 || UNITY_4_9
+                    if (EventSystem.current != null) {
+                        EventSystem.current.enabled = false;
+                    }
+#endif
+                    RewardAdCallBack ();
+                }
+                if (GUI.Button (new Rect (Screen.width - 100 * scaleWidth, 0, 100 * scaleWidth, 50 * scaleHeight), "Close")) {
+                    rewardShow = false;
+#if UNITY_5 || UNITY_4_6 || UNITY_4_7 || UNITY_4_8 || UNITY_4_9
+                    if (EventSystem.current != null) {
+                        EventSystem.current.enabled = false;
+                    }
+#endif
+                    RewardAdCallBack ();
+                }
+                if (GUI.Button (new Rect (Screen.width - 100 * scaleWidth, 0, 100 * scaleWidth, 50 * scaleHeight), "Close")) {
+                    rewardShow = false;
+#if UNITY_5 || UNITY_4_6 || UNITY_4_7 || UNITY_4_8 || UNITY_4_9
+                    if (EventSystem.current != null) {
+                        EventSystem.current.enabled = false;
+                    }
+#endif
+                    RewardAdCallBack ();
+                }
+            }
+            if (iconAdShow) {
+                GUI.backgroundColor = Color.black;
+                GUI.color = Color.white;
+                //GUI.backgroundColor = new Color (0, 0, 0, 1);
+                //GUI.color = new Color (1, 0, 0, 1);
+                if (GUI.Button (new Rect (Screen.width * iconAdXPercent, Screen.height * iconAdYPercent, iconAdWidth, iconAdWidth), iconAdContent)) {
+                }
+                if (GUI.Button (new Rect (Screen.width * iconAdXPercent, Screen.height * iconAdYPercent, iconAdWidth, iconAdWidth), iconAdContent)) {
+                }
+                if (GUI.Button (new Rect (Screen.width * iconAdXPercent, Screen.height * iconAdYPercent, iconAdWidth, iconAdWidth), iconAdContent)) {
+                }
+                if (GUI.Button (new Rect (Screen.width * iconAdXPercent, Screen.height * iconAdYPercent, iconAdWidth, iconAdWidth), iconAdContent)) {
+                }
+            }
+            if (toastList.Count > 0) {
+                GUI.backgroundColor = Color.black;
+                GUI.color = Color.red;
+                //GUI.contentColor = Color.red;
+                GUI.Button (new Rect ((Screen.width - 400 * scaleWidth) * .5f, Screen.height - 100 * scaleHeight, 400 * scaleWidth, 50 * scaleHeight), toastList[0]);
+                GUI.Button (new Rect ((Screen.width - 400 * scaleWidth) * .5f, Screen.height - 100 * scaleHeight, 400 * scaleWidth, 50 * scaleHeight), toastList[0]);
+                //GUI.Label (new Rect ((Screen.width - 200 * scaleWidth) * .5f, Screen.height - 100 * scaleHeight, 200 * scaleWidth, 50 * scaleHeight), toastList [0], toastStyle);
+            }
+#if UNITY_5 || UNITY_4_6 || UNITY_4_7 || UNITY_4_8 || UNITY_4_9
+            if (EventSystem.current != null) {
+                EventSystem.current.enabled = true;
+            } else if (curEvent != null) {
+                curEvent.enabled = true;
+                EventSystem.current = curEvent;
+            }
+#endif
+        }
+
+        void Update () {
+            if (Input.GetKeyDown (KeyCode.Escape)) {
+                if (interstitialShow) {
+                    interstitialShow = false;
+                    InterstitialAdCallBack ();
+                } else if (rewardShow) {
+                    rewardShow = false;
+                    RewardAdCallBack ();
+                }
+#if UNITY_5 || UNITY_4_6 || UNITY_4_7 || UNITY_4_8 || UNITY_4_9
+                if (EventSystem.current != null) {
+                    EventSystem.current.enabled = true;
+                } else if (curEvent != null) {
+                    curEvent.enabled = true;
+                    EventSystem.current = curEvent;
+                }
+#endif
+            }
+        }
+
+        private void InterstitialAdCallBack () {
+            if (interstitialShow) {
+#if UNITY_IOS
+				// IvySdkListener.Instance.adDidClose ("custom|1");
+#elif UNITY_ANDROID
+                // IvySdkListener.Instance.onFullAdClosed ("EditorAd");
+#endif
+            }
+        }
+
+        private void RewardAdCallBack () {
+            if (rewardAdId != NONE_REWARD_ID) {
+                Toast ("Show Reward Ad Success");
+                IvySdkListener.Instance.onAdRewardUser("1|" + rewardAdTag + "|" + rewardPlacement);
+            }
+            rewardAdId = NONE_REWARD_ID;
+            rewardAdTag = DEFAULT_REWARD_TAG;
+        }
+#endif
+
+        public void ShowBanner (int pos) {
+#if UNITY_EDITOR
+            bannerContent = BANNER_DEFAULT_TXT + ", tag: default, pos: " + pos;
+            bannerShow = true;
+            SetBannerPos (pos);
+#endif
+        }
+
+        public void ShowBanner (string tag, int pos) {
+#if UNITY_EDITOR
+            bannerContent = BANNER_DEFAULT_TXT + ", tag: " + tag + ", pos: " + pos;
+            bannerShow = true;
+            SetBannerPos (pos);
+#endif
+        }
+
+        public void ShowBanner (string tag, int pos, int animate) {
+#if UNITY_EDITOR
+            bannerContent = BANNER_DEFAULT_TXT + ", tag: " + tag + ", pos: " + pos + ", animate: " + animate;
+            bannerShow = true;
+            SetBannerPos (pos);
+#endif
+        }
+
+        public void CloseBanner () {
+#if UNITY_EDITOR
+            bannerShow = false;
+#endif
+        }
+
+        private void SetBannerPos (int pos) {
+#if UNITY_EDITOR
+            switch ((BannerAdPosition)pos) {
+                case BannerAdPosition.POSITION_LEFT_BOTTOM:
+                    bannerPos = new Rect (0, Screen.height - BANNER_HEIGHT * scaleHeight, BANNER_WIDTH * scaleWidth, BANNER_HEIGHT * scaleHeight);
+                    break;
+                case BannerAdPosition.POSITION_LEFT_TOP:
+                    bannerPos = new Rect (0, 0, BANNER_WIDTH * scaleWidth, BANNER_HEIGHT * scaleHeight);
+                    break;
+                case BannerAdPosition.POSITION_CENTER_BOTTOM:
+                    bannerPos = new Rect ((Screen.width - BANNER_WIDTH * scaleWidth) * .5f, Screen.height - BANNER_HEIGHT * scaleHeight, BANNER_WIDTH * scaleWidth, BANNER_HEIGHT * scaleHeight);
+                    break;
+                case BannerAdPosition.POSITION_CENTER:
+                    bannerPos = new Rect ((Screen.width - BANNER_WIDTH * scaleWidth) * .5f, (Screen.height - BANNER_HEIGHT * scaleHeight) * .5f, BANNER_WIDTH * scaleWidth, BANNER_HEIGHT * scaleHeight);
+                    break;
+                case BannerAdPosition.POSITION_CENTER_TOP:
+                    bannerPos = new Rect ((Screen.width - BANNER_WIDTH * scaleWidth) * .5f, 0, BANNER_WIDTH * scaleWidth, BANNER_HEIGHT * scaleHeight);
+                    break;
+                case BannerAdPosition.POSITION_RIGHT_BOTTOM:
+                    bannerPos = new Rect (Screen.width - BANNER_WIDTH * scaleWidth, Screen.height - BANNER_HEIGHT * scaleHeight, BANNER_WIDTH * scaleWidth, BANNER_HEIGHT * scaleHeight);
+                    break;
+                case BannerAdPosition.POSITION_RIGHT_TOP:
+                    bannerPos = new Rect (Screen.width - BANNER_WIDTH * scaleWidth, 0, BANNER_WIDTH * scaleWidth, BANNER_HEIGHT * scaleHeight);
+                    break;
+            }
+#endif
+        }
+
+        public void ShowAd (string tag) {
+#if UNITY_EDITOR
+            interstitialShow = true;
+            interstitialContent = tag + INTERSTITIAL_DEFAULT_TXT;
+            // Instance.OnPause ();
+#endif
+        }
+
+        public void ShowRewardAd (int id) {
+#if UNITY_EDITOR
+            rewardShow = true;
+            rewardAdId = id;
+            rewardAdTag = DEFAULT_REWARD_TAG;
+            rewardContent = REWARD_DEFAULT_TXT + rewardAdTag;
+            // Instance.OnPause ();
+#endif
+        }
+
+        public void ShowRewardAd (string tag, string id) {
+#if UNITY_EDITOR
+            rewardShow = true;
+            rewardAdId = 1;
+            rewardPlacement = id;
+            rewardAdTag = tag;
+            rewardContent = REWARD_DEFAULT_TXT + tag;
+            // Instance.OnPause ();
+#endif
+        }
+
+        public void ShowIconAd (float width, float xPercent, float yPercent) {
+            iconAdShow = true;
+            iconAdWidth = width;
+            iconAdXPercent = xPercent;
+            iconAdYPercent = yPercent;
+        }
+
+        public void CloseIconAd () {
+            iconAdShow = false;
+        }
+
+        public void Pay (int billingId) {
+#if !Headline
+#if UNITY_EDITOR
+#if UNITY_ANDROID
+            switch (EditorUtility.DisplayDialogComplex ("Pay", "Pay: " + billingId, "TRY FAILURE", "NO", "YES")) {
+                case 0://TRY FAILURE
+                    Toast ("pay " + billingId + " Failed");
+                    IvySdkListener.Instance.onPaymentFail (billingId + "");
+                    break;
+                case 1://NO
+                    Toast ("pay " + billingId + " Canceled");
+                    IvySdkListener.Instance.onPaymentFail (billingId + "");
+                    break;
+                case 2://YES
+                    Toast ("pay " + billingId + " Success");
+                    IvySdkListener.Instance.onPaymentSuccess (billingId + "");
+                    break;
+            }
+#elif UNITY_IOS
+            switch (EditorUtility.DisplayDialogComplex ("Pay", "Pay: " + billingId, "TRY FAILURE", "NO", "YES")) {
+                case 0://TRY FAILURE
+                    Toast ("pay " + billingId + " Failed");
+                    IvySdkListener.Instance.onPaymentFailure (billingId + "");
+                    break;
+                case 1://NO
+                    Toast ("pay " + billingId + " Canceled");
+					IvySdkListener.Instance.onPaymentFailure (billingId + "");
+                    break;
+                case 2://YES
+                    Toast ("pay " + billingId + " Success");
+					IvySdkListener.Instance.onPaymentSuccess (billingId + "");
+                    break;
+            }
+#endif
+#endif
+#endif
+        }
+
+        private bool timeCounting = false;
+
+        public void Toast (string msg) {
+#if UNITY_EDITOR
+            toastList.Add (msg);
+            if (!timeCounting) {
+                timeCounting = true;
+                StartCoroutine (CheckToast ());
+            }
+#endif
+        }
+
+        private IEnumerator CheckToast (float time = 2) {
+            yield return new WaitForSeconds (time);
+            if (toastList.Count > 0) {
+                toastList.RemoveAt (0);
+            }
+            if (toastList.Count > 0) {
+                StartCoroutine (CheckToast ());
+            } else {
+                timeCounting = false;
+            }
+        }
+
+        public void Alert (string title, string msg) {
+#if UNITY_EDITOR
+            EditorUtility.DisplayDialog (title, msg, "NO", "OK");
+#endif
+        }
+
+        public void OnExit () {
+#if UNITY_EDITOR
+            if (EditorUtility.DisplayDialog ("Exit", "Are you sure to exit?", "YES", "NO")) {
+                EditorApplication.isPlaying = false;
+            }
+#endif
+        }
+    }
     }
 }

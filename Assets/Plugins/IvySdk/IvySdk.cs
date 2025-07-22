@@ -1757,6 +1757,9 @@ namespace com.ivy.sdk
 
         public void Toast(string message)
         {
+#if UNITY_EDITOR
+        RiseEditorAd.EditorAdInstance.Toast(message);
+#endif
             if (_class != null)
             {
                 _class.CallStatic("toast", message);

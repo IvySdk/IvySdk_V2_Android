@@ -3562,30 +3562,30 @@ namespace com.ivy.sdk
             switch (EditorUtility.DisplayDialogComplex ("Pay", "Pay: " + billingId, "TRY FAILURE", "NO", "YES")) {
                 case 0://TRY FAILURE
                     Toast ("pay " + billingId + " Failed");
-                    IvySdkListener.Instance.onPaymentFail (billingId + "");
+                    IvySdkListener.Instance.onPaymentFail (billingId + "|" + "");
                     break;
                 case 1://NO
                     Toast ("pay " + billingId + " Canceled");
-                    IvySdkListener.Instance.onPaymentFail (billingId + "");
+                    IvySdkListener.Instance.onPaymentFail (billingId + "|" + "");
                     break;
                 case 2://YES
                     Toast ("pay " + billingId + " Success");
-                    IvySdkListener.Instance.onPaymentSuccess (billingId + "");
+                    IvySdkListener.Instance.onPaymentSuccess (billingId + "|" + "");
                     break;
             }
 #elif UNITY_IOS
-            switch (EditorUtility.DisplayDialogComplex ("Pay", "Pay: " + billingId, "TRY FAILURE", "NO", "YES")) {
+                switch (EditorUtility.DisplayDialogComplex ("Pay", "Pay: " + billingId, "TRY FAILURE", "NO", "YES")) {
                 case 0://TRY FAILURE
                     Toast ("pay " + billingId + " Failed");
-                    IvySdkListener.Instance.onPaymentFailure (billingId + "");
+                    IvySdkListener.Instance.onPaymentFail(billingId + "|" + "");
                     break;
                 case 1://NO
                     Toast ("pay " + billingId + " Canceled");
-					IvySdkListener.Instance.onPaymentFailure (billingId + "");
+					IvySdkListener.Instance.onPaymentFail(billingId + "|" + "");
                     break;
                 case 2://YES
                     Toast ("pay " + billingId + " Success");
-					IvySdkListener.Instance.onPaymentSuccess (billingId + "");
+					IvySdkListener.Instance.onPaymentSuccess (billingId + "|" + "");
                     break;
             }
 #endif

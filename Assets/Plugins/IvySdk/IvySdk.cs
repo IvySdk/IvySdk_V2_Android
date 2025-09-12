@@ -1780,6 +1780,14 @@ namespace com.ivy.sdk
             return 0;
         }
 
+        public void GoLauncher()
+        {
+            if (_class != null)
+            {
+                _class.CallStatic("goLauncher");
+            }
+        }
+
         public void ForceQuit()
         {
             if (_class != null)

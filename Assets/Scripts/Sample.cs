@@ -448,72 +448,72 @@ public class Sample : MonoBehaviour
 
     public void OnPlayGamesDropDownValueChanged(int value)
     {
-        switch (value)
-        {
-            case 0:
-                bool isLoggedIn = IvySdk.Instance.IsPlayGamesLoggedIn();
-                Debug.Log($"is_play_games_logged_in --> {isLoggedIn}");
-                break;
-            case 1:
-                IvySdk.Instance.LoginPlayGames();
-                Debug.Log($"login_play_games called");
-                break;
-            case 2:
-                string user_info = IvySdk.Instance.GetPlayGamesUserInfo();
-                Debug.Log($"play_games_user_info --> {user_info}");
-                break;
-            case 3:
-                IvySdk.Instance.UnlockAchievement("achievemnt_id");
-                Debug.Log($"unlock_achievement called");
-                break;
-            case 4:
-                IvySdk.Instance.IncreaseAchievement("achievemnt_id", 1);
-                Debug.Log($"increase_achievement called");
-                break;
-            case 5:
-                IvySdk.Instance.ShowAchievement();
-                Debug.Log($"show_achievement called");
-                break;
-            case 6:
-                IvySdk.Instance.ShowLeaderboard("leaderboard_id");
-                Debug.Log($"show_leaderboard called");
-                break;
-            case 7:
-                IvySdk.Instance.ShowLeaderboards();
-                Debug.Log($"show_leaderboards called");
-                break;
-            case 8:
-                IvySdk.Instance.UpdateLeaderboard("leaderboard_id", 100);
-                Debug.Log($"update_leaderboard called");
-                break;
-        }
+        //switch (value)
+        //{
+        //    case 0:
+        //        bool isLoggedIn = IvySdk.Instance.IsPlayGamesLoggedIn();
+        //        Debug.Log($"is_play_games_logged_in --> {isLoggedIn}");
+        //        break;
+        //    case 1:
+        //        IvySdk.Instance.LoginPlayGames();
+        //        Debug.Log($"login_play_games called");
+        //        break;
+        //    case 2:
+        //        string user_info = IvySdk.Instance.GetPlayGamesUserInfo();
+        //        Debug.Log($"play_games_user_info --> {user_info}");
+        //        break;
+        //    case 3:
+        //        IvySdk.Instance.UnlockAchievement("achievemnt_id");
+        //        Debug.Log($"unlock_achievement called");
+        //        break;
+        //    case 4:
+        //        IvySdk.Instance.IncreaseAchievement("achievemnt_id", 1);
+        //        Debug.Log($"increase_achievement called");
+        //        break;
+        //    case 5:
+        //        IvySdk.Instance.ShowAchievement();
+        //        Debug.Log($"show_achievement called");
+        //        break;
+        //    case 6:
+        //        IvySdk.Instance.ShowLeaderboard("leaderboard_id");
+        //        Debug.Log($"show_leaderboard called");
+        //        break;
+        //    case 7:
+        //        IvySdk.Instance.ShowLeaderboards();
+        //        Debug.Log($"show_leaderboards called");
+        //        break;
+        //    case 8:
+        //        IvySdk.Instance.UpdateLeaderboard("leaderboard_id", 100);
+        //        Debug.Log($"update_leaderboard called");
+        //        break;
+        //}
     }
 
     public void OnFacebookDropDownValueChanged(int value)
     {
-        switch (value)
-        {
-            case 0:
-                bool isLogged = IvySdk.Instance.IsFacebookLoggedIn();
-                Debug.Log($"is_facebook_logged_in --> {isLogged}");
-                break;
-            case 1:
-                IvySdk.Instance.LogInFacebook();
-                Debug.Log("login_facebook called");
-                break;
-            case 2:
-                IvySdk.Instance.LogoutFacebook();
-                Debug.Log("logout_facebook called");
-                break;
-            case 3:
-                string friends = IvySdk.Instance.GetFacebookFriends();
-                Debug.Log($"get_facebook_friends --> {friends}");
-                break;
-            case 4:
-                string user_info = IvySdk.Instance.GetFacebookUserInfo();
-                Debug.Log($"get_facebook_user_info --> {user_info}");
-                break;
-        }
+        //switch (value)
+        //{
+        //    case 0:
+        //        bool isLogged = IvySdk.Instance.IsFacebookLoggedIn();
+        //        Debug.Log($"is_facebook_logged_in --> {isLogged}");
+        //        break;
+        //    case 1:
+        //        IvySdk.Instance.LogInFacebook();
+        //        Debug.Log("login_facebook called");
+        //        break;
+        //    case 2:
+        //        IvySdk.Instance.LogoutFacebook();
+        //        Debug.Log("logout_facebook called");
+        //        break;
+        //    case 3:
+        //        string friends = IvySdk.Instance.GetFacebookFriends();
+        //        Debug.Log($"get_facebook_friends --> {friends}");
+        //        break;
+        //    case 4:
+        //        string user_info = IvySdk.Instance.GetFacebookUserInfo();
+        //        Debug.Log($"get_facebook_user_info --> {user_info}");
+        //        break;
+        //}
     }
 
     public void OnFirebaseDropDownValueChanged(int value)
@@ -553,8 +553,8 @@ public class Sample : MonoBehaviour
                 Debug.Log("log_with_anonymous called");
                 break;
             case 8:
-                IvySdk.Instance.LoginFBWithPlayGames();
-                Debug.Log("log_with_play_games called");
+                //IvySdk.Instance.LoginFBWithPlayGames();
+                //Debug.Log("log_with_play_games called");
                 break;
             case 9:
                 IvySdk.Instance.LoginFBWithFacebook();
@@ -651,29 +651,29 @@ public class Sample : MonoBehaviour
 
     public void OnNotificationDropDownValueChanged(int value)
     {
-        switch (value)
-        {
-            case 0:
-                int isInit = IvySdk.Instance.LoadNotificationPermissionState();
-                Debug.Log($"permission_state --> {isInit}");
-                break;
-            case 1:
-                IvySdk.Instance.RequestNotificationPermission();
-                Debug.Log("request_permission called");
-                break;
-            case 2:
-                IvySdk.Instance.OpenNotificationSettings();
-                Debug.Log("open_permission_setting called");
-                break;
-            case 3:
-                IvySdk.Instance.PushNotificationTask("tag", "title", "subtitle", null, null, null, null, 60, true, "test_action", true, false, false);
-                Debug.Log("push_notification called");
-                break;
-            case 4:
-                IvySdk.Instance.CancelNotification("tag");
-                Debug.Log("cancel_notification called");
-                break;
-        }
+        //switch (value)
+        //{
+        //    case 0:
+        //        int isInit = IvySdk.Instance.LoadNotificationPermissionState();
+        //        Debug.Log($"permission_state --> {isInit}");
+        //        break;
+        //    case 1:
+        //        IvySdk.Instance.RequestNotificationPermission();
+        //        Debug.Log("request_permission called");
+        //        break;
+        //    case 2:
+        //        IvySdk.Instance.OpenNotificationSettings();
+        //        Debug.Log("open_permission_setting called");
+        //        break;
+        //    case 3:
+        //        IvySdk.Instance.PushNotificationTask("tag", "title", "subtitle", null, null, null, null, 60, true, "test_action", true, false, false);
+        //        Debug.Log("push_notification called");
+        //        break;
+        //    case 4:
+        //        IvySdk.Instance.CancelNotification("tag");
+        //        Debug.Log("cancel_notification called");
+        //        break;
+        //}
     }
 
     public void OnAppsflyerinviteDropDown(int value)
@@ -693,73 +693,73 @@ public class Sample : MonoBehaviour
 
     public void OnOthersinviteDropDown(int value)
     {
-        switch (value)
-        {
-            case 0:
-                IvySdk.Instance.SendEmail("email", "data");
-                Debug.Log("send_email called");
-                break;
-            case 1:
-                string data = IvySdk.Instance.GetConfig(IvySdk.ConfigKeys.CONFIG_KEY_APP_ID);
-                Debug.Log($"get_config --> {data}");
-                break;
-            case 2:
-                bool isConnected = IvySdk.Instance.IsNetworkConnected();
-                Debug.Log($"is_network_connected --> {isConnected}");
-                break;
-            case 3:
-                IvySdk.Instance.Rate();
-                Debug.Log($"rate called");
-                break;
-            case 4:
-                IvySdk.Instance.SystemShareText("text");
-                Debug.Log("share_text called");
-                break;
-            case 5:
-                IvySdk.Instance.SystemShareImage("title", "pic_patch");
-                Debug.Log("share_image called");
-                break;
-            case 6:
-                IvySdk.Instance.OpenUrl("https://www.baidu.com");
-                Debug.Log("open_url called");
-                break;
-            case 7:
-                bool hasNotch = IvySdk.Instance.HasNotch();
-                Debug.Log($"is_notch_screen --> {hasNotch}");
-                break;
-            case 8:
-                int height = IvySdk.Instance.GetNotchHeight();
-                Debug.Log($"notch_height --> {height}");
-                break;
-            case 9:
-                IvySdk.Instance.OpenAppStore("market://details?id=package_name");
-                Debug.Log("open_app_store called");
-                break;
-            case 10:
-                IvySdk.Instance.toast("message");
-                Debug.Log("toast called");
-                break;
-            case 11:
-                IvySdk.Instance.copyTxt("text");
-                Debug.Log("copy_text called");
-                break;
-            case 12:
-                int tmMB = IvySdk.Instance.GetTotalMemory();
-                Debug.Log($"device_total_memory --> {tmMB}");
-                break;
-            case 13:
-                int fmMB = IvySdk.Instance.GetFreeMemory();
-                Debug.Log($"device_free_memory --> {fmMB}");
-                break;
-            case 14:
-                int tdMB = IvySdk.Instance.GetDiskSize();
-                Debug.Log($"device_total_disk_size --> {tdMB}");
-                break;
-            case 15:
-                int fdMB = IvySdk.Instance.GetFreeDiskSize();
-                Debug.Log($"device_free_disk_size --> {fdMB}");
-                break;
-        }
+        //switch (value)
+        //{
+        //    case 0:
+        //        IvySdk.Instance.SendEmail("email", "data");
+        //        Debug.Log("send_email called");
+        //        break;
+        //    case 1:
+        //        string data = IvySdk.Instance.GetConfig(IvySdk.ConfigKeys.CONFIG_KEY_APP_ID);
+        //        Debug.Log($"get_config --> {data}");
+        //        break;
+        //    case 2:
+        //        bool isConnected = IvySdk.Instance.IsNetworkConnected();
+        //        Debug.Log($"is_network_connected --> {isConnected}");
+        //        break;
+        //    case 3:
+        //        IvySdk.Instance.Rate();
+        //        Debug.Log($"rate called");
+        //        break;
+        //    case 4:
+        //        IvySdk.Instance.SystemShareText("text");
+        //        Debug.Log("share_text called");
+        //        break;
+        //    case 5:
+        //        IvySdk.Instance.SystemShareImage("title", "pic_patch");
+        //        Debug.Log("share_image called");
+        //        break;
+        //    case 6:
+        //        IvySdk.Instance.OpenUrl("https://www.baidu.com");
+        //        Debug.Log("open_url called");
+        //        break;
+        //    case 7:
+        //        bool hasNotch = IvySdk.Instance.HasNotch();
+        //        Debug.Log($"is_notch_screen --> {hasNotch}");
+        //        break;
+        //    case 8:
+        //        int height = IvySdk.Instance.GetNotchHeight();
+        //        Debug.Log($"notch_height --> {height}");
+        //        break;
+        //    case 9:
+        //        IvySdk.Instance.OpenAppStore("market://details?id=package_name");
+        //        Debug.Log("open_app_store called");
+        //        break;
+        //    case 10:
+        //        IvySdk.Instance.toast("message");
+        //        Debug.Log("toast called");
+        //        break;
+        //    case 11:
+        //        IvySdk.Instance.copyTxt("text");
+        //        Debug.Log("copy_text called");
+        //        break;
+        //    case 12:
+        //        int tmMB = IvySdk.Instance.GetTotalMemory();
+        //        Debug.Log($"device_total_memory --> {tmMB}");
+        //        break;
+        //    case 13:
+        //        int fmMB = IvySdk.Instance.GetFreeMemory();
+        //        Debug.Log($"device_free_memory --> {fmMB}");
+        //        break;
+        //    case 14:
+        //        int tdMB = IvySdk.Instance.GetDiskSize();
+        //        Debug.Log($"device_total_disk_size --> {tdMB}");
+        //        break;
+        //    case 15:
+        //        int fdMB = IvySdk.Instance.GetFreeDiskSize();
+        //        Debug.Log($"device_free_disk_size --> {fdMB}");
+        //        break;
+        //}
     }
 
     private void IvySdkListener_OnReceivedNotificationEvent(string obj)

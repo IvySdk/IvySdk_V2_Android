@@ -288,6 +288,15 @@ namespace com.ivy.sdk
 
         #region ads
 
+        // bxid = old, 执行老sdk 广告逻辑； 其它值请和运营确定
+        public void SetBxId(string bxid)
+        {
+            if (_class != null)
+            {
+                _class.CallStatic("setBXId", bxid);
+            }
+        }
+
         public bool HasBannerAd()
         {
             if (_class != null)

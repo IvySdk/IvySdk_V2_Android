@@ -7,6 +7,7 @@ using System.Runtime.InteropServices;
 using UnityEngine;
 #if UNITY_EDITOR
 using UnityEditor;
+using System.Diagnostics;
 #endif
 
 namespace com.ivy.sdk
@@ -2077,6 +2078,75 @@ namespace com.ivy.sdk
         private static extern void showToast(string message);
         [DllImport("__Internal")]
         private static extern void openUrl(string url);
+        [DllImport("__Internal")]
+        private static extern bool isIpad();
+        [DllImport("__Internal")]
+        private static extern bool isDebug();
+        [DllImport("__Internal")]
+        private static extern void addShortcut(string type, string title, string subtitle, string icon);
+        [DllImport("__Internal")]
+        private static extern void deleteShortcut(string type);
+        [DllImport("__Internal")]
+        private static extern string getShortcutAction();
+        [DllImport("__Internal")]
+        private static extern void showWebView(string url, int x, int y, int w, int h);
+        [DllImport("__Internal")]
+        private static extern bool isWebViewDisplayed();
+        [DllImport("__Internal")]
+        private static extern void closeWebView();
+        [DllImport("__Internal")]
+        private static extern void loginGameCenter();
+        [DllImport("__Internal")]
+        private static extern void showGameCenter();
+        [DllImport("__Internal")]
+        private static extern void showLeaderboards();
+        [DllImport("__Internal")]
+        private static extern void showLeaderboard(string leaderboardId);
+        [DllImport("__Internal")]
+        private static extern void submitLeaderboard(string leaderboardId, long score);
+        [DllImport("__Internal")]
+        private static extern long getLeaderboardScore(string leaderboardId);
+        [DllImport("__Internal")]
+        private static extern void showAchievements();
+        [DllImport("__Internal")]
+        private static extern void submitAchievement(string achievementId, double percent);
+        [DllImport("__Internal")]
+        private static extern double getAchievementProgress(string achievementId);
+        [DllImport("__Internal")]
+        private static extern void resetAchievements();
+        [DllImport("__Internal")]
+        private static extern void showChallenges();
+        [DllImport("__Internal")]
+        private static extern void enableAbTest(int abChannel);
+        [DllImport("__Internal")]
+        private static extern void setHeaderInfo(string data);
+        [DllImport("__Internal")]
+        private static extern void setUserInfo(string data);
+        [DllImport("__Internal")]
+        private static extern void startTrackEvent();
+        [DllImport("__Internal")]
+        private static extern void pullAbTestConfigs();
+        [DllImport("__Internal")]
+        private static extern string getAllAbConfigs();
+        [DllImport("__Internal")]
+        private static extern string getAbConfigString(string key, string defaultValue);
+        [DllImport("__Internal")]
+        private static extern double getAbConfigDouble(string key, double defaultValue);
+        [DllImport("__Internal")]
+        private static extern float getAbConfigFloat(string key, float defaultValue);
+        [DllImport("__Internal")]
+        private static extern long getAbConfigLong(string key, long defaultValue);
+        [DllImport("__Internal")]
+        private static extern int getAbConfigInt(string key, int defaultValue);
+        [DllImport("__Internal")]
+        private static extern bool getAbConfigBoolean(string key, bool defaultValue);
+        [DllImport("__Internal")]
+        private static extern string getAbTestSSID();
+        [DllImport("__Internal")]
+        private static extern void setCustomUserId(string userId);
+
+
+
 
 
         private bool hasCalledInit = false;
@@ -2095,60 +2165,92 @@ namespace com.ivy.sdk
 
         public void EnableAbTest(ABChannel channel)
         {
+            enableAbTest((int)channel);
         }
 
         public void SetHeaderInfo(Dictionary<string, object> data)
         {
+            try
+            {
+                string param = "{}";
+                if (data != null)
+                {
+                    param = IvyJson.Serialize(data);
+                }
+                setHeaderInfo(param);
+            }
+            catch (Exception)
+            {
+            }
         }
 
         public void SetUserInfo(Dictionary<string, object> data)
         {
+            try
+            {
+                string param = "{}";
+                if (data != null)
+                {
+                    param = IvyJson.Serialize(data);
+                }
+                setUserInfo(param);
+            }
+            catch (Exception)
+            {
+            }
         }
-
 
         public void StartTrackEvent()
         {
+            startTrackEvent();
         }
 
         public void PullAbTestConfigs()
         {
+            pullAbTestConfigs();
         }
 
         public string GetHuoShanSSID()
         {
-            return null;
+            return getAbTestSSID();
+        }
+
+        public string GetAllAbConfigs()
+        {
+
+            return getAllAbConfigs();
         }
 
         public bool GetAbConfigBoolean(string key, bool defaultValue)
         {
-            return defaultValue;
+
+            return getAbConfigBoolean(key, defaultValue);
         }
 
         public int GetAbConfigInt(string key, int defaultValue)
         {
-            return defaultValue;
+            return getAbConfigInt(key, defaultValue);
         }
 
         public long GetAbConfigLong(string key, long defaultValue)
         {
-            return defaultValue;
+            return getAbConfigLong(key, defaultValue);
         }
 
         public float GetAbConfigFloat(string key, float defaultValue)
         {
-            return defaultValue;
+            return getAbConfigFloat(key, defaultValue);
         }
 
         public double GetAbConfigDouble(string key, double defaultValue)
         {
-            return defaultValue;
+            return getAbConfigDouble(key, defaultValue);
         }
 
         public string GetAbConfigString(string key, string defaultValue)
         {
-            return defaultValue;
+            return getAbConfigString(key, defaultValue);
         }
-
 
         public void RequestATT()
         {
@@ -2466,18 +2568,18 @@ namespace com.ivy.sdk
         /**
          *  设置用户属性 至 所有平台
          */
-        public void SetUserProperty(string key, string value)
-        {
+        //public void SetUserProperty(string key, string value)
+        //{
            
-        }
+        //}
 
         /**
          *  设置用户属性 至 Firebase
          */
-        public void SetUserPropertyToFirebase(string key, string value)
-        {
+        //public void SetUserPropertyToFirebase(string key, string value)
+        //{
            
-        }
+        //}
 
         /**
          *  设置用户属性 至 Appsflyer
@@ -2493,17 +2595,17 @@ namespace com.ivy.sdk
         /**
          *  设置用户属性 至 自有平台
          */
-        public void SetUserPropertyToIvy(string key, string value)
-        {
+        //public void SetUserPropertyToIvy(string key, string value)
+        //{
             
-        }
+        //}
 
         /**
          *  设置自定义用户 id
          */
         public void SetCustomUserId(string value)
         {
-            
+            setCustomUserId(value);
         }
 
         #endregion
@@ -3106,20 +3208,107 @@ namespace com.ivy.sdk
             openFacebookPage(pageId);
         }
 
+        public bool IsIpad()
+        {
+            return isIpad();
+        }
 
+        public bool IsDebug()
+        {
+            return isDebug();
+        }
 
+        public void AddShortcut(string type, string title, string subtitle, string icon)
+        {
+            addShortcut(type, title, subtitle, icon);
+        }
 
+        public void DeleteShortcut(string type)
+        {
+            deleteShortcut(type);
+        }
 
+        public string GetShortcutAction()
+        {
+            return getShortcutAction();
+        }
 
+        public void ShowWebView(string url, int x, int y, int w, int h)
+        {
+            showWebView(url, x, y, w, h);
+        }
 
+        public bool IsWebViewDisplayed()
+        {
+            return isWebViewDisplayed();
+        }
 
+        public void CloseWebView()
+        {
+            closeWebView();
+        }
+
+        public void LoginGameCenter()
+        {
+            loginGameCenter();
+        }
+
+        public void ShowGameCenter()
+        {
+            showGameCenter();
+        }
+
+        public void ShowLeaderboards()
+        {
+            showLeaderboards();
+        }
+
+        public void ShowLeaderboard(string leaderboardId)
+        {
+            showLeaderboard(leaderboardId);
+        }
+
+        public void SubmitLeaderboard(string leaderboardId, long score)
+        {
+            submitLeaderboard(leaderboardId, score);
+        }
+
+        public long GetLeaderboardScore(string leaderboardId)
+        {
+            return getLeaderboardScore(leaderboardId);
+        }
+
+        public void ShowAchievements()
+        {
+            showAchievements();
+        }
+
+        public void SubmitAchievement(string achievementId, double percent)
+        {
+            submitAchievement(achievementId, percent);
+        }
+
+        public double GetAchievementProgress(string achievementId)
+        {
+           return getAchievementProgress(achievementId);
+        }
+
+        public void ResetAchievements()
+        {
+            resetAchievements();
+        }
+
+        public void ShowChallenges()
+        {
+            showChallenges();
+        }
 
 
 #endif
-    /// <summary>
-    /// Editor模式下的广告测试类，不可以调用该类的方法。
-    /// </summary>
-    private class RiseEditorAd : MonoBehaviour {
+        /// <summary>
+        /// Editor模式下的广告测试类，不可以调用该类的方法。
+        /// </summary>
+        private class RiseEditorAd : MonoBehaviour {
         private static RiseEditorAd _editorAdInstance = null;
         public static bool hasInit = false;
         private Rect bannerPos;

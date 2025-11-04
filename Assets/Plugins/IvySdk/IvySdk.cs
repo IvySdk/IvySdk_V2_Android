@@ -2274,7 +2274,7 @@ namespace com.ivy.sdk
         // bxid = old, 执行老sdk 广告逻辑； 其它值请和运营确定
         public void SetBxId(string bxid)
         {
-            SetBxId(bxid);
+            setBxId(bxid);
         }
 
         public bool HasBannerAd()

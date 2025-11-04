@@ -1880,6 +1880,8 @@ namespace com.ivy.sdk
         private static extern int loadATTStatus();
         [DllImport ("__Internal")]
         private static extern void triggerBannerAd(string placement);
+        [DllImport("__Internal")]
+        private static extern void setBxId(string bxid);
         [DllImport ("__Internal")]
         private static extern bool hasBannerAd();
         [DllImport ("__Internal")]
@@ -2269,6 +2271,11 @@ namespace com.ivy.sdk
 
         #region ads
 
+        // bxid = old, 执行老sdk 广告逻辑； 其它值请和运营确定
+        public void SetBxId(string bxid)
+        {
+            SetBxId(bxid);
+        }
 
         public bool HasBannerAd()
         {

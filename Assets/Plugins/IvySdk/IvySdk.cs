@@ -362,9 +362,9 @@ namespace com.ivy.sdk
 
         public bool HasInterstitialAd()
         {
-    #if UNITY_EDITOR
+#if UNITY_EDITOR
             return true;
-    #endif
+#endif
             if (_class != null)
             {
                 return _class.CallStatic<bool>("hasInterstitialAd");
@@ -1558,25 +1558,25 @@ namespace com.ivy.sdk
 
         /**
          *
-         * @param tag                   任务 id
+         * @param tag                   通知任务唯一标志
          * @param title                 通知栏标题
          * @param subtitle              通知栏副标题
          * @param bigText               长文本
-         * @param smallIcon             小图标
-         * @param largeIcon             大图标
-         * @param bigPicture            大图
-         * @param delay                 延迟时间
-         * @param autoCancel            可关闭
-         * @param action                通知栏点击事件行为
-         * @param repeat                重复触发通知栏
-         * @param requireNetwork        要求联网状态展示通知栏
-         * @param requireCharging       要求充电状态展示通知栏
+         * @param smallIcon             状态栏角标，放在assets目录下，传入完整文件名称
+         * @param largeIcon             通知栏ICON，放在assets目录下，传入完整文件名称
+         * @param bigPicture            大图通知栏，放在assets目录下，传入完整文件名称
+         * @param pushTime              推送时间，单位毫秒
+         * @param interval              两次推送的间隔，单位毫秒，最短间隔15分钟
+         * @param autoCancel            是否可自动关闭
+         * @param action                通知栏事件数据
+         * @param repeat                是否循环展示
+         * 
          */
-        public void PushNotificationTask(string tag, string title, string subtitle, string bigText, string smallIcon, string largeIcon, string bigPicture, long delay, bool autoCancel, string action, bool repeat, bool requireNetwork, bool requireCharging)
+        public void PushNotificationTask(string tag, string title, string subtitle, string bigText, string smallIcon, string largeIcon, string bigPicture, long pushTime, long interval, bool autoCancel, string action, bool repeat)
         {
             if (_class != null)
             {
-                _class.CallStatic("pushNotificationTask", tag, title, subtitle, bigText, smallIcon, largeIcon, bigPicture, delay, autoCancel, action, repeat, requireNetwork, requireCharging);
+                _class.CallStatic("pushNotificationTask", tag, title, subtitle, bigText, smallIcon, largeIcon, bigPicture, pushTime, interval, autoCancel, action, repeat);
             }
         }
 

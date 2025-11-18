@@ -1869,6 +1869,30 @@ namespace com.ivy.sdk
             return false;
         }
 
+         /**
+         * @param duration  震动时长，单位毫秒
+         * @param amplitude 震动强度， 1 ~ 255
+         */
+        public void Vibrate(long duration, int amplitude) {
+            if (_class != null)
+            {
+                return _class.CallStatic("vibrate", duration, amplitude);
+            }
+        }
+
+        /**
+         * @param stepDuration 每个震动点的震动时长， 逗号分隔的字符串； 例如 1，2，3
+         * @param curve        每个震动点的震动强度，范围在 1~255； 逗号分隔的字符串，例如 1，2，3
+         * @implNote stepDuration 和 curve 的长度必须一致
+         */
+        public void vibrateWithCure(String stepDuration, String curve) {
+            if (_class != null)
+            {
+                return _class.CallStatic("vibrateWithCure", stepDuration, curve);
+            }
+        }
+
+
 #elif UNITY_IOS
         [DllImport ("__Internal")]
         private static extern void onCreate();

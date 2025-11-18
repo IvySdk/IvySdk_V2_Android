@@ -294,7 +294,7 @@ namespace com.ivy.sdk
         {
             if (_class != null)
             {
-                _class.CallStatic("setBxId", bxid);
+                _class.CallStatic("setBXId", bxid);
             }
         }
 

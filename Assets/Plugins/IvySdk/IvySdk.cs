@@ -1885,7 +1885,7 @@ namespace com.ivy.sdk
          * @param curve        每个震动点的震动强度，范围在 1~255； 逗号分隔的字符串，例如 1，2，3
          * @implNote stepDuration 和 curve 的长度必须一致
          */
-        public void vibrateWithCure(String stepDuration, String curve) {
+        public void VibrateWithCure(string stepDuration, string curve) {
             if (_class != null)
             {
                 return _class.CallStatic("vibrateWithCure", stepDuration, curve);

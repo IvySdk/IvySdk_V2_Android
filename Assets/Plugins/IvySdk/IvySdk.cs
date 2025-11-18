@@ -2109,6 +2109,11 @@ namespace com.ivy.sdk
         [DllImport("__Internal")]
         private static extern bool isDebug();
         [DllImport("__Internal")]
+        private static extern void vibrate(int degree);
+        [DllImport("__Internal")]
+        private static extern void playAHAP(string file_name, string folder);
+
+        [DllImport("__Internal")]
         private static extern void addShortcut(string type, string title, string subtitle, string icon);
         [DllImport("__Internal")]
         private static extern void deleteShortcut(string type);
@@ -3247,6 +3252,19 @@ namespace com.ivy.sdk
         public bool IsDebug()
         {
             return isDebug();
+        }
+
+        /**
+         *  @param degree  0:轻震； 1：中震； 2：强震
+         */
+        public void Vibrate(int degree)
+        {
+            vibrate(degree);
+        }
+
+        public void PlayAHAP(string file_name, string folder)
+        {
+            playAHAP(file_name, folder);
         }
 
         public void AddShortcut(string type, string title, string subtitle, string icon)

@@ -68,6 +68,7 @@ namespace com.ivy.sdk
         public static event Action OnCustomATTRequestEvent;  //自定义UMP引导
         public static event Action OnCustomATTRequestEndEvent; //自定义UMP引导结束
         public static event Action<bool> OnATTRequestEvent; //自定义ATT引导结束
+        public static event Action<bool> OnGameCenterAuthEvent; //GameCenter 登录回调
 #endif
 
         public static IvySdkListener Instance
@@ -479,6 +480,24 @@ namespace com.ivy.sdk
                 }
             }
             catch (Exception e) {
+            }
+        }
+
+        public void onGameCenterAuthResult(string data)
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(data))
+                {
+                    int arg = int.Parse(data);
+                    if (OnGameCenterAuthEvent != null && OnGameCenterAuthEvent.GetInvocationList().Length > 0)
+                    {
+                        OnGameCenterAuthEvent.Invoke(arg == 1);
+                    }
+                }
+            }
+            catch (Exception e)
+            {
             }
         }
 

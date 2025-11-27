@@ -1693,7 +1693,7 @@ namespace com.ivy.sdk
             }
         }
 
-        public void SystemShareText(String txt)
+        public void SystemShareText(string txt)
         {
             if (_class != null)
             {
@@ -1701,7 +1701,7 @@ namespace com.ivy.sdk
             }
         }
 
-        public void SystemShareImage(String title, String imagePath)
+        public void SystemShareImage(string title, string imagePath)
         {
             if (_class != null)
             {
@@ -1709,11 +1709,19 @@ namespace com.ivy.sdk
             }
         }
 
-        public void OpenUrl(String url)
+        public void OpenUrl(string url)
         {
             if (_class != null)
             {
                 _class.CallStatic("openUrl", url);
+            }
+        }
+
+        public void ShowWebView(string title, string url)
+        {
+            if (_class != null)
+            {
+                _class.CallStatic("showWebView", title, url);
             }
         }
 

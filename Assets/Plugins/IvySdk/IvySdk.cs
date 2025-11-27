@@ -1877,6 +1877,15 @@ namespace com.ivy.sdk
             return false;
         }
 
+        public bool IsNightMode()
+        {
+            if (_class != null)
+            {
+                return _class.CallStatic<bool>("isNightMode");
+            }
+            return false;
+        }
+
          /**
          * @param duration  震动时长，单位毫秒
          * @param amplitude 震动强度， 1 ~ 255
@@ -1898,6 +1907,28 @@ namespace com.ivy.sdk
             {
                 return _class.CallStatic("vibrateWithCure", stepDuration, curve);
             }
+        }
+
+        public void AddShortcut(string id, string title, string label, string icon) {
+            if (_class != null)
+            {
+                return _class.CallStatic("addShortcut", id, title, label, icon);
+            }
+        }
+
+        public void DeleteShortcut(string id) {
+            if (_class != null)
+            {
+                return _class.CallStatic("deleteShortcut", id);
+            }
+        }
+
+        public string GetShortcutAction(string id) {
+            if (_class != null)
+            {
+                return _class.CallStatic<string>("getShortcutAction");
+            }
+            return "";
         }
 
 

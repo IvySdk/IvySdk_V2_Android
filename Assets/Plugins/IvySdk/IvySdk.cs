@@ -2214,8 +2214,10 @@ namespace com.ivy.sdk
         private static extern string getAbTestSSID();
         [DllImport("__Internal")]
         private static extern void setCustomUserId(string userId);
-
-
+        [DllImport("__Internal")]
+        private static extern void showLoading();
+        [DllImport("__Internal")]
+        private static extern void hideLoading();
 
 
 
@@ -3269,7 +3271,7 @@ namespace com.ivy.sdk
             showToast(message);
         }
 
-        public void copyTxt(string message)
+        public void CopyTxt(string message)
         {
             copyText(message);
         }
@@ -3304,6 +3306,16 @@ namespace com.ivy.sdk
         public void PlayAHAP(string file_name, string folder)
         {
             playAHAP(file_name, folder);
+        }
+
+        public void ShowLoading()
+        {
+            showLoading();
+        }
+
+        public void HideLoading()
+        {
+            hideLoading();
         }
 
         public void AddShortcut(string type, string title, string subtitle, string icon)

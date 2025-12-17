@@ -1931,6 +1931,22 @@ namespace com.ivy.sdk
             return "";
         }
 
+        public static string EncodeData(string data){
+            if (_class != null)
+            {
+                return _class.CallStatic<string>("encodeData", data);
+            }
+            return data;
+        }
+
+        public static string DecodeData(string data){
+            if (_class != null)
+            {
+                return _class.CallStatic<string>("decodeData", data);
+            }
+            return data;
+        }
+
 
 #elif UNITY_IOS
         [DllImport ("__Internal")]

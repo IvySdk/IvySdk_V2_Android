@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using static Unity.VisualScripting.Dependencies.Sqlite.SQLite3;
 
 namespace com.ivy.sdk
 {
@@ -25,6 +26,9 @@ namespace com.ivy.sdk
         public static event Action<bool> OnFacebookLogoutEvent;
         public static event Action<string, bool> OnFirebaseLoginEvent;
 
+        public static event Action<string, string, bool> OnPlayGameAchiveSetEvent;
+        public static event Action<string, string> OnPlayGameAchiveReadEvent;
+        public static event Action<string> OnPlayGameActivityEvents;
 
 #if UNITY_IOS
         public static event Action<bool> OnAppleLoginEvent; // apple 登入
@@ -1076,6 +1080,54 @@ namespace com.ivy.sdk
         }
         #endregion
 
+        public void onPGArchiveRead(string data) {
+            if (!string.IsNullOrEmpty(data))
+            {
+                string[] args = data.Split('|');
+                if (args != null && args.Length == 2)
+                {
+                    string achiveName = args[0];
+                    string result = args[1];
+                    if (OnPlayGameAchiveReadEvent != null && OnPlayGameAchiveReadEvent.GetInvocationList().Length > 0)
+                    {
+                        OnPlayGameAchiveReadEvent.Invoke(achiveName, result);
+                    }
+                }
+            }
+        }
+
+        public void onPGArchiveSet(string data) {
+            try
+            {
+                if (!string.IsNullOrEmpty(data))
+                {
+                    string[] args = data.Split('|');
+                    if (args != null && args.Length == 3)
+                    {
+                        string achiveName = args[0];
+                        string transcationId = args[1];
+                        int result = int.Parse(data);
+                        if (OnPlayGameAchiveSetEvent != null && OnPlayGameAchiveSetEvent.GetInvocationList().Length > 0)
+                        {
+                            OnPlayGameAchiveSetEvent.Invoke(achiveName, transcationId, result == 1);
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+            }
+        }
+
+        public void onPGEventsLoaded(string data) {
+            if (!string.IsNullOrEmpty(data))
+            {
+                if (OnPlayGameActivityEvents != null && OnPlayGameActivityEvents.GetInvocationList().Length > 0)
+                {
+                    OnPlayGameActivityEvents.Invoke(data);
+                }
+            }
+        }
 
     }
 

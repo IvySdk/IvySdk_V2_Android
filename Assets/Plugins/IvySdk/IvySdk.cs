@@ -1046,6 +1046,49 @@ namespace com.ivy.sdk
                 _class.CallStatic("updateLeaderboard", leaderboardId, score);
             }
         }
+
+        //playgames  写存档
+        public void SetPlayGamesArchive(string archiveName, string transcationId, string payload) {
+            if (_class != null)
+            {
+                _class.CallStatic("setPlayGamesArchive", archiveName, transcationId, payload);
+            }
+        }
+
+         //playgames  读存档
+        public static void readPlayGamesArchive(string archiveName) {
+            if (_class != null)
+            {
+                _class.CallStatic("readPlayGamesArchive", archiveName);
+            }
+        }
+
+        //playgames 更新活动事件进度
+        public static void submitPlayGamesActivityEvent(string eventId, int increment) {
+            if (_class != null)
+            {
+                _class.CallStatic("submitPGActivityEvent", eventId, increment);
+            }
+        }
+
+        //playgames 根据事件id获取活动事件信息
+        // 返回结构 "[{"id":"xxx", "name":"xxx", "value": "xxx", "icon":"xxx"}]"
+        public static void loadPlayGamesActivityEventById(string eventId) {
+            if (_class != null)
+            {
+                _class.CallStatic("loadPGActivityEventById", eventId);
+            }
+        }
+
+        //playgames 获取所有活动事件信息
+        // 返回结构 "[{"id":"xxx", "name":"xxx", "value": "xxx", "icon":"xxx"}]"
+        public static void loadPlayGamesActivityEvents() {
+            if (_class != null)
+            {
+                _class.CallStatic("loadPGActivityEvents");
+            }
+        }
+
         #endregion
 
         #region G+

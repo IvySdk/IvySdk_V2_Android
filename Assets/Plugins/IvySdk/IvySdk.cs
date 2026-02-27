@@ -1974,7 +1974,7 @@ namespace com.ivy.sdk
             return "";
         }
 
-        public static string EncodeData(string data){
+        public string EncodeData(string data){
             if (_class != null)
             {
                 return _class.CallStatic<string>("encodeData", data);
@@ -1982,7 +1982,7 @@ namespace com.ivy.sdk
             return data;
         }
 
-        public static string DecodeData(string data){
+        public string DecodeData(string data){
             if (_class != null)
             {
                 return _class.CallStatic<string>("decodeData", data);
@@ -1990,7 +1990,7 @@ namespace com.ivy.sdk
             return data;
         }
 
-        public static void GetAdId(){
+        public void GetAdId(){
             if (_class != null)
             {
                 _class.CallStatic("getAdId");

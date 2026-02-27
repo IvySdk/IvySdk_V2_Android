@@ -1990,6 +1990,12 @@ namespace com.ivy.sdk
             return data;
         }
 
+        public static void GetAdId(){
+            if (_class != null)
+            {
+                _class.CallStatic("getAdId");
+            }
+        }
 
 #elif UNITY_IOS
         [DllImport ("__Internal")]

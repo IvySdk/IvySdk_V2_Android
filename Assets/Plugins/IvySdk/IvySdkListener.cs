@@ -75,6 +75,8 @@ namespace com.ivy.sdk
         public static event Action<bool> OnGameCenterAuthEvent; //GameCenter 登录回调
 #endif
 
+        public static event Action<string> OnReceivedAdIdEvent;//Android Advertising Id 回传
+
         public static IvySdkListener Instance
         {
             get
@@ -216,7 +218,7 @@ namespace com.ivy.sdk
 
 #endif
 
-    #endregion
+        #endregion
 
         #region 客服
         public void unreadHelperMsgCount(string data)
@@ -264,14 +266,14 @@ namespace com.ivy.sdk
                         {
                             OnFacebookLoginEvent.Invoke(true);
                         }
-                    } 
+                    }
                     else if (data.Equals("google"))
                     {
                         if (OnGoogleLoginEvent != null && OnGoogleLoginEvent.GetInvocationList().Length > 0)
                         {
                             OnGoogleLoginEvent.Invoke(true);
                         }
-                    } 
+                    }
                     else if (data.Equals("apple"))
                     {
 #if UNITY_IOS
@@ -453,9 +455,9 @@ namespace com.ivy.sdk
 
 
 #if UNITY_IOS
-    #region ATT
-       public void onCustomATTRequest(string data)
-       {
+        #region ATT
+        public void onCustomATTRequest(string data)
+        {
             if (OnCustomATTRequestEvent != null && OnCustomATTRequestEvent.GetInvocationList().Length > 0)
             {
                 OnCustomATTRequestEvent.Invoke();
@@ -483,7 +485,8 @@ namespace com.ivy.sdk
                     }
                 }
             }
-            catch (Exception e) {
+            catch (Exception e)
+            {
             }
         }
 
@@ -812,7 +815,7 @@ namespace com.ivy.sdk
                 {
                     if (OnCloudDataSaveEvent != null && OnCloudDataSaveEvent.GetInvocationList().Length > 0)
                     {
-                        OnCloudDataSaveEvent.Invoke(args[0], args[1],  true);
+                        OnCloudDataSaveEvent.Invoke(args[0], args[1], true);
                     }
                 }
             }
@@ -1080,7 +1083,8 @@ namespace com.ivy.sdk
         }
         #endregion
 
-        public void onPGArchiveRead(string data) {
+        public void onPGArchiveRead(string data)
+        {
             if (!string.IsNullOrEmpty(data))
             {
                 string[] args = data.Split('|');
@@ -1096,7 +1100,8 @@ namespace com.ivy.sdk
             }
         }
 
-        public void onPGArchiveSet(string data) {
+        public void onPGArchiveSet(string data)
+        {
             try
             {
                 if (!string.IsNullOrEmpty(data))
@@ -1119,7 +1124,8 @@ namespace com.ivy.sdk
             }
         }
 
-        public void onPGEventsLoaded(string data) {
+        public void onPGEventsLoaded(string data)
+        {
             if (!string.IsNullOrEmpty(data))
             {
                 if (OnPlayGameActivityEvents != null && OnPlayGameActivityEvents.GetInvocationList().Length > 0)
@@ -1128,6 +1134,19 @@ namespace com.ivy.sdk
                 }
             }
         }
+
+        public void onReceivedAdId(string data)
+        {
+            if (!string.IsNullOrEmpty(data))
+            {
+                if (OnReceivedAdIdEvent != null && OnReceivedAdIdEvent.GetInvocationList().Length > 0)
+                {
+                    OnReceivedAdIdEvent.Invoke(data);
+                }
+
+            }
+        }
+
 
     }
 

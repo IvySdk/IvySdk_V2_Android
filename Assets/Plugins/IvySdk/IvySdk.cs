@@ -1056,7 +1056,7 @@ namespace com.ivy.sdk
         }
 
          //playgames  读存档
-        public static void readPlayGamesArchive(string archiveName) {
+        public void readPlayGamesArchive(string archiveName) {
             if (_class != null)
             {
                 _class.CallStatic("readPlayGamesArchive", archiveName);
@@ -1064,7 +1064,7 @@ namespace com.ivy.sdk
         }
 
         //playgames 更新活动事件进度
-        public static void submitPlayGamesActivityEvent(string eventId, int increment) {
+        public void submitPlayGamesActivityEvent(string eventId, int increment) {
             if (_class != null)
             {
                 _class.CallStatic("submitPGActivityEvent", eventId, increment);
@@ -1073,7 +1073,7 @@ namespace com.ivy.sdk
 
         //playgames 根据事件id获取活动事件信息
         // 返回结构 "[{"id":"xxx", "name":"xxx", "value": "xxx", "icon":"xxx"}]"
-        public static void loadPlayGamesActivityEventById(string eventId) {
+        public void loadPlayGamesActivityEventById(string eventId) {
             if (_class != null)
             {
                 _class.CallStatic("loadPGActivityEventById", eventId);
@@ -1082,7 +1082,7 @@ namespace com.ivy.sdk
 
         //playgames 获取所有活动事件信息
         // 返回结构 "[{"id":"xxx", "name":"xxx", "value": "xxx", "icon":"xxx"}]"
-        public static void loadPlayGamesActivityEvents() {
+        public void loadPlayGamesActivityEvents() {
             if (_class != null)
             {
                 _class.CallStatic("loadPGActivityEvents");
@@ -1936,7 +1936,7 @@ namespace com.ivy.sdk
         public void Vibrate(long duration, int amplitude) {
             if (_class != null)
             {
-                return _class.CallStatic("vibrate", duration, amplitude);
+                _class.CallStatic("vibrate", duration, amplitude);
             }
         }
 
@@ -1948,21 +1948,21 @@ namespace com.ivy.sdk
         public void VibrateWithCure(string stepDuration, string curve) {
             if (_class != null)
             {
-                return _class.CallStatic("vibrateWithCure", stepDuration, curve);
+                _class.CallStatic("vibrateWithCure", stepDuration, curve);
             }
         }
 
         public void AddShortcut(string id, string title, string label, string icon) {
             if (_class != null)
             {
-                return _class.CallStatic("addShortcut", id, title, label, icon);
+                _class.CallStatic("addShortcut", id, title, label, icon);
             }
         }
 
         public void DeleteShortcut(string id) {
             if (_class != null)
             {
-                return _class.CallStatic("deleteShortcut", id);
+                _class.CallStatic("deleteShortcut", id);
             }
         }
 

@@ -8,6 +8,7 @@ using UnityEngine;
 #if UNITY_EDITOR
 using UnityEditor;
 using System.Diagnostics;
+using Debug = UnityEngine.Debug;
 #endif
 
 namespace com.ivy.sdk
@@ -106,6 +107,7 @@ namespace com.ivy.sdk
                 return _instance;
             }
         }
+
 #if UNITY_ANDROID
         public void Init()
         {
@@ -1997,6 +1999,65 @@ namespace com.ivy.sdk
             }
         }
 
+
+        #region 国内独有接口
+        public void ShowGameProtocolDialog()
+        {
+            if (_class != null)
+            {
+                _class.CallStatic("showGameProtocolDialog");
+            }
+        }
+
+        public void Login()
+        {
+            if (_class != null)
+            {
+                _class.CallStatic("login");
+            }
+        }
+
+        public bool IsLogged()
+        {
+            if (_class != null)
+            {
+                return _class.CallStatic<bool>("isLogged");
+            }
+            return false;
+        }
+
+        public void Logout()
+        {
+            if (_class != null)
+            {
+                _class.CallStatic("logout");
+            }
+        }
+
+        public void TrackEventToGravity(string eventName, Dictionary<string, object> data)
+        {
+            try
+            {
+                string param = "{}";
+                if (data != null)
+                {
+                    param = IvyJson.Serialize(data);
+                }
+
+                if (_class != null)
+                {
+                    _class.CallStatic("trackEventToGravity", eventName, param);
+                }
+            }
+            catch (Exception)
+            {
+                Debug.LogError($"track event to gravity:{eventName} failed!!!, param convert failed");
+            }
+        }
+
+        #endregion
+
+
 #elif UNITY_IOS
         [DllImport ("__Internal")]
         private static extern void onCreate();
@@ -3539,7 +3600,7 @@ namespace com.ivy.sdk
                     _editorAdInstance = FindObjectOfType<RiseEditorAd> () == null ? new GameObject ("RiseEditorAd").AddComponent<RiseEditorAd> () : _editorAdInstance;
                 }
                 if (!hasInit) {
-                    Debug.LogError ("Fatal Error: \nNeed Call RiseSdk.Instance.Init () First At Initialize Scene");
+                       UnityEngine.Debug.LogError ("Fatal Error: \nNeed Call RiseSdk.Instance.Init () First At Initialize Scene");
                 }
                 return _editorAdInstance;
             }

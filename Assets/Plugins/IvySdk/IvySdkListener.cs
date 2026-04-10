@@ -1,6 +1,5 @@
 using System;
 using UnityEngine;
-using static Unity.VisualScripting.Dependencies.Sqlite.SQLite3;
 
 namespace com.ivy.sdk
 {
@@ -77,13 +76,15 @@ namespace com.ivy.sdk
 
         public static event Action<string> OnReceivedAdIdEvent;//Android Advertising Id 回传
 
+
         public static IvySdkListener Instance
         {
             get
             {
                 if (_instance == null)
                 {
-                    _instance = FindObjectOfType(typeof(IvySdkListener)) as IvySdkListener;
+                    _instance = FindObjectOfType<IvySdkListener>();
+
                     if (_instance == null)
                     {
                         var obj = new GameObject("IvySdkListener");
@@ -91,9 +92,22 @@ namespace com.ivy.sdk
                         DontDestroyOnLoad(obj);
                     }
                 }
+
                 return _instance;
             }
         }
+
+        //private void Awake()
+        //{
+        //    if (_instance != null && _instance != this)
+        //    {
+        //        Destroy(gameObject);
+        //        return;
+        //    }
+
+        //    _instance = this;
+        //    DontDestroyOnLoad(gameObject);
+        //}
 
         public void onRemoteConfigSynced()
         {

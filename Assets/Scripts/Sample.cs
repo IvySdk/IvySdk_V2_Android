@@ -283,167 +283,167 @@ public class Sample : MonoBehaviour
 
     public void OnAdDropDownValueChanged(int value)
     {
-        switch (value)
-        {
-            case 0:
-                bool isBannerReady = IvySdk.Instance.HasBannerAd();
-                Debug.Log($"is_banner_ready --> {isBannerReady}");
-                break;
-            case 1:
-                IvySdk.Instance.ShowBannerAd("default", IvySdk.BannerAdPosition.POSITION_CENTER_BOTTOM, "1");
-                Debug.Log("show_banner_ad called");
-                break;
-            case 2:
-                IvySdk.Instance.CloseBannerAd("1");
-                Debug.Log("close_banner called");
-                break;
-            case 3:
-                bool isInterstitialReady = IvySdk.Instance.HasInterstitialAd();
-                Debug.Log($"is_interstitial_ready --> {isInterstitialReady}");
-                break;
-            case 4:
-                IvySdk.Instance.ShowInterstitialAd("default", "2", null);
-                Debug.Log("show_interstital_ad called");
-                break;
-            case 5:
-                bool isRewardedReady = IvySdk.Instance.HasRewardedAd();
-                Debug.Log($"is_rewarded_ready --> {isRewardedReady}");
-                break;
-            case 6:
-                IvySdk.Instance.ShowRewardedAd("default", "3", null);
-                Debug.Log("show_rewarded_ad called");
-                break;
-        }
+        //switch (value)
+        //{
+        //    case 0:
+        //        bool isBannerReady = IvySdk.Instance.HasBannerAd();
+        //        Debug.Log($"is_banner_ready --> {isBannerReady}");
+        //        break;
+        //    case 1:
+        //        IvySdk.Instance.ShowBannerAd("default", IvySdk.BannerAdPosition.POSITION_CENTER_BOTTOM, "1");
+        //        Debug.Log("show_banner_ad called");
+        //        break;
+        //    case 2:
+        //        IvySdk.Instance.CloseBannerAd("1");
+        //        Debug.Log("close_banner called");
+        //        break;
+        //    case 3:
+        //        bool isInterstitialReady = IvySdk.Instance.HasInterstitialAd();
+        //        Debug.Log($"is_interstitial_ready --> {isInterstitialReady}");
+        //        break;
+        //    case 4:
+        //        IvySdk.Instance.ShowInterstitialAd("default", "2", null);
+        //        Debug.Log("show_interstital_ad called");
+        //        break;
+        //    case 5:
+        //        bool isRewardedReady = IvySdk.Instance.HasRewardedAd();
+        //        Debug.Log($"is_rewarded_ready --> {isRewardedReady}");
+        //        break;
+        //    case 6:
+        //        IvySdk.Instance.ShowRewardedAd("default", "3", null);
+        //        Debug.Log("show_rewarded_ad called");
+        //        break;
+        //}
     }
 
     public void OnPurchaseDropDownValueChanged(int value)
     {
-        switch (value)
-        {
-            case 0:
-                IvySdk.Instance.Pay(1);
-                Debug.Log("pay called");
-                break;
-            case 1:
-                IvySdk.Instance.Pay(1, "test_payload_data");
-                Debug.Log("pay_with_payload called");
-                break;
-            case 2:
-                //发货;使用在线计费时，务必调用此接口通知后台发货
-                IvySdk.Instance.ShippingGoods("test_merchantTransaction_id");
-                Debug.Log("shipping_goods called");
-                break;
-            case 3:
-                IvySdk.Instance.QueryPaymentOrder(1);
-                Debug.Log("query_payment_order called");
-                break;
-            case 4:
-                IvySdk.Instance.QueryPaymentOrders();
-                Debug.Log("query_payment_orders called");
-                break;
-            case 5:
-                IvySdk.Instance.GetPaymentData(1);
-                Debug.Log("query_payment_data called");
-                break;
-            case 6:
-                IvySdk.Instance.GetPaymentDatas();
-                Debug.Log("query_payment_datas called");
-                break;
-            case 7:
-                bool isReady = IvySdk.Instance.IsPaymentValid();
-                Debug.Log($"is_payment_ready --> {isReady}");
-                break;
-        }
+        //switch (value)
+        //{
+        //    case 0:
+        //        IvySdk.Instance.Pay(1);
+        //        Debug.Log("pay called");
+        //        break;
+        //    case 1:
+        //        IvySdk.Instance.Pay(1, "test_payload_data");
+        //        Debug.Log("pay_with_payload called");
+        //        break;
+        //    case 2:
+        //        //发货;使用在线计费时，务必调用此接口通知后台发货
+        //        IvySdk.Instance.ShippingGoods("test_merchantTransaction_id");
+        //        Debug.Log("shipping_goods called");
+        //        break;
+        //    case 3:
+        //        IvySdk.Instance.QueryPaymentOrder(1);
+        //        Debug.Log("query_payment_order called");
+        //        break;
+        //    case 4:
+        //        IvySdk.Instance.QueryPaymentOrders();
+        //        Debug.Log("query_payment_orders called");
+        //        break;
+        //    case 5:
+        //        IvySdk.Instance.GetPaymentData(1);
+        //        Debug.Log("query_payment_data called");
+        //        break;
+        //    case 6:
+        //        IvySdk.Instance.GetPaymentDatas();
+        //        Debug.Log("query_payment_datas called");
+        //        break;
+        //    case 7:
+        //        bool isReady = IvySdk.Instance.IsPaymentValid();
+        //        Debug.Log($"is_payment_ready --> {isReady}");
+        //        break;
+        //}
     }
 
     public void OnEventsDropDownValueChanged(int value)
     {
-        switch (value)
-        {
-            case 0:
-                IvySdk.Instance.TrackEventToFacebook("event_name", null);
-                Debug.Log("log_to_all_platform called");
-                break;
-            case 1:
-                IvySdk.Instance.TrackEventToFirebase("event_name", null);
-                Debug.Log("log_to_firebase called");
-                break;
-            case 2:
-                IvySdk.Instance.TrackEventToFacebook("event_name", null);
-                Debug.Log("log_to_facebook called");
-                break;
-            case 3:
-                IvySdk.Instance.TrackEventToAppsflyer("event_name", null);
-                Debug.Log("log_to_appsflyer called");
-                break;
-            case 4:
-                IvySdk.Instance.TrackEventToIvy("event_name", null);
-                Debug.Log("log_to_ivy called");
-                break;
-            case 5:
-                IvySdk.Instance.SetUserProperty("key", "value");
-                Debug.Log("set_user_property_to_all_platform called");
-                break;
-            case 6:
-                IvySdk.Instance.SetUserPropertyToFirebase("key", "value");
-                Debug.Log("set_user_property_to_firebase called");
-                break;
-            case 7:
-                IvySdk.Instance.SetUserPropertyToIvy("key", "value");
-                Debug.Log("set_user_property_to_ivy called");
-                break;
-            case 8:
-                IvySdk.Instance.SetCustomUserId("custom_user_id");
-                Debug.Log("set_user_custom_user_id called");
-                break;
-        }
+        //switch (value)
+        //{
+        //    case 0:
+        //        IvySdk.Instance.TrackEventToFacebook("event_name", null);
+        //        Debug.Log("log_to_all_platform called");
+        //        break;
+        //    case 1:
+        //        IvySdk.Instance.TrackEventToFirebase("event_name", null);
+        //        Debug.Log("log_to_firebase called");
+        //        break;
+        //    case 2:
+        //        IvySdk.Instance.TrackEventToFacebook("event_name", null);
+        //        Debug.Log("log_to_facebook called");
+        //        break;
+        //    case 3:
+        //        IvySdk.Instance.TrackEventToAppsflyer("event_name", null);
+        //        Debug.Log("log_to_appsflyer called");
+        //        break;
+        //    case 4:
+        //        IvySdk.Instance.TrackEventToIvy("event_name", null);
+        //        Debug.Log("log_to_ivy called");
+        //        break;
+        //    case 5:
+        //        IvySdk.Instance.SetUserProperty("key", "value");
+        //        Debug.Log("set_user_property_to_all_platform called");
+        //        break;
+        //    case 6:
+        //        IvySdk.Instance.SetUserPropertyToFirebase("key", "value");
+        //        Debug.Log("set_user_property_to_firebase called");
+        //        break;
+        //    case 7:
+        //        IvySdk.Instance.SetUserPropertyToIvy("key", "value");
+        //        Debug.Log("set_user_property_to_ivy called");
+        //        break;
+        //    case 8:
+        //        IvySdk.Instance.SetCustomUserId("custom_user_id");
+        //        Debug.Log("set_user_custom_user_id called");
+        //        break;
+        //}
     }
 
     public void OnRemoteConfigDropDownValueChanged(int value)
     {
-        switch (value)
-        {
-            case 0:
-                int intValue = IvySdk.Instance.GetRemoteConfigInt("key");
-                Debug.Log($"get_int_from_firebase --> {intValue}");
-                break;
-            case 1:
-                long longValue = IvySdk.Instance.GetRemoteConfigLong("key");
-                Debug.Log($"get_long_from_firebase --> {longValue}");
-                break;
-            case 2:
-                double doubleValue = IvySdk.Instance.GetRemoteConfigDouble("key");
-                Debug.Log($"get_double_from_firebase --> {doubleValue}");
-                break;
-            case 3:
-                bool boolValue = IvySdk.Instance.GetRemoteConfigBoolean("key");
-                Debug.Log($"get_bool_from_firebase --> {boolValue}");
-                break;
-            case 4:
-                string stringValue = IvySdk.Instance.GetRemoteConfigString("key");
-                Debug.Log($"get_string_from_firebase --> {stringValue}");
-                break;
-            case 5:
-                int ivyIntValue = IvySdk.Instance.GetIvyRemoteConfigInt("key");
-                Debug.Log($"get_int_from_ivy --> {ivyIntValue}");
-                break;
-            case 6:
-                long ivyLongValue = IvySdk.Instance.GetIvyRemoteConfigLong("key");
-                Debug.Log($"get_long_from_ivy --> {ivyLongValue}");
-                break;
-            case 7:
-                double ivyDoublwValue = IvySdk.Instance.GetIvyRemoteConfigDouble("key");
-                Debug.Log($"get_double_from_ivy --> {ivyDoublwValue}");
-                break;
-            case 8:
-                bool ivyBoolValue = IvySdk.Instance.GetIvyRemoteConfigBoolean("key");
-                Debug.Log($"get_bool_from_ivy --> {ivyBoolValue}");
-                break;
-            case 9:
-                string ivyStringValue = IvySdk.Instance.GetIvyRemoteConfigString("key");
-                Debug.Log($"get_string_from_ivy --> {ivyStringValue}");
-                break;
-        }
+        //switch (value)
+        //{
+        //    case 0:
+        //        int intValue = IvySdk.Instance.GetRemoteConfigInt("key");
+        //        Debug.Log($"get_int_from_firebase --> {intValue}");
+        //        break;
+        //    case 1:
+        //        long longValue = IvySdk.Instance.GetRemoteConfigLong("key");
+        //        Debug.Log($"get_long_from_firebase --> {longValue}");
+        //        break;
+        //    case 2:
+        //        double doubleValue = IvySdk.Instance.GetRemoteConfigDouble("key");
+        //        Debug.Log($"get_double_from_firebase --> {doubleValue}");
+        //        break;
+        //    case 3:
+        //        bool boolValue = IvySdk.Instance.GetRemoteConfigBoolean("key");
+        //        Debug.Log($"get_bool_from_firebase --> {boolValue}");
+        //        break;
+        //    case 4:
+        //        string stringValue = IvySdk.Instance.GetRemoteConfigString("key");
+        //        Debug.Log($"get_string_from_firebase --> {stringValue}");
+        //        break;
+        //    case 5:
+        //        int ivyIntValue = IvySdk.Instance.GetIvyRemoteConfigInt("key");
+        //        Debug.Log($"get_int_from_ivy --> {ivyIntValue}");
+        //        break;
+        //    case 6:
+        //        long ivyLongValue = IvySdk.Instance.GetIvyRemoteConfigLong("key");
+        //        Debug.Log($"get_long_from_ivy --> {ivyLongValue}");
+        //        break;
+        //    case 7:
+        //        double ivyDoublwValue = IvySdk.Instance.GetIvyRemoteConfigDouble("key");
+        //        Debug.Log($"get_double_from_ivy --> {ivyDoublwValue}");
+        //        break;
+        //    case 8:
+        //        bool ivyBoolValue = IvySdk.Instance.GetIvyRemoteConfigBoolean("key");
+        //        Debug.Log($"get_bool_from_ivy --> {ivyBoolValue}");
+        //        break;
+        //    case 9:
+        //        string ivyStringValue = IvySdk.Instance.GetIvyRemoteConfigString("key");
+        //        Debug.Log($"get_string_from_ivy --> {ivyStringValue}");
+        //        break;
+        //}
     }
 
     public void OnPlayGamesDropDownValueChanged(int value)
@@ -518,135 +518,135 @@ public class Sample : MonoBehaviour
 
     public void OnFirebaseDropDownValueChanged(int value)
     {
-        switch (value)
-        {
-            case 0:
-                IvySdk.Instance.LogoutFirebase();
-                Debug.Log("logout_firebase called");
-                break;
-            case 1:
-                string user_info = IvySdk.Instance.GetFirebaseUserInfo(IvySdk.FirebaseLinkChannel.PLAY_GAMES);
-                Debug.Log($"get_firebase_user_info called --> {user_info}");
-                break;
-            case 2:
-                bool isAnonymous = IvySdk.Instance.IsFirebaseAnonymousLoggedIn();
-                Debug.Log($"is_anonymous_logged_in called --> {isAnonymous}");
-                break;
-            case 3:
-                bool isLinked = IvySdk.Instance.IsFirebaseLinkedWithChannel(IvySdk.FirebaseLinkChannel.PLAY_GAMES);
-                Debug.Log($"is_linked_with_channel called --> {isLinked}");
-                break;
-            case 4:
-                bool canUnlink = IvySdk.Instance.CanFirebaseUnlinkWithChannel(IvySdk.FirebaseLinkChannel.PLAY_GAMES);
-                Debug.Log($"can_unlink_with_channel called --> {canUnlink}");
-                break;
-            case 5:
-                IvySdk.Instance.UnlinkFirebaseWithChannel(IvySdk.FirebaseLinkChannel.PLAY_GAMES);
-                Debug.Log("unlink_with_channel called");
-                break;
-            case 6:
-                IvySdk.Instance.ReloadFirebaseLogStatus();
-                Debug.Log("reload_log_state called");
-                break;
-            case 7:
-                IvySdk.Instance.LoginFBWithAnonymous();
-                Debug.Log("log_with_anonymous called");
-                break;
-            case 8:
-                //IvySdk.Instance.LoginFBWithPlayGames();
-                //Debug.Log("log_with_play_games called");
-                break;
-            case 9:
-                IvySdk.Instance.LoginFBWithFacebook();
-                Debug.Log("log_with_facebook called");
-                break;
-            case 10:
-                IvySdk.Instance.LoginFBWithEmailAndPwd("email", "password");
-                Debug.Log("log_with_email called");
-                break;
-            case 11:
-                string user_id = IvySdk.Instance.GetFirebaseUserId();
-                Debug.Log($"firebase_user_id called --> {user_id}");
-                break;
-        }
+        //switch (value)
+        //{
+        //    case 0:
+        //        IvySdk.Instance.LogoutFirebase();
+        //        Debug.Log("logout_firebase called");
+        //        break;
+        //    case 1:
+        //        string user_info = IvySdk.Instance.GetFirebaseUserInfo(IvySdk.FirebaseLinkChannel.PLAY_GAMES);
+        //        Debug.Log($"get_firebase_user_info called --> {user_info}");
+        //        break;
+        //    case 2:
+        //        bool isAnonymous = IvySdk.Instance.IsFirebaseAnonymousLoggedIn();
+        //        Debug.Log($"is_anonymous_logged_in called --> {isAnonymous}");
+        //        break;
+        //    case 3:
+        //        bool isLinked = IvySdk.Instance.IsFirebaseLinkedWithChannel(IvySdk.FirebaseLinkChannel.PLAY_GAMES);
+        //        Debug.Log($"is_linked_with_channel called --> {isLinked}");
+        //        break;
+        //    case 4:
+        //        bool canUnlink = IvySdk.Instance.CanFirebaseUnlinkWithChannel(IvySdk.FirebaseLinkChannel.PLAY_GAMES);
+        //        Debug.Log($"can_unlink_with_channel called --> {canUnlink}");
+        //        break;
+        //    case 5:
+        //        IvySdk.Instance.UnlinkFirebaseWithChannel(IvySdk.FirebaseLinkChannel.PLAY_GAMES);
+        //        Debug.Log("unlink_with_channel called");
+        //        break;
+        //    case 6:
+        //        IvySdk.Instance.ReloadFirebaseLogStatus();
+        //        Debug.Log("reload_log_state called");
+        //        break;
+        //    case 7:
+        //        IvySdk.Instance.LoginFBWithAnonymous();
+        //        Debug.Log("log_with_anonymous called");
+        //        break;
+        //    case 8:
+        //        //IvySdk.Instance.LoginFBWithPlayGames();
+        //        //Debug.Log("log_with_play_games called");
+        //        break;
+        //    case 9:
+        //        IvySdk.Instance.LoginFBWithFacebook();
+        //        Debug.Log("log_with_facebook called");
+        //        break;
+        //    case 10:
+        //        IvySdk.Instance.LoginFBWithEmailAndPwd("email", "password");
+        //        Debug.Log("log_with_email called");
+        //        break;
+        //    case 11:
+        //        string user_id = IvySdk.Instance.GetFirebaseUserId();
+        //        Debug.Log($"firebase_user_id called --> {user_id}");
+        //        break;
+        //}
     }
 
     public void OnFirestoreDropDownValueChanged(int value)
     {
-        switch (value)
-        {
-            case 0:
-                IvySdk.Instance.SaveCloudData("collection", "documentId", "{}");
-                Debug.Log("save called");
-                break;
-            case 1:
-                IvySdk.Instance.ReadCloudData("collection", "documentId");
-                Debug.Log("read called");
-                break;
-            case 2:
-                IvySdk.Instance.MergeCloudData("collection", "documentId", "{}");
-                Debug.Log("merge called");
-                break;
-            case 3:
-                IvySdk.Instance.QueryCloudData("collection", "documentId");
-                Debug.Log("query called");
-                break;
-            case 4:
-                IvySdk.Instance.DeleteCloudData("collection", "documentId");
-                Debug.Log("delete called");
-                break;
-            case 5:
-                IvySdk.Instance.UpdateCloudData("collection", "documentId", "transactionId", "{}");
-                Debug.Log("update called");
-                break;
-            case 6:
-                IvySdk.Instance.SnapshotCloudData("collection", "documentId");
-                Debug.Log("snapshot called");
-                break;
-        }
+        //switch (value)
+        //{
+        //    case 0:
+        //        IvySdk.Instance.SaveCloudData("collection", "documentId", "{}");
+        //        Debug.Log("save called");
+        //        break;
+        //    case 1:
+        //        IvySdk.Instance.ReadCloudData("collection", "documentId");
+        //        Debug.Log("read called");
+        //        break;
+        //    case 2:
+        //        IvySdk.Instance.MergeCloudData("collection", "documentId", "{}");
+        //        Debug.Log("merge called");
+        //        break;
+        //    case 3:
+        //        IvySdk.Instance.QueryCloudData("collection", "documentId");
+        //        Debug.Log("query called");
+        //        break;
+        //    case 4:
+        //        IvySdk.Instance.DeleteCloudData("collection", "documentId");
+        //        Debug.Log("delete called");
+        //        break;
+        //    case 5:
+        //        IvySdk.Instance.UpdateCloudData("collection", "documentId", "transactionId", "{}");
+        //        Debug.Log("update called");
+        //        break;
+        //    case 6:
+        //        IvySdk.Instance.SnapshotCloudData("collection", "documentId");
+        //        Debug.Log("snapshot called");
+        //        break;
+        //}
     }
 
     public void OnHelperDropDownValueChanged(int value)
     {
-        switch (value)
-        {
-            case 0:
-                bool isInit = IvySdk.Instance.IsHelperInitialized();
-                Debug.Log($"is_initialized --> {isInit}");
-                break;
-            case 1:
-                bool hasNew = IvySdk.Instance.HasNewHelperMessage();
-                Debug.Log($"has_new_message --> {hasNew}");
-                break;
-            case 2:
-                IvySdk.Instance.ShowHelper("entranceId", null, null, null);
-                Debug.Log("show_helper called");
-                break;
-            case 3:
-                IvySdk.Instance.ShowHelperSingleFAQ("faqId");
-                Debug.Log("show_helper_single_faq called");
-                break;
-            case 4:
-                IvySdk.Instance.ListenHelperUnreadMsgCount(false);
-                Debug.Log("listen_unread_message called");
-                break;
-            case 5:
-                IvySdk.Instance.StopListenHelperUnreadMsgCount();
-                Debug.Log("stop_listen_unread_message called");
-                break;
-            case 6:
-                IvySdk.Instance.UpdateHelperUserInfo("{}", "");
-                Debug.Log("update_user_info called");
-                break;
-            case 7:
-                IvySdk.Instance.ResetHelperUserInfo();
-                Debug.Log("reset_user_info called");
-                break;
-            case 8:
-                IvySdk.Instance.CloseHelper();
-                Debug.Log("close_helper called");
-                break;
-        }
+        //switch (value)
+        //{
+        //    case 0:
+        //        bool isInit = IvySdk.Instance.IsHelperInitialized();
+        //        Debug.Log($"is_initialized --> {isInit}");
+        //        break;
+        //    case 1:
+        //        bool hasNew = IvySdk.Instance.HasNewHelperMessage();
+        //        Debug.Log($"has_new_message --> {hasNew}");
+        //        break;
+        //    case 2:
+        //        IvySdk.Instance.ShowHelper("entranceId", null, null, null);
+        //        Debug.Log("show_helper called");
+        //        break;
+        //    case 3:
+        //        IvySdk.Instance.ShowHelperSingleFAQ("faqId");
+        //        Debug.Log("show_helper_single_faq called");
+        //        break;
+        //    case 4:
+        //        IvySdk.Instance.ListenHelperUnreadMsgCount(false);
+        //        Debug.Log("listen_unread_message called");
+        //        break;
+        //    case 5:
+        //        IvySdk.Instance.StopListenHelperUnreadMsgCount();
+        //        Debug.Log("stop_listen_unread_message called");
+        //        break;
+        //    case 6:
+        //        IvySdk.Instance.UpdateHelperUserInfo("{}", "");
+        //        Debug.Log("update_user_info called");
+        //        break;
+        //    case 7:
+        //        IvySdk.Instance.ResetHelperUserInfo();
+        //        Debug.Log("reset_user_info called");
+        //        break;
+        //    case 8:
+        //        IvySdk.Instance.CloseHelper();
+        //        Debug.Log("close_helper called");
+        //        break;
+        //}
     }
 
     public void OnNotificationDropDownValueChanged(int value)
@@ -678,17 +678,17 @@ public class Sample : MonoBehaviour
 
     public void OnAppsflyerinviteDropDown(int value)
     {
-        switch (value)
-        {
-            case 0:
-                IvySdk.Instance.AppsflyerInviteUser("inviterId", "inviter_app_id");
-                Debug.Log("invite called");
-                break;
-            case 1:
-                string data = IvySdk.Instance.GetAppsflyerInviterId();
-                Debug.Log($"get_inviter_id --> {data}");
-                break;
-        }
+        //switch (value)
+        //{
+        //    case 0:
+        //        IvySdk.Instance.AppsflyerInviteUser("inviterId", "inviter_app_id");
+        //        Debug.Log("invite called");
+        //        break;
+        //    case 1:
+        //        string data = IvySdk.Instance.GetAppsflyerInviterId();
+        //        Debug.Log($"get_inviter_id --> {data}");
+        //        break;
+        //}
     }
 
     public void OnOthersinviteDropDown(int value)

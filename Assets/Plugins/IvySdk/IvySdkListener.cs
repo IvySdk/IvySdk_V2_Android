@@ -54,6 +54,15 @@ namespace com.ivy.sdk
 #endif
 
 
+#if UNITY_ANDROID
+
+        #region 国内接口回调
+        public static event Action OnCNRequireLoginEvent;//在特定情况下，强制要求用户必须登录
+        public static event Action<bool> OnCNLoginEvent;//国内各渠道同意登录回调
+        #endregion
+
+#endif
+
 
         public static event Action<string> OnReceivedNotificationEvent;
 
@@ -119,6 +128,20 @@ namespace com.ivy.sdk
         //    DontDestroyOnLoad(gameObject);
         //}
 
+#if UNITY_ANDROID
+        #region 国内回调
+        //强制要求登录回传，必须调用登录接口login
+        public void onRequireLogin(string data)
+        {
+            if (OnCNRequireLoginEvent != null && OnCNRequireLoginEvent.GetInvocationList().Length > 0)
+            {
+                OnCNRequireLoginEvent.Invoke();
+            }
+        }
+
+        #endregion
+
+#endif
         public void onRemoteConfigSynced()
         {
             if (OnRemoteDataSyncEvent != null && OnRemoteDataSyncEvent.GetInvocationList().Length > 0)
@@ -306,6 +329,13 @@ namespace com.ivy.sdk
                             OnAppleLoginEvent.Invoke(true);
                         }
 #endif
+                    } else if (data.Equals("CN"))
+                    {
+#if UNITY_ANDROID
+                        if (OnCNLoginEvent != null && OnCNLoginEvent.GetInvocationList().Length > 0) {
+                            OnCNLoginEvent.Invoke(true);
+                        }
+#endif
                     }
                 }
                 catch { }
@@ -350,6 +380,15 @@ namespace com.ivy.sdk
                             if (OnAppleLoginEvent != null && OnAppleLoginEvent.GetInvocationList().Length > 0)
                             {
                                 OnAppleLoginEvent.Invoke(false);
+                            }
+#endif
+                        }
+                        else if (data.Equals("CN"))
+                        {
+#if UNITY_ANDROID
+                            if (OnCNLoginEvent != null && OnCNLoginEvent.GetInvocationList().Length > 0)
+                            {
+                                OnCNLoginEvent.Invoke(false);
                             }
 #endif
                         }

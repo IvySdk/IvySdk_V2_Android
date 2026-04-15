@@ -2000,7 +2000,7 @@ namespace com.ivy.sdk
         }
 
 
-        #region 国内独有接口
+        #region 国内接口
         public void ShowGameProtocolDialog()
         {
             if (_class != null)
@@ -2032,6 +2032,24 @@ namespace com.ivy.sdk
             {
                 _class.CallStatic("logout");
             }
+        }
+
+        public string GetLoggedUserInfo()
+        {
+            if (_class != null)
+            {
+                return _class.CallStatic<string>("getLoggedUserInfo");
+            }
+            return "{}";
+        }
+
+        public string GetLoggedUserId()
+        {
+            if (_class != null)
+            {
+                return _class.CallStatic<string>("getLoggedUserId");
+            }
+            return "";
         }
 
         public void TrackEventToGravity(string eventName, Dictionary<string, object> data)

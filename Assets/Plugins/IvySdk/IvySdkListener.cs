@@ -35,7 +35,25 @@ namespace com.ivy.sdk
         public static event Action<bool> OnAppleLogStatusEvent;//apple 登录状态
 
         public static event Action<bool> OnFacebookLogStatusEvent;// facebook 登录状态
+
+
+        public static event Action<int> OnNotificationPermissionEvent; // 通知权限状态，0：已拒绝； 1：已允许；2：待申请
+        public static event Action OnCustomATTRequestEvent;  //自定义UMP引导
+        public static event Action OnCustomATTRequestEndEvent; //自定义UMP引导结束
+        public static event Action<bool> OnATTRequestEvent; //自定义ATT引导结束
+        public static event Action<bool> OnGameCenterAuthEvent; //GameCenter 登录回调
+
+        #region 国内接口回调
+        public static event Action<bool> OnWeChatLogStateEvent;//微信登录状态回传，由接口IsWeChatLogged触发
+        public static event Action<bool> OnWeChatLogResultEvent;//微信登录结果回传，由接口LoginWeChat触发
+        public static event Action<bool> OnUserProtocolResultEvent;//用户协议结果回传，由接口ShowGameProtocolDialog触发
+        public static event Action<bool> OnIdVerifyResultEvent;//用户协议结果回传，由接口ShowIdVerifyDialog、VerifyIdCard触发
+        #endregion
+
+
 #endif
+
+
 
         public static event Action<string> OnReceivedNotificationEvent;
 
@@ -65,14 +83,6 @@ namespace com.ivy.sdk
 
         //remote data 同步完成回调
         public static event Action OnRemoteDataSyncEvent;
-
-#if UNITY_IOS
-        public static event Action<int> OnNotificationPermissionEvent; // 通知权限状态，0：已拒绝； 1：已允许；2：待申请
-        public static event Action OnCustomATTRequestEvent;  //自定义UMP引导
-        public static event Action OnCustomATTRequestEndEvent; //自定义UMP引导结束
-        public static event Action<bool> OnATTRequestEvent; //自定义ATT引导结束
-        public static event Action<bool> OnGameCenterAuthEvent; //GameCenter 登录回调
-#endif
 
         public static event Action<string> OnReceivedAdIdEvent;//Android Advertising Id 回传
 
@@ -468,6 +478,7 @@ namespace com.ivy.sdk
         #endregion
 
 
+
 #if UNITY_IOS
         #region ATT
         public void onCustomATTRequest(string data)
@@ -523,6 +534,73 @@ namespace com.ivy.sdk
         }
 
         #endregion
+
+#region 国内接口回调
+    public void onWeChatLogState(string data)
+        {
+            if (!string.IsNullOrEmpty(data))
+            {
+                try
+                {
+                    int state = int.Parse(data);
+                    if (OnWeChatLogStateEvent != null && OnWeChatLogStateEvent.GetInvocationList().Length > 0)
+                    {
+                        OnWeChatLogStateEvent.Invoke(state == 1);
+                    }
+                }
+                catch { }
+            }
+        }
+
+        public void onWeChatLogResult(string data)
+        {
+            if (!string.IsNullOrEmpty(data))
+            {
+                try
+                {
+                    int state = int.Parse(data);
+                    if (OnWeChatLogResultEvent != null && OnWeChatLogResultEvent.GetInvocationList().Length > 0)
+                    {
+                        OnWeChatLogResultEvent.Invoke(state == 1);
+                    }
+                }
+                catch { }
+            }
+        }
+
+        public void onIdVeriftResult(string data)
+        {
+            if (!string.IsNullOrEmpty(data))
+            {
+                try
+                {
+                    int state = int.Parse(data);
+                    if (OnIdVerifyResultEvent != null && OnIdVerifyResultEvent.GetInvocationList().Length > 0)
+                    {
+                        OnIdVerifyResultEvent.Invoke(state == 1);
+                    }
+                }
+                catch { }
+            }
+        }
+
+        public void onUserProtocolResult(string data)
+        {
+            if (!string.IsNullOrEmpty(data))
+            {
+                try
+                {
+                    int state = int.Parse(data);
+                    if (OnUserProtocolResultEvent != null && OnUserProtocolResultEvent.GetInvocationList().Length > 0)
+                    {
+                        OnUserProtocolResultEvent.Invoke(state == 1);
+                    }
+                }
+                catch { }
+            }
+        }
+#endregion
+
 #endif
 
         #region ads
@@ -1097,6 +1175,7 @@ namespace com.ivy.sdk
         }
         #endregion
 
+        #region PlayGame 存档
         public void onPGArchiveRead(string data)
         {
             if (!string.IsNullOrEmpty(data))
@@ -1160,6 +1239,10 @@ namespace com.ivy.sdk
 
             }
         }
+
+        #endregion
+
+
 
 
     }

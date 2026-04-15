@@ -2345,7 +2345,24 @@ namespace com.ivy.sdk
         [DllImport("__Internal")]
         private static extern void hideLoading();
 
-
+#region 国内接口
+        [DllImport("__Internal")]
+        private static extern void loginWeChat();
+        [DllImport("__Internal")]
+        private static extern void isWeChatLogged();
+        [DllImport("__Internal")]
+        private static extern void logoutWeChat();
+        [DllImport("__Internal")]
+        private static extern string getWeChatUserInfo();
+        [DllImport("__Internal")]
+        private static extern void showGameProtocolDialog();
+        [DllImport("__Internal")]
+        private static extern void showIdVerifyDialog();
+        [DllImport("__Internal")]
+        private static extern bool isIdVerified();
+        [DllImport("__Internal")]
+        private static extern void verifyIdCard(string name, string card);
+#endregion
 
         private bool hasCalledInit = false;
 
@@ -3529,6 +3546,48 @@ namespace com.ivy.sdk
             showChallenges();
         }
 
+        #region 国内接口
+
+        private void LoginWeChat()
+        {
+            loginWeChat();
+        }
+ 
+        private void IsWeChatLogged()
+        {
+            isWeChatLogged();
+        }
+        
+        private void LogoutWeChat()
+        {
+            logoutWeChat();
+        }
+
+        private string GetWeChatUserInfo()
+        {
+            return getWeChatUserInfo();
+        }
+
+        private void ShowGameProtocolDialog()
+        {
+            showGameProtocolDialog();
+        }
+  
+        private void ShowIdVerifyDialog()
+        {
+            showIdVerifyDialog();
+        }
+
+        private bool IsIdVerified()
+        {
+            return isIdVerified();
+        }
+      
+        private void VerifyIdCard(string name, string card)
+        {
+            verifyIdCard(string name, string card);
+        }
+#endregion
 
 #endif
         /// <summary>

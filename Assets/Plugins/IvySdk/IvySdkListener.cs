@@ -57,6 +57,7 @@ namespace com.ivy.sdk
 #if UNITY_ANDROID
 
         #region 国内接口回调
+        public static event Action OnCNPolicyResultEvent;//用户协议结果
         public static event Action OnCNRequireLoginEvent;//在特定情况下，强制要求用户必须登录
         public static event Action<bool> OnCNLoginEvent;//国内各渠道同意登录回调
         #endregion
@@ -136,6 +137,14 @@ namespace com.ivy.sdk
             if (OnCNRequireLoginEvent != null && OnCNRequireLoginEvent.GetInvocationList().Length > 0)
             {
                 OnCNRequireLoginEvent.Invoke();
+            }
+        }
+
+        public void onPolicyAccepted(string data)
+        {
+            if (OnCNPolicyResultEvent != null && OnCNPolicyResultEvent.GetInvocationList().Length > 0)
+            {
+                OnCNPolicyResultEvent.Invoke();
             }
         }
 

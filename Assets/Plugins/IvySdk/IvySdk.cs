@@ -2052,6 +2052,16 @@ namespace com.ivy.sdk
             return "";
         }
 
+        //用户唯一id， 官包根据身份证号码生成，  其它渠道需要登录后才会返回正确值
+        public string GetUserUniqueId()
+        {
+            if (_class != null)
+            {
+                return _class.CallStatic<string>("getUserUniqueId");
+            }
+            return "";
+        }
+
         public void TrackEventToGravity(string eventName, Dictionary<string, object> data)
         {
             try

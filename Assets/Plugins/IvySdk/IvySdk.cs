@@ -2083,6 +2083,14 @@ namespace com.ivy.sdk
             }
         }
 
+        public void SaveCloudData(string collection, string documentId, string jsonData, bool is_compressed)
+        {
+            if (_class != null)
+            {
+                _class.CallStatic("saveCloudData", collection, documentId, jsonData, is_compressed);
+            }
+        }
+
         #endregion
 
 

@@ -383,7 +383,7 @@ namespace com.ivy.sdk
                                 OnGoogleLoginEvent.Invoke(false);
                             }
                         }
-                        else if (data.Equals("apple"))
+                        else if (platform.Equals("apple"))
                         {
 #if UNITY_IOS
                             if (OnAppleLoginEvent != null && OnAppleLoginEvent.GetInvocationList().Length > 0)
@@ -392,7 +392,7 @@ namespace com.ivy.sdk
                             }
 #endif
                         }
-                        else if (data.Equals("CN"))
+                        else if (platform.Equals("CN"))
                         {
 #if UNITY_ANDROID
                             if (OnCNLoginEvent != null && OnCNLoginEvent.GetInvocationList().Length > 0)

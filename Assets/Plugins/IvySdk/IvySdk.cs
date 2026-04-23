@@ -9,6 +9,7 @@ using UnityEngine;
 using UnityEditor;
 using System.Diagnostics;
 using Debug = UnityEngine.Debug;
+using System.Collections.ObjectModel;
 #endif
 
 namespace com.ivy.sdk
@@ -2091,6 +2092,14 @@ namespace com.ivy.sdk
             }
         }
 
+        public void JoinQQGroup(string key)
+        {
+            if (_class != null)
+            {
+                _class.CallStatic("joinQQGroup", key);
+            }
+        }
+   
         #endregion
 
 

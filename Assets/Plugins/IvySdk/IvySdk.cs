@@ -141,6 +141,18 @@ namespace com.ivy.sdk
                 Debug.LogException(e);
             }
         }
+
+        public void HideSplash()
+        {
+            using (AndroidJavaClass unityPlayer = new AndroidJavaClass("com.unity3d.player.UnityPlayer"))
+            {
+                using (AndroidJavaObject context = unityPlayer.GetStatic<AndroidJavaObject>("currentActivity"))
+                {
+                    context.Call("hideSplash");
+                }
+            }
+        }
+
         //广告媒体平台
         public string GetMediaSource()
         {
@@ -593,6 +605,17 @@ namespace com.ivy.sdk
                 return _class.CallStatic<bool>("isPaymentValid");
             }
             return false;
+        }
+
+        /**
+         *  设置用于计费校验的用户id
+         */
+        public void SetPaymentUserId(string user_id)
+        {
+            if (_class != null)
+            {
+                _class.CallStatic("setPaymentUserId", user_id);
+            }
         }
 
         #endregion

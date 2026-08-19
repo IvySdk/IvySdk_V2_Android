@@ -169,18 +169,6 @@ namespace com.ivy.sdk
             }
         }
 
-        /**
-         * 屏蔽指定关卡轨迹上传
-         *
-         * @param data 关卡列表，ex:  1,2,3
-         */
-        public void UpdateBlockTrajectoryLevels(string data)
-        {
-            if (_class != null)
-            {
-                _class.CallStatic("updateBlockTrajectoryLevels", data);
-            }
-        }
 
         //广告媒体平台
         public string GetMediaSource()

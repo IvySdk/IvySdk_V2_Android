@@ -153,6 +153,35 @@ namespace com.ivy.sdk
             }
         }
 
+        //关卡轨迹
+        /**
+           * 上传轨迹
+           *
+           * @param levelId  关卡id
+           * @param userTier 用户分层
+           * @param data     轨迹数据
+           */
+        public void UploadTrajectory(int levelId, string userTier, string data)
+        {
+            if (_class != null)
+            {
+                _class.CallStatic("UploadTrajectory", levelId, userTier, data);
+            }
+        }
+
+        /**
+         * 屏蔽指定关卡轨迹上传
+         *
+         * @param data 关卡列表，ex:  1,2,3
+         */
+        public void UpdateBlockTrajectoryLevels(string data)
+        {
+            if (_class != null)
+            {
+                _class.CallStatic("updateBlockTrajectoryLevels", data);
+            }
+        }
+
         //广告媒体平台
         public string GetMediaSource()
         {

@@ -165,7 +165,7 @@ namespace com.ivy.sdk
         {
             if (_class != null)
             {
-                _class.CallStatic("UploadTrajectory", levelId, userTier, data);
+                _class.CallStatic("uploadTrajectory", levelId, userTier, data);
             }
         }
 

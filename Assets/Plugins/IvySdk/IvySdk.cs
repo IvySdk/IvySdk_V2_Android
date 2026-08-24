@@ -10,6 +10,7 @@ using UnityEditor;
 using System.Diagnostics;
 using Debug = UnityEngine.Debug;
 using System.Collections.ObjectModel;
+using System.Runtime.InteropServices;
 #endif
 
 namespace com.ivy.sdk
@@ -1636,6 +1637,18 @@ namespace com.ivy.sdk
         }
 
         /**
+        * 设置客服语言 ，
+        * 
+        */
+        public void UpdateHelperLanguage(string language)
+        {
+            if (_class != null)
+            {
+                _class.CallStatic("updateHelperLanguage", language);
+            }
+        }
+
+        /**
          * 关闭客服
          */
         public void CloseHelper()
@@ -2193,7 +2206,7 @@ namespace com.ivy.sdk
         }
 
         #endregion
-
+    
 
 #elif UNITY_IOS
         [DllImport ("__Internal")]

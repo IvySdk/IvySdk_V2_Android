@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace com.ivy.sdk
@@ -96,6 +97,7 @@ namespace com.ivy.sdk
 
         public static event Action<string> OnReceivedAdIdEvent;//Android Advertising Id 回传
 
+        public static event Action<string, string> OnTranslateResultEvent;// Translate接口回调，第一个参数是原语句，第二个是翻译结果，结果可能为空
 
         public static IvySdkListener Instance
         {
@@ -1278,6 +1280,8 @@ namespace com.ivy.sdk
             }
         }
 
+        #endregion
+
         public void onReceivedAdId(string data)
         {
             if (!string.IsNullOrEmpty(data))
@@ -1286,13 +1290,27 @@ namespace com.ivy.sdk
                 {
                     OnReceivedAdIdEvent.Invoke(data);
                 }
-
             }
         }
 
-        #endregion
-
-
+        public void onTranslateResult(string data)
+        {
+            if (!string.IsNullOrEmpty(data))
+            {
+                try
+                {
+                    object result = IvyJson.Deserialize(data);
+                    Dictionary<string, object> json = result as Dictionary<string, object>;
+                    string src = json["src"] as string;
+                    string dst = json["dst"] as string;
+                    if (OnTranslateResultEvent != null && OnTranslateResultEvent.GetInvocationList().Length > 0)
+                    {
+                        OnTranslateResultEvent.Invoke(src, dst);
+                    }
+                }
+                catch (Exception e) { }
+            }
+        }
 
 
     }

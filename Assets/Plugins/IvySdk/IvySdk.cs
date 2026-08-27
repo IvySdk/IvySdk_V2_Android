@@ -2098,6 +2098,14 @@ namespace com.ivy.sdk
         }
 
 
+        public void Translate(string from_lang, string dst_lang, string data)
+        {
+            if (_class != null)
+            {
+                _class.CallStatic("translate", from_lang, dst_lang, data);
+            }
+        }
+
         #region 国内接口
         public void ShowGameProtocolDialog()
         {

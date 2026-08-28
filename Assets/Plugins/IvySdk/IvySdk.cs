@@ -638,6 +638,126 @@ namespace com.ivy.sdk
 
         #endregion
 
+        #region EnjoyPay
+        public void EnjoyPay(int id)
+        {
+#if UNITY_EDITOR
+            RiseEditorAd.EditorAdInstance.Pay(id);
+#endif
+            if (_class != null)
+            {
+                _class.CallStatic("enjoyPay", id);
+            }
+        }
+
+        public void EnjoyPay(int id, string payload)
+        {
+#if UNITY_EDITOR
+            RiseEditorAd.EditorAdInstance.Pay(id);
+#endif
+            if (_class != null)
+            {
+                _class.CallStatic("enjoyPay", id, payload);
+            }
+        }
+
+        /**
+         *  支付
+         *  @param id           计费点位id
+         *  @param payload      
+         *  @param clientInfo   客户端自定义信息，JSONObject结构，注意 bool值会被转换位1/0
+         */
+        public void EnjoyPay(int id, string payload, string clientInfo)
+        {
+#if UNITY_EDITOR
+            RiseEditorAd.EditorAdInstance.Pay(id);
+#endif
+            if (_class != null)
+            {
+                _class.CallStatic("enjoyPay", id, payload, clientInfo);
+            }
+        }
+
+        /**
+         *  如果在使用在线计费校验时，请在客户端发放奖励时调用此接口通知服务端发货
+         *  @param merchantTransactionId    预下单id
+         */
+        public void EnjoyPayShippingGoods(string merchantTransactionId)
+        {
+            ShippingGoods(merchantTransactionId);
+        }
+
+        /**
+         * 查询指定计费点位是否存在未处理支付记录
+         * @param id    计费点位 id 
+         */
+        public void QueryEnjoyPayOrder(int id)
+        {
+            if (_class != null)
+            {
+                _class.CallStatic("queryEnjoyPayOrder", id);
+            }
+        }
+
+        /**
+         * 查询所有未处理支付记录
+         */
+        public void QueryEnjoyPayOrders()
+        {
+            if (_class != null)
+            {
+                _class.CallStatic("queryEnjoyPayOrders");
+            }
+        }
+
+        /**
+         *  查询指定计费点位详情
+         */
+        public string GetEnjoyPayData(int id)
+        {
+            if (_class != null)
+            {
+                return _class.CallStatic<string>("getEnjoyPayData", id);
+            }
+            return "{}";
+        }
+
+        /**
+         *  查询所有计费点位详情
+         */
+        public string GetEnjoyPayDatas()
+        {
+            if (_class != null)
+            {
+                return _class.CallStatic<string>("getEnjoyPayDatas");
+            }
+            return "{}";
+        }
+
+        /**
+         * 计费系统是否可用
+         */
+        public bool IsEnjoyPayValid()
+        {
+            if (_class != null)
+            {
+                return _class.CallStatic<bool>("isEnjoyPayValid");
+            }
+            return false;
+        }
+
+        /**
+         *  设置用于计费校验的用户id
+         */
+        public void SetEnjoyPayUserId(string user_id)
+        {
+           SetPaymentUserId(user_id);
+        }
+
+        #endregion
+
+
+
         #region track
         /**
          * 统计事件至 所有平台

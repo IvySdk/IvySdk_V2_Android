@@ -1297,6 +1297,17 @@ namespace com.ivy.sdk
             }
         }
 
+        //playgames 上传游戏统计数据
+        //eventId   事件名称
+        //property  事件属性，结构类型：JSONObject 
+        public void SubmitPlayGameEvent(string eventId, string property)
+        {
+            if (_class != null)
+            {
+                _class.CallStatic("submitPlayGameEvent", eventId, property);
+            }
+        }
+
         #endregion
 
         #region G+

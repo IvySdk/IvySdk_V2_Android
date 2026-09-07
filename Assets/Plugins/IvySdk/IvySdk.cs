@@ -2334,7 +2334,7 @@ namespace com.ivy.sdk
         }
 
         #endregion
-    
+
 
 #elif UNITY_IOS
         [DllImport ("__Internal")]
@@ -2558,8 +2558,11 @@ namespace com.ivy.sdk
         [DllImport("__Internal")]
         private static extern void vibrate(int degree);
         [DllImport("__Internal")]
+        private static extern void vibrateWithCure(string duration, string intensity, string sharpness);
+        [DllImport("__Internal")]
+        private static extern void vibrateSingle(float duration, float intensity, float sharpness);
+        [DllImport("__Internal")]
         private static extern void playAHAP(string file_name, string folder);
-
         [DllImport("__Internal")]
         private static extern void addShortcut(string type, string title, string subtitle, string icon);
         [DllImport("__Internal")]
@@ -3731,6 +3734,27 @@ namespace com.ivy.sdk
         public void Vibrate(int degree)
         {
             vibrate(degree);
+        }
+
+        /**
+         *  @param duration    时间列表，单位毫秒，用逗号分隔
+         *  @param intensity   震动强度列表，取值范围：0-1，用逗号分割
+         *  @param sharpness   震动锐度列表，取值范围：0-1，用逗号分割
+         *    ！！！ 注意：以上三个列表长度必须一致
+         */
+        private void VibrateWithCure(string duration, string intensity, string sharpness)
+        {
+            vibrateWithCure(duration, intensity, sharpness)
+        }
+     
+        /**
+         *  @param duration    时间，单位毫秒
+         *  @param intensity   震动强度，取值范围：0-1
+         *  @param sharpness   震动锐度，取值范围：0-1
+         */
+        private void VibrateSingle(float duration, float intensity, float sharpness)
+        {
+            vibrateSingle(duration, intensity, sharpness)
         }
 
         public void PlayAHAP(string file_name, string folder)

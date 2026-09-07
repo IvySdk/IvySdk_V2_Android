@@ -2172,6 +2172,14 @@ namespace com.ivy.sdk
             }
         }
 
+        public void CancelVibrate()
+        {
+            if (_class != null)
+            {
+                _class.CallStatic("cancelVibrate");
+            }
+        }
+
         public void AddShortcut(string id, string title, string label, string icon) {
             if (_class != null)
             {
@@ -2216,7 +2224,6 @@ namespace com.ivy.sdk
                 _class.CallStatic("getAdId");
             }
         }
-
 
         public void Translate(string from_lang, string dst_lang, string data)
         {
@@ -2561,6 +2568,8 @@ namespace com.ivy.sdk
         private static extern void vibrateWithCure(string duration, string intensity, string sharpness);
         [DllImport("__Internal")]
         private static extern void vibrateSingle(float duration, float intensity, float sharpness);
+        [DllImport("__Internal")]
+        private static extern void cancelVibrate();
         [DllImport("__Internal")]
         private static extern void playAHAP(string file_name, string folder);
         [DllImport("__Internal")]
@@ -3742,7 +3751,7 @@ namespace com.ivy.sdk
          *  @param sharpness   震动锐度列表，取值范围：0-1，用逗号分割
          *    ！！！ 注意：以上三个列表长度必须一致
          */
-        private void VibrateWithCure(string duration, string intensity, string sharpness)
+        public void VibrateWithCure(string duration, string intensity, string sharpness)
         {
             vibrateWithCure(duration, intensity, sharpness)
         }
@@ -3752,9 +3761,14 @@ namespace com.ivy.sdk
          *  @param intensity   震动强度，取值范围：0-1
          *  @param sharpness   震动锐度，取值范围：0-1
          */
-        private void VibrateSingle(float duration, float intensity, float sharpness)
+        public void VibrateSingle(float duration, float intensity, float sharpness)
         {
             vibrateSingle(duration, intensity, sharpness)
+        }
+
+        public void CancelVibrate()
+        {
+            cancelVibrate();
         }
 
         public void PlayAHAP(string file_name, string folder)

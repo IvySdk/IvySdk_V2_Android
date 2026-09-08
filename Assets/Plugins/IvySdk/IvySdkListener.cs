@@ -29,6 +29,7 @@ namespace com.ivy.sdk
         public static event Action<string, string, bool> OnPlayGameAchiveSetEvent;
         public static event Action<string, string> OnPlayGameAchiveReadEvent;
         public static event Action<string> OnPlayGameActivityEvents;
+        public static event Action<string, string, string> OnPlayGameLeaderboardScoreEvents;
 
 #if UNITY_IOS
         public static event Action<bool> OnAppleLoginEvent; // apple 登入
@@ -1277,6 +1278,29 @@ namespace com.ivy.sdk
                 {
                     OnPlayGameActivityEvents.Invoke(data);
                 }
+            }
+        }
+
+        public void onPGLeaderboardScore(string data) {
+            try
+            {
+                if (!string.IsNullOrEmpty(data))
+                {
+                    string[] args = data.Split('|');
+                    if (args != null && args.Length == 3)
+                    {
+                        string leaderboardId = args[0];
+                        string score = args[1];
+                        string rank = args[2];
+                        if (OnPlayGameLeaderboardScoreEvents != null && OnPlayGameLeaderboardScoreEvents.GetInvocationList().Length > 0)
+                        {
+                            OnPlayGameLeaderboardScoreEvents.Invoke(leaderboardId, score, rank);
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
             }
         }
 

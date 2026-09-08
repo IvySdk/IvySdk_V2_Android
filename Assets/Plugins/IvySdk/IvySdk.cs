@@ -11,6 +11,7 @@ using System.Diagnostics;
 using Debug = UnityEngine.Debug;
 using System.Collections.ObjectModel;
 using System.Runtime.InteropServices;
+using UnityEngine.SocialPlatforms.Impl;
 #endif
 
 namespace com.ivy.sdk
@@ -1255,6 +1256,14 @@ namespace com.ivy.sdk
             }
         }
 
+        public void LoadLeaderboardScore(string leaderboardId)
+        {
+            if (_class != null)
+            {
+                _class.CallStatic("loadLeaderboardScore", leaderboardId);
+            }
+        }
+
         //playgames  写存档
         public void SetPlayGamesArchive(string archiveName, string transcationId, string payload) {
             if (_class != null)
@@ -1264,7 +1273,7 @@ namespace com.ivy.sdk
         }
 
          //playgames  读存档
-        public void readPlayGamesArchive(string archiveName) {
+        public void ReadPlayGamesArchive(string archiveName) {
             if (_class != null)
             {
                 _class.CallStatic("readPlayGamesArchive", archiveName);
@@ -1272,7 +1281,7 @@ namespace com.ivy.sdk
         }
 
         //playgames 更新活动事件进度
-        public void submitPlayGamesActivityEvent(string eventId, int increment) {
+        public void SubmitPlayGamesActivityEvent(string eventId, int increment) {
             if (_class != null)
             {
                 _class.CallStatic("submitPGActivityEvent", eventId, increment);
@@ -1281,7 +1290,7 @@ namespace com.ivy.sdk
 
         //playgames 根据事件id获取活动事件信息
         // 返回结构 "[{"id":"xxx", "name":"xxx", "value": "xxx", "icon":"xxx"}]"
-        public void loadPlayGamesActivityEventById(string eventId) {
+        public void LoadPlayGamesActivityEventById(string eventId) {
             if (_class != null)
             {
                 _class.CallStatic("loadPGActivityEventById", eventId);
@@ -1290,7 +1299,7 @@ namespace com.ivy.sdk
 
         //playgames 获取所有活动事件信息
         // 返回结构 "[{"id":"xxx", "name":"xxx", "value": "xxx", "icon":"xxx"}]"
-        public void loadPlayGamesActivityEvents() {
+        public void LoadPlayGamesActivityEvents() {
             if (_class != null)
             {
                 _class.CallStatic("loadPGActivityEvents");

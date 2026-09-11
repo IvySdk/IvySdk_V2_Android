@@ -1199,7 +1199,7 @@ namespace com.ivy.sdk
         /**
          * 提升成就
          * @param achievementId     成就id
-         * @param step 增长量
+         * @param step 增量,eq: 1->2, 应该传1
          */
         public void IncreaseAchievement(string achievementId, int step)
         {
@@ -1212,7 +1212,7 @@ namespace com.ivy.sdk
         /**
          * 直接设定成就进度
          * @param achievementId     成就id
-         * @param step 进度值
+         * @param step 进度值，当前总量
          */
         public void SetAchievementStep(string achievementId, int step)
         {

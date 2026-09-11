@@ -1199,13 +1199,26 @@ namespace com.ivy.sdk
         /**
          * 提升成就
          * @param achievementId     成就id
-         * @param step
+         * @param step 增长量
          */
         public void IncreaseAchievement(string achievementId, int step)
         {
             if (_class != null)
             {
                 _class.CallStatic("increaseAchievement", achievementId, step);
+            }
+        }
+
+        /**
+         * 直接设定成就进度
+         * @param achievementId     成就id
+         * @param step 进度值
+         */
+        public void SetAchievementStep(string achievementId, int step)
+        {
+            if (_class != null)
+            {
+                _class.CallStatic("setAchievementStep", achievementId, step);
             }
         }
 

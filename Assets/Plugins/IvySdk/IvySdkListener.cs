@@ -17,6 +17,7 @@ namespace com.ivy.sdk
 #endif
 
         public static event Action<int> HelperUnreadMsgCountEvent;
+        public static event Action<bool> OnHelperOpenStatusEvent;
 
         public static event Action OnAuthPlatformInitializeEvent; // 三方登录 平台初始化回调
         public static event Action<bool> OnPlayGamesLoginEvent;// 
@@ -292,6 +293,22 @@ namespace com.ivy.sdk
                     if (HelperUnreadMsgCountEvent != null && HelperUnreadMsgCountEvent.GetInvocationList().Length > 0)
                     {
                         HelperUnreadMsgCountEvent.Invoke(msgCount);
+                    }
+                }
+                catch { }
+            }
+        }
+
+        public void onHelperStatus(string data)
+        {
+            if (!string.IsNullOrEmpty(data))
+            {
+                try
+                {
+                    int msg = int.Parse(data);
+                    if (OnHelperOpenStatusEvent != null && OnHelperOpenStatusEvent.GetInvocationList().Length > 0)
+                    {
+                        OnHelperOpenStatusEvent.Invoke(msg == 1);
                     }
                 }
                 catch { }

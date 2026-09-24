@@ -8,18 +8,16 @@
 //google 支付模块，可以根据需要引入
     implementation("io.github.ivysdk:GooglePay:$sdk_version")
 //广告聚合平台，根据需要选择引入
-    implementation("io.github.ivysdk:Admob:$sdk_version")
-    implementation("io.github.ivysdk:Max:$sdk_version")
-    implementation("io.github.ivysdk:Yandex:$sdk_version")
+    implementation("io.github.ivysdk:MaxAds:$sdk_version")
+    implementation("io.github.ivysdk:AdmobAds:$sdk_version")
+    implementation("io.github.ivysdk:YandexAds:$sdk_version")
 //游戏排行榜、成就等，根据需要选择引入
     implementation("io.github.ivysdk:PlayGames:$sdk_version")
 //事件统计平台，根据需要引入
     implementation("io.github.ivysdk:Appsflyer:$sdk_version")
     implementation("io.github.ivysdk:Facebook:$sdk_version")
     implementation("io.github.ivysdk:Firebase:$sdk_version")
-    implementation("io.github.ivysdk:thinkingsdk:$sdk_version")
-//云存档模块，根据需要引入
-    implementation("io.github.ivysdk:Firestore:$sdk_version")
+    //implementation("io.github.ivysdk:thinkingsdk:$sdk_version")
 //客服模块，根据需要引入
     implementation("io.github.ivysdk:AIHelp:$sdk_version")
 ```

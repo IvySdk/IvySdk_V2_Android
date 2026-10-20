@@ -3719,12 +3719,12 @@ namespace com.ivy.sdk
 
         public void StartListenFoldStateChange()
         {
-            return startListenFoldStateChange();
+            startListenFoldStateChange();
         }
 
         public void StopListenFoldStateChange()
         {
-            return stopListenFoldStateChange();
+            stopListenFoldStateChange();
         }
 
 #endregion
@@ -3839,7 +3839,7 @@ namespace com.ivy.sdk
          */
         public void VibrateWithCure(string duration, string intensity, string sharpness)
         {
-            vibrateWithCure(duration, intensity, sharpness)
+            vibrateWithCure(duration, intensity, sharpness);
         }
      
         /**
@@ -3849,7 +3849,7 @@ namespace com.ivy.sdk
          */
         public void VibrateSingle(float duration, float intensity, float sharpness)
         {
-            vibrateSingle(duration, intensity, sharpness)
+            vibrateSingle(duration, intensity, sharpness);
         }
 
         public void CancelVibrate()

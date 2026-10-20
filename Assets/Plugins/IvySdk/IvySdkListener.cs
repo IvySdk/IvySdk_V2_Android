@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using UnityEngine;
 
 namespace com.ivy.sdk
@@ -15,6 +16,8 @@ namespace com.ivy.sdk
 #if UNITY_IOS
         public static event Action<int, bool> OnPaymentRestoreEvent;
 #endif
+
+        public static event Action<int, float> OnHingeStateChangedEvent;//折叠屏状态变化回调
 
         public static event Action<int> HelperUnreadMsgCountEvent;
         public static event Action<bool> OnHelperOpenStatusEvent;
@@ -1352,6 +1355,33 @@ namespace com.ivy.sdk
                 catch (Exception e) { }
             }
         }
+
+        #region 折叠屏
+
+        public void onHingeStateChanged(string data)
+        {
+            if (!string.IsNullOrEmpty(data))
+            {
+                try
+                {
+                    string[] args = data.Split('|');
+                    if (args != null && args.Length == 2)
+                    {
+                        int state = int.Parse(args[0]); // 折叠状态 ； 0 未知；1 未展开； 2 部分展开； 3 完全展开；
+                        float angle = float.Parse(args[1]); //折叠弧度
+                        if (OnHingeStateChangedEvent != null && OnHingeStateChangedEvent.GetInvocationList().Length > 0)
+                        {
+                            OnHingeStateChangedEvent.Invoke(state, angle);
+                        }
+                    }
+                    
+                }
+                catch (Exception e) { }
+            }
+        }
+
+
+        #endregion
 
 
     }

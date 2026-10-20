@@ -2672,6 +2672,18 @@ namespace com.ivy.sdk
         [DllImport("__Internal")]
         private static extern void hideLoading();
 
+        [DllImport("__Internal")]
+        private static extern bool isFoldableDevice();
+        [DllImport("__Internal")]
+        private static extern int currentFoldState();
+        [DllImport("__Internal")]
+        private static extern float currentFoldAngle();
+        [DllImport("__Internal")]
+        private static extern void startListenFoldStateChange();
+        [DllImport("__Internal")]
+        private static extern void stopListenFoldStateChange();
+
+
 #region 国内接口
         [DllImport("__Internal")]
         private static extern void loginWeChat();
@@ -3675,6 +3687,47 @@ namespace com.ivy.sdk
         }
 
         #endregion
+
+#region 折叠屏
+ 
+        /**
+        *  !!! 所有折叠屏API必须在sdk初始化后延迟1s再使用，否则返回信息不准确
+         */
+        public bool IsFoldableDevice()
+        {
+            return isFoldableDevice();
+        }
+        
+        /**
+         * 当前折叠状态
+         *  @return  0    未知状态
+         *           1    未展开
+         *           2    部分展开
+         *           3    完全展开
+         *
+        */
+        public int CurrentFoldState()
+        {
+            return currentFoldState();
+        }
+
+        // 注意返回值为弧度
+        public float CurrentFoldAngle()
+        {
+            return currentFoldAngle();
+        }
+
+        public void StartListenFoldStateChange()
+        {
+            return startListenFoldStateChange();
+        }
+
+        public void StopListenFoldStateChange()
+        {
+            return stopListenFoldStateChange();
+        }
+
+#endregion
 
         public void SendEmail(string email, string content)
         {

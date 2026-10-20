@@ -4,22 +4,22 @@
 ```js
     def sdk_version = "xxx"
 // 核心模块，必须引入
-    implementation("io.github.ivysdk:Core:$sdk_version")
+    implementation("com.github.IvySdk.IvySdk-V2:Core:$sdk_version")
 //google 支付模块，可以根据需要引入
-    implementation("io.github.ivysdk:GooglePay:$sdk_version")
+    implementation("com.github.IvySdk.IvySdk-V2:GooglePay:$sdk_version")
 //广告聚合平台，根据需要选择引入
-    implementation("io.github.ivysdk:MaxAds:$sdk_version")
-    implementation("io.github.ivysdk:AdmobAds:$sdk_version")
-    implementation("io.github.ivysdk:YandexAds:$sdk_version")
+    implementation("com.github.IvySdk.IvySdk-V2:MaxAds:$sdk_version")
+    implementation("com.github.IvySdk.IvySdk-V2:AdmobAds:$sdk_version")
+    implementation("com.github.IvySdk.IvySdk-V2:YandexAds:$sdk_version")
 //游戏排行榜、成就等，根据需要选择引入
-    implementation("io.github.ivysdk:PlayGames:$sdk_version")
+    implementation("com.github.IvySdk.IvySdk-V2:PlayGames:$sdk_version")
 //事件统计平台，根据需要引入
-    implementation("io.github.ivysdk:Appsflyer:$sdk_version")
-    implementation("io.github.ivysdk:Facebook:$sdk_version")
-    implementation("io.github.ivysdk:Firebase:$sdk_version")
-    //implementation("io.github.ivysdk:thinkingsdk:$sdk_version")
+    implementation("com.github.IvySdk.IvySdk-V2:Appsflyer:$sdk_version")
+    implementation("com.github.IvySdk.IvySdk-V2:Facebook:$sdk_version")
+    implementation("com.github.IvySdk.IvySdk-V2:Firebase:$sdk_version")
+    //implementation("com.github.IvySdk.IvySdk-V2:thinkingsdk:$sdk_version")
 //客服模块，根据需要引入
-    implementation("io.github.ivysdk:AIHelp:$sdk_version")
+    implementation("com.github.IvySdk.IvySdk-V2:AIHelp:$sdk_version")
 ```
 
 # 混淆
@@ -54,7 +54,8 @@ android {
                 "gms_play_services_id" : "16951538787", 
                 "applovin_sdk_key"      : "E8pVhU9mykQd3y0TD0Ksoq4vpf_Muat6ifcP9m96UakTWk5klQaWEeQ2IPOA-GHgxu54eEA8pvgKcn2MBdtQGH",
                 "ivy_notch"             : true, //是否适配刘海屏
-                "aps_id"                : "" //amazion app id
+                "aps_id"                : "", //amazion app id
+                "ivy_splash"            : false
         ]
     }
 }

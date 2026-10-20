@@ -1,8 +1,9 @@
 @[TOC](Android SDK 接入文档)
 
 # SDK引入
+
 ```js
-    def sdk_version = "xxx"
+def sdk_version = "xxx"
 // 核心模块，必须引入
     implementation("com.github.IvySdk.IvySdk-V2:Core:$sdk_version")
 //google 支付模块，可以根据需要引入
@@ -23,6 +24,7 @@
 ```
 
 # 混淆
+
 ```js
 -keep class com.ivy.sdk.** { *; }
 -keep interface com.ivy.sdk.** { *; }
@@ -39,6 +41,7 @@
 ```
 
 # 原生配置
+
 ```js
 请在原生项目 build.gradle文件内增加以下配置:
 android {
@@ -62,17 +65,20 @@ android {
 ```
 
 # 初始化
+
 ```js
-        Builder builder = new Builder.Build().build();
+Builder builder = new Builder.Build().build();
         AndroidSdk.onCreate(activity, builder)
 ```
+
 <br>
 
 # 广告
 
 - 广告事件监听
+
 ```js
-    Builder builder = new Builder.Build().setAdListener(new IAdListener() {
+Builder builder = new Builder.Build().setAdListener(new IAdListener() {
             @Override
             public void onAdLoadSuccess(@NonNull AdType adType) {
                 
@@ -106,10 +112,12 @@ android {
 ```
 
 > Banner
+
 - 加载状态<br>
   ```boolean isReady = AndroidSdk.hasBannerAd();```
   <br>
 - 展示banner
+
 ```js
 /**
  *  @param tag          广告标签，默认为 default; 必传
@@ -119,6 +127,7 @@ android {
  */
 AndroidSdk.showBannerAd(String tag, int pos, int placement, String clientInfo);
 ```
+
 - 关闭Banner<br>
   ```AndroidSdk.CloseBannerAd(int placement);```
   <br>
@@ -129,6 +138,7 @@ AndroidSdk.showBannerAd(String tag, int pos, int placement, String clientInfo);
   ```boolean isReady = AndroidSdk.hasInterstitialAd();```
   <br>
 - 展示插屏
+
 ```js
 /**
  *  展示 插屏 广告
@@ -138,6 +148,7 @@ AndroidSdk.showBannerAd(String tag, int pos, int placement, String clientInfo);
  */
 AndroidSdk.showInterstitialAd(String tag, int placement, String clientInfo);
 ```
+
 <br>
 
 > 激励视频
@@ -146,6 +157,7 @@ AndroidSdk.showInterstitialAd(String tag, int placement, String clientInfo);
   ```boolean isReady = AndroidSdk.hasRewardedAd();```
   <br>
 - 展示视频广告
+
 ```js
 /**
  *  @param tag          广告标签，默认为 default；必传
@@ -154,10 +166,13 @@ AndroidSdk.showInterstitialAd(String tag, int placement, String clientInfo);
  */
 AndroidSdk.showRewardedAd(String tag, int placement, String clientInfo);
 ```
+
 <br>
 
 # 计费
+
 - 支付
+
 ```js
 /**
  *  @param id           计费点位id;必传
@@ -166,12 +181,15 @@ AndroidSdk.showRewardedAd(String tag, int placement, String clientInfo);
  */
 AndroidSdk.Pay(int id, String payload, String clientInfo);
 ```
+
 - 发货<br>
   ++*在使用在线支付校验流程时，必须调用此接口，否则会存在重复发货情况*++
+
 ```js
 //merchantTransactionId  预下单Id
 AndroidSdk.shippingGoods(string merchantTransactionId);
 ```
+
 - 计费系统是否可用<br>
   ```boolean isReady = AndroidSdk.isPaymentValid();```
   <br>
@@ -188,8 +206,9 @@ AndroidSdk.shippingGoods(string merchantTransactionId);
   ```String data = AndroidSdk.query(int payId);```
   <br>
 - 监听计费结果
+
 ```js
-      Builder builder = new Builder.Build().setPurchaseListener(new IPurchaseResult() {
+Builder builder = new Builder.Build().setPurchaseListener(new IPurchaseResult() {
             @Override
             public void payResult(int payId, int status, @Nullable String payload, @Nullable String merchantTransactionId) {
                 
@@ -206,47 +225,74 @@ AndroidSdk.shippingGoods(string merchantTransactionId);
             }
         }).build();
 ```
+
+<br>
+
+# EnjoyPay <br>
+
+**回调同Google支付**
+
+- 计费系统是否可用<br>
+  ```boolean isReady = AndroidSdk.isEnjoyPayValid();```
+  <br>
+- 查询所有计费点位详情<br>
+
+```
+String data = AndroidSdk.getEnjoyPayPurchaseInfo(int id)
+```
+
+- 查询所有未处理支付记录<br>
+  ++查询结果会通过计费回调回传++
+  ```AndroidSdk.queryEnjoyPayPurchase(-1);```
+  <br>
+
+- 付费<br>
+
+```js
+/**
+ *  @param id           计费点位id;必传
+ *  @param payload      可选
+ *  @param clientInfo   客户端自定义信息，JSONObject结构，注意 bool值会被转换位1/0； 可选
+ */
+AndroidSdk.enjoyPay(int id, String payload, String clientInfo);
+```
+
 <br>
 
 # 事件统计 <br>
+
 ++*所有事件接口中data参数结构为 单层JSONObject
 <br>
 
 - 事件流向所有平台<br>
   ```AndroidSdk.trackEvent(string eventName, string data, 5);```
   <br>
-
 - 事件流向Firebase<br>
   ```AndroidSdk.trackEvent(string eventName, string data, 1);```
   <br>
-
 - 事件流向Facebook<br>
   ```AndroidSdk.trackEvent(string eventName, string data, 2);```
   <br>
-
 - 事件流向AppsFlyer<br>
   ```AndroidSdk.trackEvent(string eventName, string data, 3);```
   <br>
-
 - 事件流向自有平台<br>
   ```AndroidSdk.trackEvent(string eventName, string data, 4);```
   <br>
-
 - 设置用户属性至所有平台<br>
   ```AndroidSdk.setUserProperty(string key, string value, 5);```
   <br>
-
 - 设置用户属性至Firebase<br>
   ```AndroidSdk.setUserProperty(string key, string value, 1);```
   <br>
-
 - 设置用户属性至自有平台<br>
   ```AndroidSdk.setUserProperty(string key, string value, 4);```
   <br>
 
-
 # RemoteConfig
+
 - 获取 Firebase Remote Config 配置值
+
 ```js
 int value = AndroidSdk.getRemoteConfigInt(string key);//默认值 0
 long value = AndroidSdk.getRemoteConfigLong(string key);//默认值 0
@@ -256,6 +302,7 @@ String value = AndroidSdk.getRemoteConfigString(string key);//默认值 ""
 ```
 
 - 获取 自有 Remote Config 配置值
+
 ```js
 int value = AndroidSdk.getIvyRemoteConfigInt(string key);//默认值 0
 long value = AndroidSdk.getIvyRemoteConfigLong(string key);//默认值 0
@@ -265,10 +312,13 @@ String value = AndroidSdk.getIvyRemoteConfigString(string key);//默认值 ""
 ```
 
 # 三方登录
+
 > PlayGames
+
 - 事件监听
+
 ```js
-        Builder builder = new Builder.Build().setAuthListener(new IAuthResult() {
+Builder builder = new Builder.Build().setAuthListener(new IAuthResult() {
             @Override
             public void onLogout(@NonNull String platform) {
 
@@ -287,7 +337,6 @@ String value = AndroidSdk.getIvyRemoteConfigString(string key);//默认值 ""
 - 登陆状态<br>
   ```boolean isLogin = AndroidSdk.isPlayGamesLoggedIn();```
   <br>
-
 - 登陆 <br> (++如果项目配置了PlayGames，sdk会在游戏开启时主动登录PlayGames，客户端可以在登录回调中选择调用此接口++) <br>
   ```AndroidSdk.loginPlayGames();```
   <br>
@@ -295,8 +344,9 @@ String value = AndroidSdk.getIvyRemoteConfigString(string key);//默认值 ""
   ```AndroidSdk.logoutPlayGames();```
   <br>
 - 获取用户信息<br>
+  
   ```js
-    /**
+  /**
      *  @returns data   结构示例  
      * {
      *     "id":"",          
@@ -306,7 +356,6 @@ String value = AndroidSdk.getIvyRemoteConfigString(string key);//默认值 ""
      */
     String data = AndroidSdk.getPlayGamesUserInfo();
   ```
-
 - 解锁成就<br>
   ```AndroidSdk.unlockAchievement(String achievementId);```
   <br>
@@ -339,7 +388,7 @@ String value = AndroidSdk.getIvyRemoteConfigString(string key);//默认值 ""
   <br>
 - 获取用户信息<br>
   ```js
-    /**
+  /**
      *  @returns data   结构示例  
      * {
      *     "id":"",
@@ -353,11 +402,12 @@ String value = AndroidSdk.getIvyRemoteConfigString(string key);//默认值 ""
 - 用户id<br>
   ```String user_id = AndroidSdk.GetGoogleUserId();```
 
-
 > Facebook
+
 - 事件监听
+
 ```js
-        Builder builder = new Builder.Build().setAuthListener(new IAuthResult() {
+Builder builder = new Builder.Build().setAuthListener(new IAuthResult() {
             @Override
             public void onLogout(@NonNull String platform) {
 
@@ -383,8 +433,9 @@ String value = AndroidSdk.getIvyRemoteConfigString(string key);//默认值 ""
   ```boolean isLogin = AndroidSdk.isFacebookLoggedIn();```
   <br>
 - 获取用户信息<br>
+  
   ```js
-    /**
+  /**
      *  @returns data   结构示例  
      * {
      *     "id":"",
@@ -394,17 +445,17 @@ String value = AndroidSdk.getIvyRemoteConfigString(string key);//默认值 ""
      */
     String data = AndroidSdk.getFacebookUserInfo();
   ```
-
 - 获取朋友列表<br>
-**必须预先在Facebook后台申请对应权限，然后再default.json中增加facebook登陆权限方可使用**
+  **必须预先在Facebook后台申请对应权限，然后再default.json中增加facebook登陆权限方可使用**
   ```String data = AndroidSdk.getFacebookFriends();```
   <br>
 
 > Firebase
 
 - 事件监听
+
 ```js
-        Builder builder = new Builder.Build().setAuthListener(new IAuthResult() {
+Builder builder = new Builder.Build().setAuthListener(new IAuthResult() {
             @Override
             public void onLogout(@NonNull String platform) {
 
@@ -418,12 +469,12 @@ String value = AndroidSdk.getIvyRemoteConfigString(string key);//默认值 ""
                 // reason    失败原因
             }
         }).build();
-
 ```
 
 - 匿名登陆<br>
+
 ```js
-    AndroidSdk.signAnonymous(new IAuthResponse() {
+AndroidSdk.signAnonymous(new IAuthResponse() {
         @Override
         public void onLoginResult(@NonNull String platform, boolean status, @Nullable String channel, @Nullable String reason) {
                 // channel   登陆渠道，仅在Firebase登陆中有效，参考 FirebaseLinkChannel
@@ -433,8 +484,9 @@ String value = AndroidSdk.getIvyRemoteConfigString(string key);//默认值 ""
 ```
 
 - Google渠道登陆<br>
+
 ```js
-        AndroidSdk.signWithGoogle(new IAuthResponse() {
+AndroidSdk.signWithGoogle(new IAuthResponse() {
 
             @Override
             public void onLoginResult(@NonNull String platform, boolean status, String channel, @Nullable String reason) {
@@ -445,9 +497,10 @@ String value = AndroidSdk.getIvyRemoteConfigString(string key);//默认值 ""
 ```
 
 - PlayGames渠道登陆<br>
+  
   ```js
-        AndroidSdk.signWithPlayGames(new IAuthResponse() {
-
+  AndroidSdk.signWithPlayGames(new IAuthResponse() {
+  
             @Override
             public void onLoginResult(@NonNull String platform, boolean status, String channel, @Nullable String reason) {
                 // channel   登陆渠道，仅在Firebase登陆中有效，参考 FirebaseLinkChannel
@@ -455,11 +508,13 @@ String value = AndroidSdk.getIvyRemoteConfigString(string key);//默认值 ""
             }
         });
   ```
+  
   <br>
 - Facebook渠道登陆<br>
+  
   ```js
-        AndroidSdk.signWithFacebook(new IAuthResponse() {
-
+  AndroidSdk.signWithFacebook(new IAuthResponse() {
+  
             @Override
             public void onLoginResult(@NonNull String platform, boolean status, String channel, @Nullable String reason) {
                 // channel   登陆渠道，仅在Firebase登陆中有效，参考 FirebaseLinkChannel
@@ -467,11 +522,13 @@ String value = AndroidSdk.getIvyRemoteConfigString(string key);//默认值 ""
             }
         });
   ```
+  
   <br>
 - Email渠道登陆<br>
+  
   ```js
-        AndroidSdk.signWithEmailAndPassword(String email, String password, new IAuthResponse() {
-
+  AndroidSdk.signWithEmailAndPassword(String email, String password, new IAuthResponse() {
+  
             @Override
             public void onLoginResult(@NonNull String platform, boolean status, String channel, @Nullable String reason) {
                 // channel   登陆渠道，仅在Firebase登陆中有效，参考 FirebaseLinkChannel
@@ -479,10 +536,12 @@ String value = AndroidSdk.getIvyRemoteConfigString(string key);//默认值 ""
             }
         });
   ```
+  
   <br>
 - 重载Firebase的登陆状态<br>
+  
   ```js
-          AndroidSdk.reloadFirebaseLastSign(new IFirebaseAuthReload() {
+  AndroidSdk.reloadFirebaseLastSign(new IFirebaseAuthReload() {
             @Override
             public void onReload(boolean status, @Nullable String reason) {
                 // status    登陆结果
@@ -490,19 +549,22 @@ String value = AndroidSdk.getIvyRemoteConfigString(string key);//默认值 ""
             }
         });
   ```
+  
   <br>
 - 是否可登出指定渠道(++channel 参考FirebaseLinkChannel++)<br>
   ```boolean status = AndroidSdk.canFirebaseUnlinkWithChannel(string channel)```
   <br>
 - 登出指定渠道<br>
+  
   ```js
-          AndroidSdk.unlinkFirebaseWithChannel(String channel, new IFirebaseUnlink() {
+  AndroidSdk.unlinkFirebaseWithChannel(String channel, new IFirebaseUnlink() {
             @Override
             public void onUnlinked(@NonNull String unlinkChannel, boolean status, @Nullable String reason) {
-                
+  
             }
         });
   ```
+  
   <br>
 - 是否已登陆指定渠道<br>
   ```boolean status = AndroidSdk.isFirebaseLinkedWithChannel(String channel)```
@@ -511,8 +573,9 @@ String value = AndroidSdk.getIvyRemoteConfigString(string key);//默认值 ""
   ```boolean status = AndroidSdk.isFirebaseAnonymousSign()```
   <br>
 - 获取指定渠道用户信息<br>
+  
   ```js
-    /**
+  /**
      *  @returns data   结构示例  
      * {
      *     "id":"",
@@ -523,7 +586,6 @@ String value = AndroidSdk.getIvyRemoteConfigString(string key);//默认值 ""
      */
     String data = AndroidSdk.getFirebaseUserInfo(String channel);
   ```
-
 - 登出<br>
   ```AndroidSdk.signOutFirebase()```
   <br>
@@ -531,6 +593,7 @@ String value = AndroidSdk.getIvyRemoteConfigString(string key);//默认值 ""
 # Firestore云存档
 
 - 存储数据到指定数据集合
+
 ```js
 /**
  * @param collection     数据集合
@@ -550,6 +613,7 @@ String value = AndroidSdk.getIvyRemoteConfigString(string key);//默认值 ""
 ```
 
 - 读取指定数据集合内文档
+
 ```js
 /**
  * @param collection     数据集合
@@ -569,6 +633,7 @@ String value = AndroidSdk.getIvyRemoteConfigString(string key);//默认值 ""
 ```
 
 - 合并数据
+
 ```js
 /**
  * @param collection     数据集合
@@ -588,6 +653,7 @@ String value = AndroidSdk.getIvyRemoteConfigString(string key);//默认值 ""
 ```
 
 - 查询数据
+
 ```js
 /**
  * @param collection     数据集合  
@@ -604,8 +670,8 @@ String value = AndroidSdk.getIvyRemoteConfigString(string key);//默认值 ""
         });
 ```
 
-
 - 删除数据
+
 ```js
 /**
  * @param collection     数据集合  
@@ -624,6 +690,7 @@ String value = AndroidSdk.getIvyRemoteConfigString(string key);//默认值 ""
 ```
 
 - 更新数据
+
 ```js
 /**
  * @param collection        数据集合
@@ -644,6 +711,7 @@ String value = AndroidSdk.getIvyRemoteConfigString(string key);//默认值 ""
 `
 
 - 备份数据
+
 ```js
 /**
  * @param collection     数据集合
@@ -661,9 +729,11 @@ String value = AndroidSdk.getIvyRemoteConfigString(string key);//默认值 ""
             }
         });
 ```
+
 <br>
 
 # 客服
+
 - 客服准备状态<br>
   ```boolean isReady = AndroidSdk.isHelperInitialized();```
   <br>
@@ -671,6 +741,7 @@ String value = AndroidSdk.getIvyRemoteConfigString(string key);//默认值 ""
   ```boolean isReady = AndroidSdk.hasNewHelperMessage();```
   <br>
 - 跳转客服
+
 ```js
 /**
  * @param entranceId            自定义入口 ID; 必传
@@ -682,6 +753,7 @@ AndroidSdk.showHelper(String entranceId, String meta, String tags, String welcom
 ```
 
 - 跳转指定客服单页
+
 ```js
 /**
  * @param faqId     指定单页id; 必传
@@ -697,8 +769,9 @@ AndroidSdk.showHelperSingleFAQ(String faqId, int moment = 3);
   ```AndroidSdk.stopListenHelperUnreadMsgCount();```
   <br>
 - 未读消息监听
+
 ```js
-        Builder builder = new Builder.Build().setHelperListener(new IHelperCallback() {
+Builder builder = new Builder.Build().setHelperListener(new IHelperCallback() {
             @Override
             public void onUnreadHelperMessageCount(int count) {
                 
@@ -707,6 +780,7 @@ AndroidSdk.showHelperSingleFAQ(String faqId, int moment = 3);
 ```
 
 - 更新用户属性
+
 ```js
 /**
  * @param data      用户属性，字典格式；可选
@@ -723,7 +797,9 @@ AndroidSdk.updateHelperUserInfo(String data, String tags);
   <br>
 
 # 通知
+
 - 权限状态
+
 ```js
 /**
  *  @returns        0: 权限被彻底拒绝，需要跳转设置页面开启
@@ -739,8 +815,8 @@ int state = AndroidSdk.loadNotificationPermissionState();
 - 跳转权限设置页<br>
   ```AndroidSdk.openNotificationSettings();```
   <br>
-
 - 本地通知任务
+
 ```js
 /**
  *
@@ -760,11 +836,13 @@ int state = AndroidSdk.loadNotificationPermissionState();
  */
 AndroidSdk.pushNotificationTask(String tag, String title, String subtitle, String bigText, String smallIcon, String largeIcon, String bigPicture, long delay, boolean autoCancel, String action, boolean repeat, boolean requireNetwork, boolean requireCharging);
 ```
+
 <br>
 
 - 通知栏点击监听
+
 ```js
-        Builder builder = new Builder.Build().setNotificationEventListener(new INotificationEvent() {
+Builder builder = new Builder.Build().setNotificationEventListener(new INotificationEvent() {
             @Override
             public void onReceivedNotificationAction(@NonNull String action) {
                 
@@ -782,15 +860,18 @@ AndroidSdk.pushNotificationTask(String tag, String title, String subtitle, Strin
   ```AndroidSdk.appsflyerInviteUser(string inviterId, string inviterAppId);```
   <br>
 - 获取邀请者id
+
 ```js
 /**
  * @returns inviterId  格式为 inviterId|inviterAppId
  */
 string inviterId = AndroidSdk.getAppsflyerInviterId();
 ```
+
 <br>
 
 # 其它
+
 - 发送邮件<br>
   ```AndroidSdk.sendEmail(String email, String extra);```
   <br>
@@ -815,12 +896,14 @@ string inviterId = AndroidSdk.getAppsflyerInviterId();
   ```int height = AndroidSdk.getNotchHeight();```
   <br>
 - 跳转应用商店
+
 ```js
 /**
  * @param url    1.null，指定本游戏；2.指定游戏包名；3.应用商店地址
  */
 AndroidSdk.OpenAppStore(String url);
 ```
+
 - toast<br>
   ```AndroidSdk.toast(String message);```
   <br>
@@ -833,16 +916,14 @@ AndroidSdk.OpenAppStore(String url);
 - 设备可用内存，单位MB<br>
   ```int size = AndroidSdk.getFreeMemory();```
   <br>
-
 - 设备总磁盘存储，单位MB<br>
   ```int size = AndroidSdk.getDiskSize();```
   <br>
-
 - 设备可用磁盘存储，单位MB<br>
   ```int size = AndroidSdk.getFreeDiskSize();```
   <br>
-
 - 获取配置信息
+  
   ```js
   /**
    * @params key    1       app id
@@ -861,6 +942,7 @@ AndroidSdk.OpenAppStore(String url);
     */
   String result = AndroidSdk.getConfig(int key);
   ```
+  
   <br>
 
 # 配置文件
@@ -868,6 +950,7 @@ AndroidSdk.OpenAppStore(String url);
 ## 配置说明
 
 > 广告
+
 ```js
 广告位配置:
 provider  	： 广告平台
@@ -885,14 +968,17 @@ adLoadTimeOut 		: 自定义的广告加载超时时间; 单位：秒
 bannerAdRefreshDuration ： banner自动刷新时间; 单位：秒
 bannerRefreshByPlatform : banner 由广告平台自动刷新(如果广告刷新交由平台管理，只能配置一个banner ad id)
 ```
+
 <br>
 
 > 统计
+
 ```js
 enableAdPing		： 统计广告收入事件开关
 enablePurchasePing	： 统计计费收入事件开关
 inviter_template_id	： appsflyer用户邀请模板
 ```
+
 <br>
 
 > 事件
@@ -905,14 +991,17 @@ eventChannel: 事件流向控制，此设置优先级最高<br>
 第3位： facebook<br>
 第4位： thing data<br>
 示例：如事件只 流向firebase，配置位 ”0100“<br>
+
 ```js
-     "event_channel": {
+"event_channel": {
        "banner_displayed": "0000"
      }
 ```
+
 <br>
 
 combinedEvents： 组合事件
+
 ```js
 "video_shown_2_in3day": {
         "d": 3,
@@ -936,9 +1025,11 @@ r			: 重复触发组合事件
 e			: 可触发的事件列表， 多事件名，满足其一即可
 p			: 可触发的事件属性，如e存在有效值，则必须满足e条件，多属性，满足其一即可
 ```
+
 <br>
 
 accumulateEvent：累计组合事件
+
 ```js
 "vs": {
         "e": [
@@ -962,9 +1053,11 @@ e	: 可触发的事件列表， 多事件名，满足其一即可
 p	: 可触发的事件属性，如e存在有效值，则必须满足e条件，多属性，满足其一即可
 count	: 触发次数，累计
 ```
+
 <br>
 
 > 计费
+
 ```js
 "payment": {
     "verify-url": "https://verify.ivymobile.com/api/external/v1/purchase",
@@ -978,11 +1071,13 @@ count	: 触发次数，累计
     }
   }
 ```
+
 verify-url	: 在线校验地址,使用在线校验、发货时必须配置
 <br>
 
 > 三方服务
-如需要登陆指定平台，则必须增加对应配置
+> 如需要登陆指定平台，则必须增加对应配置
+
 ```js
 "facebook": {
 // facebook 用户权限
@@ -998,9 +1093,11 @@ verify-url	: 在线校验地址,使用在线校验、发货时必须配置
       "web_client_id": "976142984853-u08f01in8d1pdhq1d9r6mli2gh83nck0.apps.googleusercontent.com"
     }
 ```
+
 <br><br>
 
 ## 配置文件示例：
+
 ```json
 {
   "ads": {

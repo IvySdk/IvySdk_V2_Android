@@ -103,8 +103,8 @@ namespace com.ivy.sdk
         {
             UNKNOWN = 0,
             CLOSED = 1,
-            partiallyOpen = 2,
-            fullyOpen = 3,
+            PARTIALLY_OPEN = 2,
+            FULLY_OPEN = 3,
         }
 
         public static IvySdk Instance

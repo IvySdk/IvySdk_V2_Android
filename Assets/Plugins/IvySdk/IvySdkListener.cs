@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Security.Cryptography;
 using UnityEngine;
 using static com.ivy.sdk.IvySdk;
@@ -1368,8 +1369,8 @@ namespace com.ivy.sdk
                     string[] args = data.Split('|');
                     if (args != null && args.Length == 2)
                     {
-                        int state = int.Parse(args[0]); // 折叠状态 ； 0 未知；1 未展开； 2 部分展开； 3 完全展开；
-                        float angle = float.Parse(args[1]); //折叠弧度
+                        if (!int.TryParse(args[0], out int state)) return; // 折叠状态 ； 0 未知；1 未展开； 2 部分展开； 3 完全展开；
+                        if (!float.TryParse(args[1], NumberStyles.Float, CultureInfo.InvariantCulture, out float angle)) return; //折叠弧度
                         if (OnHingeStateChangedEvent != null && OnHingeStateChangedEvent.GetInvocationList().Length > 0)
                         {
                             if (Enum.IsDefined(typeof(FoldDeviceState), state))

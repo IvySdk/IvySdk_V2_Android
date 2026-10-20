@@ -99,6 +99,14 @@ namespace com.ivy.sdk
             HUOSHAN = 1,
         }
 
+        public enum FoldDeviceState
+        {
+            UNKNOWN = 0,
+            CLOSED = 1,
+            partiallyOpen = 2,
+            fullyOpen = 3,
+        }
+
         public static IvySdk Instance
         {
             get
@@ -3706,9 +3714,14 @@ namespace com.ivy.sdk
          *           3    完全展开
          *
         */
-        public int CurrentFoldState()
+        public FoldDeviceState CurrentFoldState()
         {
-            return currentFoldState();
+            int state = currentFoldState();
+            if (Enum.IsDefined(typeof(FoldDeviceState), state))
+            {
+                return (FoldDeviceState)state;
+            }
+            return FoldDeviceState.UNKNOWN;
         }
 
         // 注意返回值为弧度

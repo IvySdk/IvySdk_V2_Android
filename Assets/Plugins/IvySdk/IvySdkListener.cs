@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Security.Cryptography;
 using UnityEngine;
+using static com.ivy.sdk.IvySdk;
 
 namespace com.ivy.sdk
 {
@@ -17,7 +18,7 @@ namespace com.ivy.sdk
         public static event Action<int, bool> OnPaymentRestoreEvent;
 #endif
 
-        public static event Action<int, float> OnHingeStateChangedEvent;//折叠屏状态变化回调
+        public static event Action<FoldDeviceState, float> OnHingeStateChangedEvent;//折叠屏状态变化回调
 
         public static event Action<int> HelperUnreadMsgCountEvent;
         public static event Action<bool> OnHelperOpenStatusEvent;
@@ -1371,7 +1372,14 @@ namespace com.ivy.sdk
                         float angle = float.Parse(args[1]); //折叠弧度
                         if (OnHingeStateChangedEvent != null && OnHingeStateChangedEvent.GetInvocationList().Length > 0)
                         {
-                            OnHingeStateChangedEvent.Invoke(state, angle);
+                            if (Enum.IsDefined(typeof(FoldDeviceState), state))
+                            {
+                                OnHingeStateChangedEvent?.Invoke((FoldDeviceState)state, angle);
+                            }
+                            else
+                            {
+                                //返回异常值
+                            }
                         }
                     }
                     

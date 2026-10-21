@@ -1696,6 +1696,58 @@ namespace com.ivy.sdk
             }
         }
 
+        /**
+        * 存储二进制数组到指定数据集合
+        * @param collection     数据集合
+        * @param bytes          UTF8编码       
+        */
+        public void SaveBytesCloudData(string collection, string documentId, byte[] bytes)
+        {
+            if (_class != null)
+            {
+                _class.CallStatic("saveBytesCloudData", collection, documentId, bytes);
+            }
+        }
+
+        /**
+         * 读取二进制数据类型文档
+         * @param collection     数据集合
+         * @param documentId     文档id
+         */
+        public void ReadBytesCloudData(string collection, string documentId)
+        {
+            if (_class != null)
+            {
+                _class.CallStatic("readBytesCloudData", collection, documentId);
+            }
+        }
+
+        /**
+        * 查询二进制数据类型文档
+        * @param collection     数据集合
+        */
+        public void QueryBytesCloudData(string collection, string documentId)
+        {
+            if (_class != null)
+            {
+                _class.CallStatic("queryBytesCloudData", collection, documentId);
+            }
+        }
+
+        /**
+         * !!! ReadBytesCloudData、QueryBytesCloudData取回的二进制数据会暂存在sdk内
+         * 需要用此方法单独取出，取出后sdk会删除暂存内容
+         * 暂存内容不会本地化，重启会丢失
+         */
+        public byte[] LoadBytesCloudData(string collection, string documentId)
+        {
+            if (_class != null)
+            {
+                return _class.CallStatic<byte[]>("getBytesCloudData", collection, documentId);
+            }
+            return new byte[0];
+        }
+
         #endregion
 
         #region 客服

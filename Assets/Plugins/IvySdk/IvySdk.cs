@@ -91,7 +91,12 @@ namespace com.ivy.sdk
             CONFIG_KEY_UUID = 11,               // role id
             SDK_CONFIG_KEY_JSON_VERSION = 21,
             SDK_KEY_NETWORK_TYPE = 22,
+            CONFIG_ANDROID_API_VERSION = 23,    //API 版本
+            CONFIG_ANDROID_VERSION = 24,        //系统版本
+            CONFIG_DEVICE_BRAND = 25,           //设备品牌
+            CONFIG_DEVICE_MODEL = 26,           //设备型号
         }
+
 
         public enum ABChannel : int
         {

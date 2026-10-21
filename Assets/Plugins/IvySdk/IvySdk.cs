@@ -1704,6 +1704,7 @@ namespace com.ivy.sdk
         /**
         * 存储二进制数组到指定数据集合
         * @param collection     数据集合
+        * @param documentId     文档id
         * @param bytes          UTF8编码       
         */
         public void SaveBytesCloudData(string collection, string documentId, byte[] bytes)
@@ -1730,6 +1731,7 @@ namespace com.ivy.sdk
         /**
         * 查询二进制数据类型文档
         * @param collection     数据集合
+        * @param documentId     文档id
         */
         public void QueryBytesCloudData(string collection, string documentId)
         {
@@ -1743,6 +1745,9 @@ namespace com.ivy.sdk
          * !!! ReadBytesCloudData、QueryBytesCloudData取回的二进制数据会暂存在sdk内
          * 需要用此方法单独取出，取出后sdk会删除暂存内容
          * 暂存内容不会本地化，重启会丢失
+         * 
+         * @param collection     数据集合
+         * @param documentId     文档id
          */
         public byte[] LoadBytesCloudData(string collection, string documentId)
         {
